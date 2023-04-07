@@ -1,46 +1,26 @@
-html{
-    margin: 0;
-    padding: 0;
-}
-body{
-    margin: 0;
-    padding: 0;
-}
-header{
-    width: 100%;
-    /* background-color: blue; */
-}
-nav{
-    /* padding-left: 10px; */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-nav img{
-    margin-top: 2rem;
-    padding-top: 1rem;
-    width: 19rem;
-    height: 7rem;
-}
-nav ul{
-    list-style: none;
-    display: flex;
-    
-}
-nav ul li{
-    padding: 1rem;
-    margin: 1rem;
-    color: black;
-    
-}
-nav ul a{
-    color: black;
-    text-decoration: none;
-    border: 2px solid black;
-    padding: 6px;
-    background-color:aqua;
-    border-radius: 7px;
-}
-nav ul a:hover{
-    background-color: bisque;
-}
+
+  #intro {
+    height: 500px;
+    position: relative;
+    top: -30px;
+    background-image: url("images/anime-girls-group-clothes-coat-wallpaper-preview.jpg");
+    background-position: center;
+    background-size: contain;
+  }
+  #intro h1 {
+    text-transform: uppercase;
+    font-size: 40px;
+    font-family: "Raleway", sans-serif;
+    color: rgb(0, 0, 0);
+    margin-left: 200px;
+    padding-top: 60px;
+  }
+  #intro p{
+      text-transform: uppercase;
+      color: rgb(0, 0, 0);
+      font-family: "Raleway", sans-serif;
+      font-size: 24px;
+      font-weight: 100;
+      margin-bottom: 32px;
+      margin-left: 200px;
+  }
