@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const bcrypt= require('bcrypt');
-const port = 8080;
+const bcrypt= require('bcrypt');  //left
+const port = 3000;
 
 const path = require('path');
 const mime = require('mime');
@@ -31,5 +31,12 @@ app.get('/signup', (req, res) => {
     css: [ '/css/style.css', '/css/signupStyles.css']
   });
 });
+
+app.get('/login', (req, res) => {
+  res.render("login.ejs",{
+    css: [ '/css/shared.css', '/css/loginStyles.css']
+  });
+});
+
 
 app.listen(port,() => console.log(`App listening on port ${port}`));

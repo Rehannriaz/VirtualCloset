@@ -1,26 +1,64 @@
 
-  #intro {
-    height: 500px;
-    position: relative;
-    top: -30px;
-    /* background-image: url("images/anime-girls-group-clothes-coat-wallpaper-preview.jpg"); */
-    background-position: center;
-    background-size: contain;
-  }
-  #intro h1 {
+#intro {
+  height: 500px;
+  /* height: 700px; */
+  position: relative;
+  top: -30px;
+  background-image: url("images/pexels-tembela-bohle-1884584.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* border-radius: 50% 50%; */
+}
+#intro h1 {
+  text-transform: uppercase;
+  font-size: 40px;
+  font-family: "Raleway", sans-serif;
+  color: rgb(0, 0, 0);
+  margin-left: 235px;
+  padding-top: 100px;
+}
+#intro p{
     text-transform: uppercase;
-    font-size: 40px;
-    font-family: "Raleway", sans-serif;
     color: rgb(0, 0, 0);
-    margin-left: 200px;
-    padding-top: 60px;
-  }
-  #intro p{
-      text-transform: uppercase;
-      color: rgb(0, 0, 0);
-      font-family: "Raleway", sans-serif;
-      font-size: 24px;
-      font-weight: 100;
-      margin-bottom: 32px;
-      margin-left: 200px;
-  }
+    font-family: "Raleway", sans-serif;
+    font-size: 24px;
+    font-weight: 100;
+    margin-bottom: 32px;
+    margin-left: 235px;
+}
+
+#smart{
+  width: 68%;
+  margin: auto;
+}
+
+#smart h1{
+  font-size: 40px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 900;
+  color: rgb(0, 0, 0);
+  margin-bottom: 0;
+  margin-top: 50px;
+
+}
+#smart h2{
+  font-size: 40px;
+  font-family: "Raleway", sans-serif;
+  color: rgb(0, 0, 0); 
+  margin-top: 0;
+  margin-bottom: 50px;
+}
+#smart p{
+  font-size: 22px;
+  font-family:sans-serif;
+  color:  rgb(160, 159, 159);
+  margin-bottom: 40px;
+  font-weight: 100;
+
+}
+
+#smart a{
+  font-size: 24px;
+
+}
