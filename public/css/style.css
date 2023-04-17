@@ -1,12 +1,11 @@
-
 #intro {
-  height: 500px;
+  height: 600px;
   /* height: 700px; */
   position: relative;
   top: -30px;
-  background-image: url("images/wardrobe3.jpg");
+  background-image: url("images/pexels-tembela-bohle-1884584.jpg");
   background-position: center;
-  background-size: cover;
+  background-size: 100% 600px;
   background-repeat: no-repeat;
   /* border-radius: 50% 50%; */
 }
@@ -14,51 +13,64 @@
   text-transform: uppercase;
   font-size: 40px;
   font-family: "Raleway", sans-serif;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   margin-left: 235px;
   padding-top: 100px;
 }
-#intro p{
-    text-transform: uppercase;
-    color: rgb(0, 0, 0);
-    font-family: "Raleway", sans-serif;
-    font-size: 24px;
-    font-weight: 100;
-    margin-bottom: 32px;
-    margin-left: 235px;
+#intro p {
+  text-transform: uppercase;
+  color: rgb(0, 0, 0);
+  font-family: "Raleway", sans-serif;
+  font-size: 24px;
+  font-weight: 100;
+  margin-bottom: 32px;
+  margin-left: 235px;
 }
 
-#smart{
+#smart {
   width: 68%;
   margin: auto;
+  /* text-align: center; */
 }
 
-#smart h1{
+#smart h1 {
   font-size: 40px;
   font-family: "Raleway", sans-serif;
   font-weight: 900;
   color: rgb(0, 0, 0);
   margin-bottom: 0;
   margin-top: 50px;
-
 }
-#smart h2{
+#smart h2 {
   font-size: 40px;
   font-family: "Raleway", sans-serif;
-  color: rgb(0, 0, 0); 
+  color: rgb(0, 0, 0);
   margin-top: 0;
   margin-bottom: 50px;
 }
-#smart p{
-  font-size: 22px;
-  font-family:sans-serif;
-  color:  rgb(160, 159, 159);
+#smart p {
+  font-size: 21px;
+  font-family: sans-serif;
+  color: rgb(160, 159, 159);
   margin-bottom: 40px;
   font-weight: 100;
-
 }
 
-#smart a{
-  font-size: 24px;
 
+
+#smart a {
+  font-size: 20px;
+  text-decoration: none;
+  font-family: sans-serif;
+  background-color: black;
+  color: rgb(244, 244, 244);
+  border-radius: 80px;
+  padding: 15px 70px;
+
+}
+#learn{
+  margin-top: 40px;
+  padding-top: 30px;
+  margin-bottom: 60px;
+  text-align: center;
 }
