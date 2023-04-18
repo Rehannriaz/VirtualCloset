@@ -4,13 +4,13 @@
   /* width: 70%; */
   position: relative;
   top: -30px;
-  background-image: url("/images/wardrobe3.jpg");
+  background-image: url("images/wardrobe3.jpg");
   background-position: center;
   background-size: 100% 600px;
   background-repeat: no-repeat;
   /* border-radius: 50% 50%; */
 }
-#intro-text{
+#intro-text {
   width: 70%;
   margin: auto;
 }
@@ -18,7 +18,7 @@
   text-transform: uppercase;
   font-size: 40px;
   font-family: "Raleway", sans-serif;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   padding-top: 100px;
 }
 #intro p {
@@ -59,8 +59,6 @@
   font-weight: 100;
 }
 
-
-
 #smart a {
   font-size: 20px;
   text-decoration: none;
@@ -69,23 +67,24 @@
   color: rgb(244, 244, 244);
   border-radius: 80px;
   padding: 15px 70px;
-
 }
-#smart a:hover{
+#smart a:hover {
   background-color: rgb(236, 173, 184);
 }
-#learn{
+#learn {
   margin-top: 40px;
   padding-top: 30px;
   margin-bottom: 60px;
   text-align: center;
 }
 
-#steps{
+#steps {
   width: 70%;
   margin: auto;
+  padding-bottom: 50px;
+  margin-bottom: 50px;
 }
-#steps h1{
+#steps h1 {
   font-size: 40px;
   font-family: sans-serif;
   font-weight: 100;
@@ -94,10 +93,31 @@
   margin-top: 50px;
   padding-top: 100px;
 }
-.bold-text{
-  font-weight: 900;
+.bold-text {
+  font-weight: 700;
 }
-step-num{
+.step-num {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  padding-left: 12px;
+  margin-top: 30px;
+}
+.step-num img {
+  width: 267px;
+  height: 184px;
+}
+.step-detail {
+  padding-left: 20px;
+}
+.step-detail h2 {
+  font-size: 30px;
+  font-family: "Raleway", sans-serif;
+  margin-top: 0;
+  color: rgb(46, 46, 46);
+}
+.step-detail p {
+  font-size: 20px;
+  font-family: sans-serif;
+  color: rgb(169, 169, 169);
+  line-height: 1.5;
 }

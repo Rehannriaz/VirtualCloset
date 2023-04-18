@@ -49,3 +49,46 @@ html {
   nav ul a:hover {
     color: black;
   }
+  footer {
+  height: 180px;
+  background-color: white;
+}
+#ready {
+  height: 220px;
+  background-color: black;
+  text-align: center;
+}
+#ready h1 {
+  font-size: 50px;
+  font-family: "Open Sans", sans-serif;
+  color: white;
+  padding-top: 30px;
+}
+#ready a {
+  text-decoration: none;
+  font-family: "Open Sans", sans-serif;
+  font-size: 25px;
+  color: white;
+  border: 1.5px solid rgb(182, 182, 182);
+  padding: 5px 15px;
+  border-radius: 10px;
+  margin: 25px;
+}
+#foot {
+  width: 70%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#docs a {
+  color: rgb(144, 143, 143);
+  font-size: 15px;
+  font-family: "Open Sans", sans-serif;
+  padding: 10px;
+}
+#media-links ul{
+  display: flex;
+  list-style: none;
+}
