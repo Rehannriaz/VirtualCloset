@@ -13,7 +13,9 @@ html {
   nav {
     /* padding-left: 10px; */
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
     align-items: center;
   }
   
@@ -30,7 +32,7 @@ html {
     font-family: "Oleo Script";
     color: rgb(0, 0, 0);
     text-decoration: none;
-    padding: 10px 1rem;
+    padding: 10px 0;
     font-size: 35px;
     text-transform: uppercase;
     text-shadow: 1px 1px 2px black;

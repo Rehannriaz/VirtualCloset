@@ -1,20 +1,24 @@
 #intro {
   height: 600px;
   /* height: 700px; */
+  /* width: 70%; */
   position: relative;
   top: -30px;
-  background-image: url("images/pexels-tembela-bohle-1884584.jpg");
+  background-image: url("images/wardrobe3.jpg");
   background-position: center;
   background-size: 100% 600px;
   background-repeat: no-repeat;
   /* border-radius: 50% 50%; */
 }
+#intro-text{
+  width: 70%;
+  margin: auto;
+}
 #intro h1 {
   text-transform: uppercase;
   font-size: 40px;
   font-family: "Raleway", sans-serif;
-  color: rgb(255, 255, 255);
-  margin-left: 235px;
+  color: rgb(0, 0, 0);
   padding-top: 100px;
 }
 #intro p {
@@ -24,11 +28,10 @@
   font-size: 24px;
   font-weight: 100;
   margin-bottom: 32px;
-  margin-left: 235px;
 }
 
 #smart {
-  width: 68%;
+  width: 70%;
   margin: auto;
   /* text-align: center; */
 }
@@ -68,9 +71,33 @@
   padding: 15px 70px;
 
 }
+#smart a:hover{
+  background-color: rgb(236, 173, 184);
+}
 #learn{
   margin-top: 40px;
   padding-top: 30px;
   margin-bottom: 60px;
   text-align: center;
+}
+
+#steps{
+  width: 70%;
+  margin: auto;
+}
+#steps h1{
+  font-size: 40px;
+  font-family: sans-serif;
+  font-weight: 100;
+  color: rgb(0, 0, 0);
+  margin-bottom: 30px;
+  margin-top: 50px;
+  padding-top: 100px;
+}
+.bold-text{
+  font-weight: 900;
+}
+step-num{
+  display: flex;
+  flex-direction: column;
 }
