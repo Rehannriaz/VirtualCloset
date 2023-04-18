@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const bcrypt= require('bcrypt'); 
-const port = 3001;
+const port = 3025;
 const pool = require('./db');
 const path = require('path');
 const mime = require('mime');
@@ -28,11 +28,31 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/loginform', passport.authenticate('local', {
-  successRedirect: '/register31',
-  failureRedirect: '/login12',
-  failureFlash: true
-}));
+app.post('/loginform', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      console.error('Error authenticating user:', err);
+      return next(err);
+    }
+
+    if (!user) {
+      console.log('Failed login attempt:', req.body);
+      return res.redirect('/login12');
+    }
+
+    req.logIn(user, (err) => {
+      if (err) {
+        console.error('Error logging in user:', err);
+        return next(err);
+      }
+
+      console.log('Successful login for user:', user.email);
+      return res.redirect('/register31');
+    });
+  })(req, res, next);
+});
+
+
 
 app.post('/register', async (req, res) => {
   try {
