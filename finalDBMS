@@ -1,0 +1,86 @@
+drop table if exists Users;
+
+create table Users(
+    userid bigint primary key,
+    username varchar(255) unique not NULL,
+    email varchar(255) unique not NULL,
+    password varchar(255) not NULL
+);
+
+drop table if exists Color;
+
+create table Color(
+    colorName varchar(30) primary key,
+    colorCode bytea,
+	colorPalette bytea
+);
+
+drop table if exists ClothingSize;
+
+create table ClothingSize(
+    ClothesSize varchar(15) primary key,
+    NumericSize int,
+    MeasurementSystem char(2),
+    MeasurementUnits varchar(10)
+);
+
+drop table if exists category;
+
+create table category(
+	clothingType varchar(50) primary key,
+	clothingSeason varchar(20)
+
+);
+
+
+drop table if exists ClothingItem;
+
+create table ClothingItem(
+	item_ID serial primary key,
+	username varchar(30),
+    ImageUpload bytea,
+    colorName varchar(30),
+    ClothesSize varchar(15),
+    FabricType varchar(25),
+    ClothingType varchar(50),
+    description text,
+    constraint username foreign key (username) references users(username),
+    constraint ClothesSize foreign key (ClothesSize) references ClothingSize(clothesSize),
+    constraint clothingtype foreign key (clothingtype) references category(clothingtype),
+	constraint colors foreign key (colorName) references Color(colorName)
+);
+
+
+drop table if exists outfit;
+create table outfit(
+	outfitID serial primary key,
+	username varchar(30),
+	outfitName varchar(15),
+	notes text,
+	
+	constraint username foreign key (username) references users(username)
+);
+
+drop table if exists outfit_clothes;
+create table outfit_Clothes(
+	outfit_ID serial,
+	item_ID serial,
+	
+	constraint outfit foreign key(outfit_ID) references outfit(outfitID),
+	constraint clothingitem foreign key(item_id) references clothingitem(item_ID)
+
+);
+
+drop table if exists occasion;
+create table occasion(
+	occasion_ID serial primary key,
+	occasionName varchar(15),
+	username varchar(30),
+	colorName varchar(30),
+	description text,
+	
+	constraint username foreign key (username) references users(username),
+	constraint colors foreign key (colorName) references Color(colorName)
+	
+	
+);
