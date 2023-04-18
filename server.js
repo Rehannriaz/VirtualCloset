@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
 const bcrypt= require('bcrypt'); 
-const port = 3038;
+const port = 3000;
 const pool = require('./db');
 const path = require('path');
 const mime = require('mime');
 const passport = require("passport");
-const initializePassport = require("./Passport-config");
+const initializePassport = require("./passport-config");
 const session = require('express-session');
 
 initializePassport(passport);
@@ -25,7 +25,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/login', passport.authenticate('local', {
+app.post('/loginform', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/login',
   failureFlash: true
