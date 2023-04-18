@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
 const bcrypt= require('bcrypt'); 
-const port = 3000;
+const port = 3001;
 const pool = require('./db');
 const path = require('path');
 const mime = require('mime');
+const flash = require('connect-flash');
 const passport = require("passport");
 const initializePassport = require("./passport-config");
 const session = require('express-session');
@@ -22,12 +23,14 @@ app.use(session({
   saveUninitialized: false
 }));
 
+
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.post('/loginform', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
+  successRedirect: '/register31',
+  failureRedirect: '/login12',
   failureFlash: true
 }));
 

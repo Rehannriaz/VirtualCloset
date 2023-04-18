@@ -7,6 +7,7 @@ function initialize(passport) {
     try {
       if (typeof email !== 'string' || typeof password !== 'string') {
         return done(null, false, { message: 'Invalid email or password' });
+        
       }
 
       const query = 'SELECT * FROM users WHERE email = $1';
