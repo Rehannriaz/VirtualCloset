@@ -1,23 +1,20 @@
-const Pool = require('pg').Pool;
+const { Pool } = require('pg');
 
 const pool = new Pool({
-    user: "myuser",
-    host: "localhost",
-    database: "proj1",
-    password: "mypass",
-    port: 5432,
-}
-);
+  user: 'myuser',
+  host: 'localhost',
+  database: 'proj1',
+  password: 'mypass',
+  port: 5432
+});
 
-pool.connect((err, client, release) => {
-    if (err) {
-      return console.error('Error connecting to database:', err.stack);
-    }
-  
-    console.log('Connected to database with process id:', client.processID);
-  
-    release(); // release the client back to the pool
-  });
+pool.connect((err, client) => {
+  if (err) {
+    console.error('Error connecting to database:', err.stack);
+    return;
+  }
+
+  console.log('Connected to database with process id:', client.processID);
+});
 
 module.exports = pool;
-

@@ -28,35 +28,25 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/loginform', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) {
-      console.error('Error authenticating user:', err);
-      return next(err);
-    }
 
-    if (!user) {
-      console.log('Failed login attempt:', req.body);
-      return res.redirect('/login12');
-    }
-
-    req.logIn(user, (err) => {
-      if (err) {
-        console.error('Error logging in user:', err);
-        return next(err);
-      }
-
-      console.log('Successful login for user:', user.email);
-      return res.redirect('/register31');
-    });
-  })(req, res, next);
-});
+app.post('/loginform', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true
+}));
 
 
 
 app.post('/register', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.passwordInput, 10);
+    if(req.body.passwordInput!=req.body.confirmPasswordInput)
+    {
+      console.log("Passwords do not match.");
+      return res.redirect('/signup');
+
+    }
+
     const id= Date.now().toString();
     const query = `INSERT INTO users (userid,username, email, password) VALUES ($1, $2, $3,$4) RETURNING *`;
     const values = [id,req.body.usernameInput, req.body.emailInput, hashedPassword];
