@@ -1,0 +1,108 @@
+#nav2 {
+  width: 100%;
+  height: 61px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  margin-bottom: 30px;
+  margin-top: 15px;
+}
+
+.head2 {
+  display: flex;
+  background-color: rgb(204, 204, 204);
+  color: rgb(63, 63, 63);
+
+  align-items: center;
+  justify-content: center;
+  /* box-shadow: 1px 2px 2px rgb(123, 123, 123); */
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.head2 p {
+  font-size: 18px;
+  text-decoration: none;
+  color: rgb(104, 104, 104);
+}
+.head2:hover {
+  background-color: rgb(232, 232, 232);
+  cursor: pointer;
+}
+.icon img {
+  height: 20px;
+  width: 20px;
+  padding: 7px;
+}
+#cloth-svg {
+  padding-top: 12px;
+}
+
+.tab-content {
+  display: none;
+}
+.head2.active {
+  background-color: white;
+  /* border-radius: none; */
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.media-scroller {
+  display: grid;
+  width: 70%;
+  height: 110px;
+  margin: auto;
+  gap: 30px; /*not working*/
+  grid-auto-flow: column;
+  grid-auto-columns: 23.5%;
+  overflow-x: auto;
+  /* overflow-y: hidden; */
+  overscroll-behavior-inline: contain;
+  padding: 0 30px 30px 30px;
+}
+.media-element {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: rgb(175, 175, 175);
+  box-shadow: 1px 1px 1px rgb(147, 147, 147);
+  border-radius: 10px;
+}
+.media-element:hover {
+  background-color: rgb(129, 129, 129);
+}
+.media-element img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+.media-element p {
+  font-size: 17px;
+  color: rgb(63, 63, 63);
+  font-family: "Open Sans", sans-serif;
+}
+
+.snaps-inline {
+  scroll-snap-type: inline mandatory;
+  scroll-padding-inline: 15px;
+}
+.snaps-inline > * {
+  scroll-snap-align: start;
+}
+
+.media-scroller::-webkit-scrollbar {
+  height: 8px;
+}
+.media-scroller::-webkit-scrollbar-track {
+  background-color: rgb(232, 232, 232);
+  border-radius: 100vw;
+  margin-inline: 200px;
+}
+.media-scroller::-webkit-scrollbar-thumb {
+  background-color: rgb(98, 98, 98);
+  border-radius: 100vw;
+  border: 2px solid rgb(98, 98, 98);
+}
