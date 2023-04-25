@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Oleo+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap"
+      rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="shared.css" />
+    <link rel="stylesheet" type="text/css" href="outfits.css" />
+    <title>PGBCMC</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/" id="logo">CLOSTYLE</a>
+        <div id="login_signup">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="">About Us</a></li>
+            <li><a href="">Outfits</a></li>
+            <li><a href="/login.html">Login</a></li>
+            <li><a href="/signup.html">Sign Up</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div id="nav2">
+        <button onclick="openTab(event, 'closet')" class="head2" id="OpenAuto">
+          <div class="icon">
+            <img src="images/clothes-hanger-svgrepo-com.svg" alt="" />
+          </div>
+          <p>closet</p>
+        </button>
+        <button onclick="openTab(event, 'looks')" class="head2">
+          <div class="icon">
+            <img src="images/noun-clothes-1075584.svg" alt="" id="cloth-svg" />
+          </div>
+          <p>looks</p>
+        </button>
+      </div>
+
+      <section id="closet" class="tab-content">
+        <div class="media-scroller snaps-inline">
+          <div class="media-element">
+            <img src="images/all.svg" alt="" />
+            <p>All</p>
+          </div>
+          <div class="media-element">
+            <img src="images/tops.svg" alt="" />
+            <p>Tops</p>
+          </div>
+          <div class="media-element">
+            <img src="images/bottoms.svg" alt="" />
+            <p>Bottoms</p>
+          </div>
+          <div class="media-element">
+            <img src="images/dresses.png" alt="" />
+            <p>Dresses</p>
+          </div>
+          <div class="media-element">
+            <img src="images/undergarments.png" alt="" />
+            <p>Undergarments</p>
+          </div>
+          <div class="media-element">
+            <img src="images/bags.png" alt="" />
+            <p>Bags</p>
+          </div>
+          <div class="media-element">
+            <img src="images/caps.png" alt="" />
+            <p>Caps</p>
+          </div>
+          <div class="media-element">
+            <img src="images/shoes.png" alt="" />
+            <p>Shoes</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="looks" class="tab-content"></section>
+    </main>
+
+    <footer>
+      <div id="foot">
+        <div id="docs">
+          <a href="">Service Terms</a>
+          <a href="">Privacy Policy</a>
+        </div>
+        <div id="media-links">
+          <ul>
+            <li><img src="images/instagram.webp" alt="" /></li>
+            <li><img src="images/facebook.webp" alt="" /></li>
+            <li><img src="images/linkedin.webp" alt="" /></li>
+            <li><img src="images/tiktok.webp" alt="" /></li>
+            <li><img src="images/youtube.webp" alt="" /></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script src="outfit.js"></script>
+</html>
