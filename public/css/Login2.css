@@ -1,0 +1,106 @@
+body {
+    /* margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
+    /* background-color: aqua; */
+    
+    background-image: url("/images/loginvector.svg");
+    background-size: cover;
+    /* background-position: bottom right, left; */
+  
+  }
+  .container{
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+  }
+  
+  form {
+    background-color: #1d222b;
+    border-radius: 10px;
+    box-shadow: 5px 10px #cfcfcf;
+    color: white;
+    padding: 3rem;
+    margin-top: 5rem;
+    /* margin-left: 25rem; */
+    display: block;
+    width: 20rem;
+    height: auto;
+  }
+  form h2 {
+    text-align: center;
+    color: #cfcfcf;
+    font-size:xx-large;
+  }
+  
+  label {
+    display: block;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    border-radius: 3px;
+  }
+  form a {
+    display: block;
+    text-decoration: none;
+    padding-top: 0.5rem;
+    color: rgb(56, 138, 245);
+    font-size: small;
+  }
+  
+  form input {
+    width: 100%;
+    padding: 12px 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .loginbutton{
+      /* background-color: #ccc; */
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+      margin-top: 1rem;
+  
+  }
+  form button {
+    background-color:rgb(243, 99, 32);
+    color: #ccc;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 0.5rem 2rem;
+    /* background-color:#cfcfcf; */
+    /* margin-top:1rem; */
+  }
+  form button:hover{
+      background-color: #1d222b;
+      color: white;
+      
+      border: 1 px solid white;
+  
+      cursor: pointer;
+  }
+  
+  form a:hover{
+      color: #ccc;
+  }
+  .googleSignin{
+      display: flex;
+      justify-content: center;   
+  }
+  .googleSignin a{
+      text-decoration: none;
+      color: white;
+  }
+  .googleSignin img{
+      padding: 6px 3px;
+      width: 17px;
+      height: 17px;
+  }
+  
+  

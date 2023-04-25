@@ -1,6 +1,10 @@
+body{
+  background-image: url("/images/loginvector.svg");
+    background-size: cover;
+}
 .container {
     display: flex;
-    justify-content: center;
+    justify-content:center;
     align-items: center;
     height: 100vh;
     
@@ -8,19 +12,21 @@
   
   form {
     max-width: 500px;
-    width: 100%;
-    padding: 30px;
-    background-color: #fff;
+    width: 40rem;
+    padding: 3rem;
+    background-color: #1d222b;
+    color: #cfcfcf;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    font-family: 'Roboto Mono', monospace;
+    box-shadow: 5px 10px #cfcfcf;
+    /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+    /* font-family: 'Roboto Mono', monospace; */
 
   }
   
   h2 {
     text-align: center;
     margin-bottom: 20px;
-    font-size: 36px;
+    font-size:xx-large;
   }
   
   .form-group {
@@ -30,7 +36,8 @@
   
   label {
     display: block;
-    margin-bottom: 5px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     font-weight: bold;
   }
   
@@ -42,8 +49,15 @@
     padding: 10px;
     border: none;
     border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.1);
   }
+
+  input[type="date"]{
+    /* width: 50%; */
+    border-radius: 5px;
+    font-size: large;
+  }
+  
   
   button[type="submit"] {
     display: block;
@@ -61,7 +75,10 @@
   button[type="submit"]:hover {
     background-color: #204e8a;
   }
-  #dob{
-    font-size: 20px;
+  form a{
+    text-decoration: none;
+    color: orange;
   }
-  
+  form a:hover{
+    color: white;
+  }
