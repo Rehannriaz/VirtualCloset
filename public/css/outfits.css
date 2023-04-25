@@ -37,9 +37,11 @@
   padding-top: 12px;
 }
 
+
 .tab-content {
   display: none;
 }
+
 .head2.active {
   background-color: white;
   /* border-radius: none; */
@@ -59,7 +61,7 @@
   overflow-x: auto;
   /* overflow-y: hidden; */
   overscroll-behavior-inline: contain;
-  padding: 0 30px 30px 30px;
+  padding: 30px 20px 30px 30px;
 }
 .media-element {
   padding: 20px;
@@ -70,6 +72,8 @@
   background-color: rgb(175, 175, 175);
   box-shadow: 1px 1px 1px rgb(147, 147, 147);
   border-radius: 10px;
+  border: 1px solid rgb(96, 96, 96);
+  cursor: pointer;
 }
 .media-element:hover {
   background-color: rgb(129, 129, 129);
@@ -83,6 +87,7 @@
   font-size: 17px;
   color: rgb(63, 63, 63);
   font-family: "Open Sans", sans-serif;
+  
 }
 
 .snaps-inline {
@@ -105,4 +110,95 @@
   background-color: rgb(98, 98, 98);
   border-radius: 100vw;
   border: 2px solid rgb(98, 98, 98);
+}
+
+
+.InsideTabContent {
+  display: none;
+}
+#all {
+  display: grid;
+}
+
+.media-element.active {
+  background-color: rgb(93, 93, 93);
+}
+
+.InsideTabContent {
+  width: 90%;
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  /* grid-auto-flow: column;
+  grid-auto-columns: 23.5%; */
+  gap: 50px 25px;
+  text-align: center;
+  /* border: 4px solid black; */
+}
+/* #closet .InsideTabContent{
+  display: grid;
+} */
+
+.card {
+  /* width: 20%;  */
+  height: 330px;
+  border: 1px solid black;
+  background-color: rgb(231, 230, 230);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 7px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.card:hover {
+  background-color: rgb(177, 177, 177);
+}
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.card-content h2 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 7px;
+  color: rgb(55, 53, 53);
+}
+.card-content p {
+  margin: 2px 0 0 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  color: rgb(63, 63, 63);
+}
+#add-clothes{
+  border: 1px dashed black;
+}
+#add-clothes img{
+  margin-top: 65px;
+}
+
+#blur.active2{
+  filter: blur(18px);
+  pointer-events: none;
+  user-select: none;
+}
+#popup{
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 600px;
+  padding: 50px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s;
+}
+#popup.active2{
+  opacity: 1;
+  /* filter: blur(0); */
+  visibility: visible;
+  transition: 0.5s;
 }

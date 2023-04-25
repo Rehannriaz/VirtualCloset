@@ -83,5 +83,13 @@ app.get('/login', (req, res) => {
     css: [ '/css/shared.css', '/css/loginStyles.css']
   });
 });
+app.get('/outfits', (req, res) => {
+  res.render("outfits.ejs",{
+    css: [ '/css/shared.css', '/css/outfits.css','/css/outfits2.css'],
+    scripts: ['/app/outfit.js']
+  });
+});
+
+
 
 app.listen(port,() => console.log(`App listening on port ${port}`));

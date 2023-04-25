@@ -12,11 +12,12 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap"
       rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="shared.css" />
-    <link rel="stylesheet" type="text/css" href="outfits.css" />
-    <title>PGBCMC</title>
+    <link rel="stylesheet" type="text/css" href="css/shared.css" />
+    <link rel="stylesheet" type="text/css" href="css/outfits.css" />
+    <link rel="stylesheet" type="text/css" href="css/outfits2.css" />
+    <title>Your Outfits</title>
   </head>
-  <body>
+  <body id="blur">
     <header>
       <nav>
         <a href="/" id="logo">CLOSTYLE</a>
@@ -50,42 +51,203 @@
 
       <section id="closet" class="tab-content">
         <div class="media-scroller snaps-inline">
-          <div class="media-element">
+          <button
+            onclick="openInsideTab(event, 'all')"
+            class="media-element"
+            id="InsideOpenAuto">
             <img src="images/all.svg" alt="" />
             <p>All</p>
-          </div>
-          <div class="media-element">
+          </button>
+          <button onclick="openInsideTab(event, 'tops')" class="media-element">
             <img src="images/tops.svg" alt="" />
             <p>Tops</p>
-          </div>
-          <div class="media-element">
+          </button>
+          <button
+            onclick="openInsideTab(event, 'bottoms')"
+            class="media-element">
             <img src="images/bottoms.svg" alt="" />
             <p>Bottoms</p>
-          </div>
-          <div class="media-element">
+          </button>
+          <button
+            onclick="openInsideTab(event, 'dresses')"
+            class="media-element">
             <img src="images/dresses.png" alt="" />
             <p>Dresses</p>
-          </div>
-          <div class="media-element">
+          </button>
+          <button
+            onclick="openInsideTab(event, 'undergarments')"
+            class="media-element">
             <img src="images/undergarments.png" alt="" />
             <p>Undergarments</p>
-          </div>
-          <div class="media-element">
+          </button>
+          <button onclick="openInsideTab(event, 'bags')" class="media-element">
             <img src="images/bags.png" alt="" />
             <p>Bags</p>
-          </div>
-          <div class="media-element">
+          </button>
+          <button onclick="openInsideTab(event, 'caps')" class="media-element">
             <img src="images/caps.png" alt="" />
             <p>Caps</p>
-          </div>
-          <div class="media-element">
+          </button>
+          <button onclick="openInsideTab(event, 'shoes')" class="media-element">
             <img src="images/shoes.png" alt="" />
             <p>Shoes</p>
+          </button>
+        </div>
+
+        <div class="InsideTabContent" id="all">
+          <!-- add hover effect on card so it increses slightly in size with animation -->
+          <div class="card" onclick="toggle()">
+            <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
+            <div class="card-content">
+              <h2>Black Shirt</h2>
+              <p>Formal</p>
+              <p>M</p>
+            </div>
           </div>
+          <div class="card" onclick="toggle()">
+            <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
+            <div class="card-content">
+              <h2>Black Shirt</h2>
+              <p>Formal</p>
+              <p>M</p>
+            </div>
+          </div>
+          <div class="card" onclick="toggle()">
+            <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
+            <div class="card-content">
+              <h2>Black Shirt</h2>
+              <p>Formal</p>
+              <p>M</p>
+            </div>
+          </div>
+          <div class="card" onclick="toggle()">
+            <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
+            <div class="card-content">
+              <h2>Black Shirt</h2>
+              <p>Formal</p>
+              <p>M</p>
+            </div>
+          </div>
+          <div class="card" onclick="toggle()">
+            <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
+            <div class="card-content">
+              <h2>Black Shirt</h2>
+              <p>Formal</p>
+              <p>M</p>
+            </div>
+          </div>
+          <div class="card" onclick="toggle()">
+            <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
+            <div class="card-content">
+              <h2>Black Shirt</h2>
+              <p>Formal</p>
+              <p>M</p>
+            </div>
+          </div>
+          <div class="card" onclick="toggle()" id="add-clothes">
+            <img src="images/plus-60.png" alt="" />
+          </div>
+
+          <div id="popup">
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima
+              beatae quaerat perferendis provident labore ratione perspiciatis
+              iure eligendi? Aliquid quis pariatur fugiat facere accusamus
+              eligendi ratione recusandae voluptatum vero! Omnis.
+            </p>
+          </div>
+
+          <script type="text/javascript">
+            function toggle() {
+              var blur = document.getElementById("blur");
+              blur.classList.toggle("active2");
+              var popup = document.getElementById("popup");
+              popup.classList.toggle("active2");
+            }
+          </script>
+        </div>
+
+        <div class="InsideTabContent" id="tops">
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
+            nulla voluptatum facilis quaerat soluta ratione ex ab, ad error
+            facere natus, cumque quibusdam praesentium adipisci sunt
+            necessitatibus? Eius, atque molestias.
+          </p>
+        </div>
+        <div class="InsideTabContent" id="bottoms">
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
+            nulla voluptatum facilis quaerat soluta ratione ex ab, ad error
+            facere natus, cumque quibusdam praesentium adipisci sunt
+            necessitatibus? Eius, atque molestias.
+          </p>
+        </div>
+        <div class="InsideTabContent" id="dresses">
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
+            nulla voluptatum facilis quaerat soluta ratione ex ab, ad error
+            facere natus, cumque quibusdam praesentium adipisci sunt
+            necessitatibus? Eius, atque molestias.
+          </p>
+        </div>
+        <div class="InsideTabContent" id="undergarments">
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
+            nulla voluptatum facilis quaerat soluta ratione ex ab, ad error
+            facere natus, cumque quibusdam praesentium adipisci sunt
+            necessitatibus? Eius, atque molestias.
+          </p>
+        </div>
+        <div class="InsideTabContent" id="bags">
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
+            nulla voluptatum facilis quaerat soluta ratione ex ab, ad error
+            facere natus, cumque quibusdam praesentium adipisci sunt
+            necessitatibus? Eius, atque molestias.
+          </p>
+        </div>
+        <div class="InsideTabContent" id="caps">
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
+            nulla voluptatum facilis quaerat soluta ratione ex ab, ad error
+            facere natus, cumque quibusdam praesentium adipisci sunt
+            necessitatibus? Eius, atque molestias.
+          </p>
+        </div>
+        <div class="InsideTabContent" id="shoes">
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
+            nulla voluptatum facilis quaerat soluta ratione ex ab, ad error
+            facere natus, cumque quibusdam praesentium adipisci sunt
+            necessitatibus? Eius, atque molestias.
+          </p>
+        </div>
+      </section>
+      
+      <section id="looks" class="tab-content">
+        <div id = "grid-container2">
+          <button class = grid onclick="popup()">
+            <img src="images/tops.svg" alt="">
+          </button>
+          <button class = grid onclick="popup()">
+            <img src="images/dresses.png" alt="">
+          </button>
+          <button class = grid onclick="popup()">
+            <img src="images/bottoms.svg" alt="">
+          </button>
+          <button class = grid onclick="popup()">
+            <img src="images/shoes.png" alt="">
+          </button>
+          <button class = grid onclick="popup()">
+            <img src="images/bags.png" alt="">
+          </button>
+          <button class = grid onclick="popup()">
+            <img src="images/caps.png" alt="">
+          </button>
         </div>
       </section>
 
-      <section id="looks" class="tab-content"></section>
     </main>
 
     <footer>
@@ -106,5 +268,6 @@
       </div>
     </footer>
   </body>
-  <script src="outfit.js"></script>
+
+  <script src="app/outfit.js"></script>
 </html>
