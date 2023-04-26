@@ -1,3 +1,12 @@
+drop table if exists sessions;
+
+CREATE TABLE IF NOT EXISTS "sessions" (
+    "sid" varchar NOT NULL COLLATE "default" primary key,
+    "sess" json NOT NULL,
+    "expire" timestamp(6) NOT NULL
+);
+
+
 drop table if exists Users;
 
 create table Users(

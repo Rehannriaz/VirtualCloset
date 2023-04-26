@@ -172,7 +172,7 @@
   border: 1px dashed black;
 }
 #add-clothes img {
-  margin-top: 65px;
+  margin-top: 52px;
 }
 
 #blur.active2 {
@@ -271,7 +271,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50%;
-  height: 70%;
+  height: 75%;
   padding: 20px 10px;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
   background-color: white;
@@ -336,8 +336,10 @@
   display: block;
   text-align: center;
   margin-block: 3px;
+  padding-block: 3px;
   border: none;
-  border-bottom: 1px solid rgb(132, 132, 132);
+  border: 1px solid rgb(132, 132, 132);
+  border-radius: 6px;
   box-sizing: border-box;
   width: 80%;
   font-family: "Open Sans", sans-serif;
@@ -384,7 +386,7 @@
   margin: auto;
   padding: 10px 30px;
   border:none;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 #submit:hover {

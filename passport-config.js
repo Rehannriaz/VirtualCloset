@@ -1,6 +1,8 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
+// const session = require('express-session');
 const pool = require('./db');
+
 
 function initialize(passport) {
   const authenticateUser = async (email, password, done) => {
@@ -33,6 +35,14 @@ function initialize(passport) {
       }
 
       // If everything is valid, return the user
+      // req.session.user = {userid: rows.userid,email:rows.email };
+      // req.session.isMatch = true;
+      // req.session.save(function(){
+      //   res.redirect('/outfits');       
+      // })
+
+
+
       return done(null, user);
     } catch (error) {
       console.error('Error authenticating user:', error);

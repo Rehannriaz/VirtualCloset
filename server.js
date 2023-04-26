@@ -9,6 +9,9 @@ const flash = require('connect-flash');
 const passport = require("passport");
 const initializePassport = require("./passport-config");
 const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
+
+
 
 initializePassport(passport);
 
@@ -17,10 +20,16 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use(session({
-  secret: 'secret',
+  secret: 'uNb2G9tkhb',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new pgSession({
+    pool: pool,
+    tableName: 'sessions'
+
+  }) 
 }));
 
 // Passport initialization 
@@ -28,12 +37,37 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+const isAuthenticated = (req, res, next) => {
+  if (req.session.isAuthenticated) {
+    
+    return next();
+  } else {
+    res.redirect('/login');
+  }
+};
+
 
 app.post('/loginform', passport.authenticate('local', {
-  successRedirect: '/',
   failureRedirect: '/login',
   failureFlash: true
-}));
+}), async (req, res) => {
+  try {
+    const query = `SELECT userid, email FROM users WHERE email = $1`;
+    const values = [req.body.email];
+    const { rows } = await pool.query(query, values);
+    
+    req.session.isAuthenticated = true;
+    req.session.user = { userid: rows[0].userid, email: rows[0].email };
+    req.session.save(function(){
+      
+      res.redirect('/outfits');
+    });
+  } catch (error) {
+    console.error('Error finding user:', error);
+    res.redirect('/login');
+  }
+});
+
 
 
 
@@ -83,13 +117,16 @@ app.get('/login', (req, res) => {
     css: [ '/css/shared.css', '/css/loginStyles.css']
   });
 });
-app.get('/outfits', (req, res) => {
+
+app.get('/outfits', function (req, res) {
+  if(!req.session.isAuthenticated){
+    return res.status(401).render('/401');
+  }
   res.render("outfits.ejs",{
     css: [ '/css/shared.css', '/css/outfits.css','/css/outfits2.css'],
     scripts: ['/app/outfit.js']
   });
 });
-
 
 
 app.listen(port,() => console.log(`App listening on port ${port}`));
