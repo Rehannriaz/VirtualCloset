@@ -37,7 +37,6 @@
   padding-top: 12px;
 }
 
-
 .tab-content {
   display: none;
 }
@@ -87,7 +86,6 @@
   font-size: 17px;
   color: rgb(63, 63, 63);
   font-family: "Open Sans", sans-serif;
-  
 }
 
 .snaps-inline {
@@ -111,7 +109,6 @@
   border-radius: 100vw;
   border: 2px solid rgb(98, 98, 98);
 }
-
 
 .InsideTabContent {
   display: none;
@@ -141,7 +138,7 @@
 
 .card {
   /* width: 20%;  */
-  height: 330px;
+  height: 300px;
   border: 1px solid black;
   background-color: rgb(231, 230, 230);
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
@@ -171,34 +168,225 @@
   font-size: 16px;
   color: rgb(63, 63, 63);
 }
-#add-clothes{
+#add-clothes {
   border: 1px dashed black;
 }
-#add-clothes img{
+#add-clothes img {
   margin-top: 65px;
 }
 
-#blur.active2{
+#blur.active2 {
   filter: blur(18px);
   pointer-events: none;
   user-select: none;
 }
-#popup{
+#modal-wrapper {
+  display: flex;
   position: fixed;
-  top: 40%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  width: 600px;
-  padding: 50px;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 60%;
+  padding: 10px 5px;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
   background-color: white;
   opacity: 0;
   visibility: hidden;
   transition: 0.5s;
+  border-radius: 10px;
+  align-items: start;
+  justify-content: space-between;
 }
-#popup.active2{
+#modal-wrapper.active2 {
   opacity: 1;
-  /* filter: blur(0); */
+  /* filter: blur(0);  */
   visibility: visible;
   transition: 0.5s;
+}
+#modal-img {
+  width: 50%;
+  height: 100%;
+  border-right: 1px solid rgb(132, 132, 132);
+  text-align: center;
+}
+#modal-img h2 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 30px;
+  color: rgb(132, 132, 132);
+}
+
+#modal-img img {
+  height: 60%;
+  width: 70%;
+  object-fit: cover;
+  margin-top: 20px;
+  border: 1px solid rgb(66, 66, 66);
+  border-radius: 10px;
+  /* top: 20%; */
+  /* left: 15%; */
+}
+
+#modal-content {
+  width: 50%;
+  height: 100%;
+  text-align: center;
+}
+#modal-content p {
+  /* margin: auto; */
+  margin-inline: auto;
+  margin-bottom: 16px;
+  padding-bottom: 13px;
+  width: 80%;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  color: rgb(52, 52, 52);
+  border-bottom: 1px solid rgb(132, 132, 132);
+}
+.cloth-desc {
+  color: rgb(154, 154, 154);
+}
+#modal-content p:last-child {
+  border-bottom: none;
+}
+
+.close {
+  height: 30px;
+  width: 30px;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+.close img {
+  height: 30px;
+  width: 30px;
+  padding: 0;
+  margin: 0;
+}
+#add-clothes-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 70%;
+  padding: 20px 10px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s;
+  border-radius: 10px;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+#add-clothes-modal.active2 {
+  opacity: 1;
+  /* filter: blur(0);  */
+  visibility: visible;
+  transition: 0.5s;
+}
+
+#modal-img-input h2 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 30px;
+  color: rgb(132, 132, 132);
+}
+#modal-img-input {
+  width: 50%;
+  height: 100%;
+  border-right: 1px solid rgb(132, 132, 132);
+  text-align: center;
+}
+#modal-img-input form {
+  margin: auto;
+  height: 60%;
+  width: 70%;
+  background-color: rgb(232, 232, 232);
+  margin-top: 20px;
+  border-radius: 10px;
+  border: 2px dashed rgb(95, 95, 95);
+}
+#file {
+  display: none;
+}
+#modal-img-input label {
+  cursor: pointer;
+}
+#modal-img-input label img {
+  position: relative;
+  top: 32%;
+}
+#modal-data-input {
+  width: 50%;
+  height: 100%;
+  text-align: center;
+}
+#modal-data-input label {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  color: rgb(79, 79, 79);
+  padding-top: 4px;
+  display: block;
+}
+.textarea-style {
+  display: block;
+  text-align: center;
+  margin-block: 3px;
+  border: none;
+  border-bottom: 1px solid rgb(132, 132, 132);
+  box-sizing: border-box;
+  width: 80%;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  margin: auto;
+  outline: none;
+  color: rgb(154, 154, 154);
+}
+#Occasion,#season,#size,#type {
+  display: block;
+  text-align: center;
+  box-sizing: border-box;
+  width: 80%;
+  border: 1px solid rgb(132, 132, 132);
+  border-radius: 6px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  margin: auto;
+  color: rgb(154, 154, 154);
+  padding-block: 3px;
+  margin-block: 3px;
+}
+#color-code{
+  display: block;
+  text-align: center;
+  box-sizing: border-box;
+  width: 80%;
+  border: 1px solid rgb(132, 132, 132);
+  border-radius: 6px;
+  margin: auto;
+  padding-block: 3px;
+  margin-block: 3px;
+}
+#submit{
+   display: block;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 16px;
+  text-decoration: none;
+  font-family: sans-serif;
+  background-color: black;
+  color: rgb(244, 244, 244);
+  border-radius: 100px;
+  margin: auto;
+  padding: 10px 30px;
+  border:none;
+  margin-top: 10px;
+}
+
+#submit:hover {
+  background-color: rgb(236, 173, 184);
 }
