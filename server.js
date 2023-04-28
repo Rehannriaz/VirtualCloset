@@ -70,9 +70,11 @@ app.post('/loginform', passport.authenticate('local', {
 
 app.post('/insertclothes', async (req, res) => {
   const { color, size, fabric, category, season, Occasion, colorCode } = req.body;
+  const userid = req.session.user.userid; // retrieve userid from session object
 
-  const itemQuery = `INSERT INTO ClothingItem (colorName,ClothesSize,FabricType,ClothingType) VALUES ($1, $2,$3,$4) RETURNING *`;
-  const itemValues = [color, size, fabric, category];
+
+  const itemQuery = `INSERT INTO ClothingItem (userid,colorName,colorCode,ClothesSize,FabricType,ClothingType) VALUES ($1, $2,$3,$4,$5,$6) RETURNING *`;
+  const itemValues = [userid,color,colorCode, size, fabric, category];
 
   const categoryQuery = `INSERT INTO category (clothingtype,clothingseason) VALUES ($1, $2) RETURNING *`;
   const categoryValues = [category, season];
@@ -80,13 +82,13 @@ app.post('/insertclothes', async (req, res) => {
   const occasionQuery = `INSERT INTO occasion (occasionname,colorName) VALUES ($1, $2) RETURNING *`;
   const occasionValues = [Occasion, color];
 
-  const colorQuery = `INSERT INTO color (colorName,colorCode) VALUES ($1, $2) RETURNING *`;
-  const colorValues = [color, colorCode];
+  // const colorQuery = `INSERT INTO color (colorName,colorCode) VALUES ($1, $2) RETURNING *`;
+  // const colorValues = [color, colorCode];
 
-  const queries = [   pool.query(categoryQuery, categoryValues) ,pool.query(itemQuery, itemValues),    pool.query(occasionQuery, occasionValues),    pool.query(colorQuery, colorValues),  ];
+  const queries = [   pool.query(categoryQuery, categoryValues) ,pool.query(itemQuery, itemValues),    pool.query(occasionQuery, occasionValues)];
 
   try {
-    const results = await Promise.all(queries);
+    const results = await Promise.all(queries);  // all queries run in parallel
     console.log(results);
     console.log("reached end");
     res.redirect('/outfits');

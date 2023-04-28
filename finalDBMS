@@ -16,29 +16,11 @@ create table Users(
     password varchar(255) not NULL
 );
 
-drop table if exists Color;
-
-create table Color(
-    colorID serial int primary key 
-    colorName varchar(30) ,
-    colorCode bytea,
-);
-
-drop table if exists ClothingSize;
-
-create table ClothingSize(
-    ClothesSize varchar(15) primary key,
-    NumericSize int,
-    MeasurementSystem char(2),
-    MeasurementUnits varchar(10)
-);
-
 drop table if exists category;
 
 create table category(
 	clothingType varchar(50) primary key,
 	clothingSeason varchar(20)
-
 );
 
 
@@ -46,27 +28,27 @@ drop table if exists ClothingItem;
 
 create table ClothingItem(
 	item_ID serial primary key,
-	username varchar(30),
+	userid bigint,
     ImageUpload bytea,
     colorName varchar(30),
+	colorCode bytea,
     ClothesSize varchar(5),
     FabricType varchar(25),
     ClothingType varchar(50),
     description text,
-    constraint username foreign key (username) references users(username),
-    constraint clothingtype foreign key (clothingtype) references category(clothingtype),
-	constraint colors foreign key (colorName) references Color(colorName)
+    constraint userid foreign key (userid) references users(userid),
+    constraint clothingtype foreign key (clothingtype) references category(clothingtype)
 );
 
 
 drop table if exists outfit;
 create table outfit(
 	outfitID serial primary key,
-	username varchar(30),
+	userid bigint,
 	outfitName varchar(15),
 	notes text,
 	
-	constraint username foreign key (username) references users(username)
+	constraint username foreign key (userid) references users(userid)
 );
 
 drop table if exists outfit_clothes;
@@ -87,8 +69,11 @@ create table occasion(
 	colorName varchar(30),
 	description text,
 	
-	constraint username foreign key (username) references users(username),
-	constraint colors foreign key (colorName) references Color(colorName)
-	
+	constraint username foreign key (username) references users(username)	
 	
 );
+
+
+select * from category;
+select * from clothingitem;
+select * from users;
