@@ -20,6 +20,7 @@
     "passport-local": "^1.0.0",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
+    "pg-pool": "^3.6.0",
     "sequelize": "^6.31.0"
   }
 }
