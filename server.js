@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const bcrypt= require('bcrypt'); 
-const port = 3025;
+const port = 3033;
 const pool = require('./db');
 const path = require('path');
 const mime = require('mime');
@@ -67,6 +67,37 @@ app.post('/loginform', passport.authenticate('local', {
     res.redirect('/login');
   }
 });
+
+app.post('/insertclothes', async (req, res) => {
+  const { color, size, fabric, category, season, Occasion, colorCode } = req.body;
+
+  const itemQuery = `INSERT INTO ClothingItem (colorName,ClothesSize,FabricType,ClothingType) VALUES ($1, $2,$3,$4) RETURNING *`;
+  const itemValues = [color, size, fabric, category];
+
+  const categoryQuery = `INSERT INTO category (clothingtype,clothingseason) VALUES ($1, $2) RETURNING *`;
+  const categoryValues = [category, season];
+
+  const occasionQuery = `INSERT INTO occasion (occasionname,colorName) VALUES ($1, $2) RETURNING *`;
+  const occasionValues = [Occasion, color];
+
+  const colorQuery = `INSERT INTO color (colorName,colorCode) VALUES ($1, $2) RETURNING *`;
+  const colorValues = [color, colorCode];
+
+  const queries = [   pool.query(categoryQuery, categoryValues) ,pool.query(itemQuery, itemValues),    pool.query(occasionQuery, occasionValues),    pool.query(colorQuery, colorValues),  ];
+
+  try {
+    const results = await Promise.all(queries);
+    console.log(results);
+    console.log("reached end");
+    res.redirect('/outfits');
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+
+
 
 
 

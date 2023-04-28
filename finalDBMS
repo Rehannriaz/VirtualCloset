@@ -19,9 +19,9 @@ create table Users(
 drop table if exists Color;
 
 create table Color(
-    colorName varchar(30) primary key,
+    colorID serial int primary key 
+    colorName varchar(30) ,
     colorCode bytea,
-	colorPalette bytea
 );
 
 drop table if exists ClothingSize;
@@ -49,12 +49,11 @@ create table ClothingItem(
 	username varchar(30),
     ImageUpload bytea,
     colorName varchar(30),
-    ClothesSize varchar(15),
+    ClothesSize varchar(5),
     FabricType varchar(25),
     ClothingType varchar(50),
     description text,
     constraint username foreign key (username) references users(username),
-    constraint ClothesSize foreign key (ClothesSize) references ClothingSize(clothesSize),
     constraint clothingtype foreign key (clothingtype) references category(clothingtype),
 	constraint colors foreign key (colorName) references Color(colorName)
 );

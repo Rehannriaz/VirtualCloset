@@ -288,7 +288,7 @@
         </script>
       </div>
       <div id="modal-data-input">
-        <form action="" method="GET">
+        <form action="/insertclothes" method="POST">
           <label for="category">Category:</label>
           <input
             type="text"
@@ -298,13 +298,13 @@
 
           <label for="type">Type:</label>
           <select name="type" id="type">
-            <option value="Top">Top</option>
-            <option value="Bottom">Bottom</option>
-            <option value="Dress">Dress</option>
-            <option value="Undergrarment">Undergrarment</option>
-            <option value="Bag">Bag</option>
-            <option value="Cap">Cap</option>
-            <option value="Shoes">Shoes</option>
+            <option value="Top" name="top">Top</option>
+            <option value="Bottom" name="bottom">Bottom</option>
+            <option value="Dress" name="dress">Dress</option>
+            <option value="Undergrarment" name="undergarment">Undergrarment</option>
+            <option value="Bag" name="bag">Bag</option>
+            <option value="Cap" name="cap">Cap</option>
+            <option value="Shoes" name="shoes">Shoes</option>
           </select>
           
           
@@ -313,7 +313,7 @@
           <label for="color-code">Color Code:</label>
           <input
             type="color"
-            name="color-code"
+            name="colorCode"
             id="color-code"/>
 
           <label for="size">Size:</label>
