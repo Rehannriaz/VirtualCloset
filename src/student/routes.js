@@ -2,11 +2,9 @@ const { Router } = require('express');
 
 const controller = require('./controller');
 const router = Router();
+const imageUploadMiddleware = require('../image-upload');
 
 
-router.get('/',controller.getStudents);
-router.post('/',controller.addUser);
-router.get("/:id",controller.getid);
-router.delete("/:id",controller.delUser);
+router.post('/upload',imageUploadMiddleware,controller.createNewOutfit);
 
 module.exports = router;

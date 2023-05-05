@@ -12,7 +12,7 @@ const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 // const fileUpload = require("express-fileupload");
 const multer = require('multer');
-
+const uuid = require('uuid').v4;
 
 
 initializePassport(passport);
@@ -34,22 +34,23 @@ app.use(session({
   }) 
 }));
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const storage = multer.diskStorage({
+    destination: 'outfit_images/images',
+    filename: (req,file,cb) =>{
+      console.log(file)
+      cb(null,Date.now()+path.extname(file.originalname));
+    }
+  
+  });
+
+ const upload= multer({storage: storage})
 
 
 app.post('/upload', upload.single('image'), (req, res) => {
-  const imageData = req.file.buffer;
-  const query = 'INSERT INTO image (imagedata) VALUES ($1)';
-  console.log("WEEEEEEEEEEEEEEEEEEE");
-  pool.query(query, [imageData], (error) => {
-    if (error) {
-      console.error(error);
-      res.sendStatus(500);
-    } else {
-      res.send('Image uploaded successfully!');
-    }
-  });
+
+  
+  console.log(req.body);
+  console.log(req.file);
 });
 
 
@@ -91,20 +92,39 @@ app.post('/loginform', passport.authenticate('local', {
   }
 });
 
-app.post('/insertclothes', async (req, res) => {
-  // const byteaFile = uploadedFile.toString("hex");
 
+const insertClothesUpload = multer({
+  storage: multer.diskStorage({
+    destination: 'outfit_images/images',
+    filename:function(req,file,cb){
+      cb(null,uuid()+'-'+file.originalname);
+    }
+  })
+}).single('image');
+
+
+
+
+
+
+
+
+app.post('/insertclothes',upload.single('image'), async (req, res) => {
+  // const byteaFile = uploadedFile.toString("hex");
+  console.log(req.file);
   const { color, size, fabric, category, season, Occasion, colorCode } = req.body;
   const userid = req.session.user.userid; // retrieve userid from session object
 
-  const imageQuery = 'SELECT imagedata FROM image ORDER BY id DESC LIMIT 1';
-  const imageResult = await pool.query(imageQuery);
-  const imageData = imageResult.rows[0].data;
+  // const imageQuery = 'SELECT imagedata FROM image ORDER BY id DESC LIMIT 1';
+  // const imageResult = await pool.query(imageQuery);
+  // const imageData = imageResult.rows[0].data;
 
 
-  const itemQuery = `INSERT INTO ClothingItem (userid,imageupload,colorName,colorCode,ClothesSize,FabricType,ClothingType) VALUES ($1, $2,$3,$4,$5,$6,$7) RETURNING *`;
-  const itemValues = [userid,imageData,color,colorCode, size, fabric, category];
-
+  // const itemQuery = `INSERT INTO ClothingItem (userid,imageupload,colorName,colorCode,ClothesSize,FabricType,ClothingType) VALUES ($1, $2,$3,$4,$5,$6,$7) RETURNING *`;
+  // const itemValues = [userid,imageData,color,colorCode, size, fabric, category];
+  const itemQuery = `INSERT INTO ClothingItem (userid,colorName,colorCode,ClothesSize,FabricType,ClothingType) VALUES ($1, $2,$3,$4,$5,$6) RETURNING *`;
+  const itemValues = [userid,color,colorCode, size, fabric, category];
+  
   const categoryQuery = `INSERT INTO category (clothingtype,clothingseason) VALUES ($1, $2) RETURNING *`;
   const categoryValues = [category, season];
 
@@ -118,9 +138,9 @@ app.post('/insertclothes', async (req, res) => {
 
   try {
     const results = await Promise.all(queries);  // all queries run in parallel
-    console.log(results);
+    // console.log(results);
     console.log("reached end");
-    console.log(imageData);
+    // console.log(imageData);
     res.redirect('/outfits');
   } catch (error) {
     console.error(error);
