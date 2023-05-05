@@ -1,41 +1,53 @@
-const express = require('express');
-const app = express();
-const bcrypt= require('bcrypt'); 
-const port = 3033;
-const pool = require('./db');
-const path = require('path');
-const mime = require('mime');
-const flash = require('connect-flash');
-const passport = require("passport");
-const initializePassport = require("./passport-config");
-const session = require('express-session');
-const pgSession = require('connect-pg-simple')(session);
+const express = require('express'); // import express module
+const app = express(); // create an instance of express
+const bcrypt = require('bcrypt'); // import bcrypt module for password hashing
+const port = 3033; // set the port number for the server
+const pool = require('./db'); // import the pool object from db.js file which contains database connection settings
+const path = require('path'); // import path module to work with file and directory paths
+const mime = require('mime'); // import mime module to get MIME type of a file
+const flash = require('connect-flash'); // import connect-flash module for flash messages
+const passport = require('passport'); // import passport module for authentication
+const initializePassport = require('./passport-config'); // import initializePassport function from passport-config.js
+const session = require('express-session'); // import express-session module for session management
+const pgSession = require('connect-pg-simple')(session); // import connect-pg-simple module to store session data in PostgreSQL database
+const multer = require('multer'); // import multer module to handle file uploads
+const uuid = require('uuid').v4; // import uuid module to generate unique IDs
 
 
+initializePassport(passport); // initialize Passport with the passport-config.js settings
 
-initializePassport(passport);
+app.set('view engine', 'ejs'); // set the view engine to ejs
 
-app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: false })); // use the urlencoded middleware to parse incoming requests with urlencoded payloads
+app.use(express.static(path.join(__dirname, 'public'))); // serve static files from the public folder
 
-app.use(express.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+  session({
+    secret: 'uNb2G9tkhb', // set the secret used to sign the session ID cookie
+    resave: false, // do not save the session if it is not modified
+    saveUninitialized: false, // do not create a session until something is stored
+    store: new pgSession({
+      pool: pool, // specify the database connection pool to use for storing sessions
+      tableName: 'sessions' // specify the name of the table to store session data
+    })
+  })
+);
 
+const storage = multer.diskStorage({
+  destination: 'outfit_images/images', // specify the destination folder for uploaded images
+  filename: (req, file, cb) => {
+    console.log(file); // log the uploaded file details to the console
+    cb(null, Date.now() + path.extname(file.originalname)); // specify the filename for the uploaded file
+  }
+});
 
-app.use(session({
-  secret: 'uNb2G9tkhb',
-  resave: false,
-  saveUninitialized: false,
-  store: new pgSession({
-    pool: pool,
-    tableName: 'sessions'
+const upload = multer({ storage: storage }); // create a multer object to handle file uploads
 
-  }) 
-}));
+// Passport initialization
+app.use(flash()); // use the connect-flash middleware for flash messages
+app.use(passport.initialize()); // use the passport middleware for authentication
+app.use(passport.session()); // use the passport middleware for session management
 
-// Passport initialization 
-app.use(flash());
-app.use(passport.initialize());
-app.use(passport.session());
 
 const isAuthenticated = (req, res, next) => {
   if (req.session.isAuthenticated) {
@@ -68,27 +80,40 @@ app.post('/loginform', passport.authenticate('local', {
   }
 });
 
-app.post('/insertclothes', async (req, res) => {
+
+
+
+
+
+
+
+
+
+app.post('/uploadclothes',upload.single('image'), async (req, res) => {
+  
+  console.log(req.file);
   const { color, size, fabric, category, season, Occasion, colorCode } = req.body;
+  const userid = req.session.user.userid; 
 
-  const itemQuery = `INSERT INTO ClothingItem (colorName,ClothesSize,FabricType,ClothingType) VALUES ($1, $2,$3,$4) RETURNING *`;
-  const itemValues = [color, size, fabric, category];
+    const imageName = req.file.filename;
 
+  const itemQuery = `INSERT INTO ClothingItem (userid,imageupload,colorName,colorCode,ClothesSize,FabricType,ClothingType) VALUES ($1, $2,$3,$4,$5,$6,$7) RETURNING *`;
+  const itemValues = [userid,imageName,color,colorCode, size, fabric, category];
+  
   const categoryQuery = `INSERT INTO category (clothingtype,clothingseason) VALUES ($1, $2) RETURNING *`;
   const categoryValues = [category, season];
 
   const occasionQuery = `INSERT INTO occasion (occasionname,colorName) VALUES ($1, $2) RETURNING *`;
   const occasionValues = [Occasion, color];
 
-  const colorQuery = `INSERT INTO color (colorName,colorCode) VALUES ($1, $2) RETURNING *`;
-  const colorValues = [color, colorCode];
+  
 
-  const queries = [   pool.query(categoryQuery, categoryValues) ,pool.query(itemQuery, itemValues),    pool.query(occasionQuery, occasionValues),    pool.query(colorQuery, colorValues),  ];
+  const queries = [   pool.query(categoryQuery, categoryValues) ,pool.query(itemQuery, itemValues),    pool.query(occasionQuery, occasionValues)];
 
   try {
-    const results = await Promise.all(queries);
-    console.log(results);
-    console.log("reached end");
+    const results = await Promise.all(queries);  // all queries run in parallel
+
+
     res.redirect('/outfits');
   } catch (error) {
     console.error(error);
