@@ -261,92 +261,74 @@
     </div>
     <div id="add-clothes-modal">
       <div id="modal-img-input">
-        <h2>Cloth Details</h2>
-        <form action="/upload" method="POST" id="imgBox" enctype="multipart/form-data">
-          <label for="file"
-            ><img src="images/upload.png" alt="" id="upload-button"
-          /></label>
-          <input
-            type="file"
-            accept="image/*"
-            capture="environment"
-            name="image"
-            id="file"
-            onchange="LoadFile(event)" />
-            <input type="submit"/>
+        <h2>Cloth Details</h2><form action="/uploadclothes" method="POST" enctype="multipart/form-data">
+          <div id="imgBox">
+            <label for="file">
+              <img src="images/upload.png" alt="" id="upload-button"/>
+            </label>
+            <input type="file" accept="image/*" capture="environment" name="image" id="file" onchange="LoadFile(event)"/>
+          </div>
+          <div id="modal-data-input">
+            <label for="category">Category:</label>
+            <input type="text" name="category" id="category" class="textarea-style"/>
+        
+            <label for="type">Type:</label>
+            <select name="type" id="type">
+              <option value="Top" name="top">Top</option>
+              <option value="Bottom" name="bottom">Bottom</option>
+              <option value="Dress" name="dress">Dress</option>
+              <option value="Undergrarment" name="undergarment">Undergrarment</option>
+              <option value="Bag" name="bag">Bag</option>
+              <option value="Cap" name="cap">Cap</option>
+              <option value="Shoes" name="shoes">Shoes</option>
+            </select>
+        
+            <label for="color">Color:</label>
+            <input type="text" name="color" id="color" class="textarea-style"/>
+            <label for="color-code">Color Code:</label>
+            <input type="color" name="colorCode" id="color-code"/>
+        
+            <label for="size">Size:</label>
+            <select name="size" id="size">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+        
+            <label for="season">Season:</label>
+            <select name="season" id="season">
+              <option value="Summer">Summer</option>
+              <option value="Winter">Winter</option>
+              <option value="Autumn">Autumn</option>
+              <option value="Spring">Spring</option>
+            </select>
+        
+            <label for="fabric">Fabric:</label>
+            <input type="text" name="fabric" id="fabric" class="textarea-style"/>
+        
+            <label for="Occasion">Occasion:</label>
+            <select name="Occasion" id="Occasion">
+              <option value="Casual">Casual</option>
+              <option value="Semi-Formal">Semi-Formal</option>
+              <option value="Formal">Formal</option>
+            </select>
+          </div>
+          <input type="submit" id="submit"/>
         </form>
+        
         <script type="text/javascript">
           var imgBox = document.getElementById("imgBox");
           var uploadButton = document.getElementById("upload-button");
           var LoadFile = function (event) {
-            imgBox.style.backgroundImage =
-              "url(" + URL.createObjectURL(event.target.files[0]) + ")";
+            imgBox.style.backgroundImage = "url(" + URL.createObjectURL(event.target.files[0]) + ")";
             imgBox.style.border = "1px solid";
             imgBox.style.backgroundPosition = "center";
             imgBox.style.objectFit = "contain";
             uploadButton.style.display = "none";
           };
         </script>
-      </div>
-      <div id="modal-data-input">
-        <form action="/insertclothes" method="POST">
-          <label for="category">Category:</label>
-          <input
-            type="text"
-            name="category"
-            id="category"
-            class="textarea-style" />
-
-          <label for="type">Type:</label>
-          <select name="type" id="type">
-            <option value="Top" name="top">Top</option>
-            <option value="Bottom" name="bottom">Bottom</option>
-            <option value="Dress" name="dress">Dress</option>
-            <option value="Undergrarment" name="undergarment">Undergrarment</option>
-            <option value="Bag" name="bag">Bag</option>
-            <option value="Cap" name="cap">Cap</option>
-            <option value="Shoes" name="shoes">Shoes</option>
-          </select>
-          
-          
-          <label for="color">Color:</label>
-          <input type="text" name="color" id="color" class="textarea-style" />
-          <label for="color-code">Color Code:</label>
-          <input
-            type="color"
-            name="colorCode"
-            id="color-code"/>
-
-          <label for="size">Size:</label>
-          <select name="size" id="size">
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-          </select>
-
-
-          <label for="season">Season:</label>
-          <select name="season" id="season">
-            <option value="Summer">Summer</option>
-            <option value="Winter">Winter</option>
-            <option value="Autumn">Autumn</option>
-            <option value="Spring">Spring</option>
-          </select>
-
-          <label for="fabric">Fabric:</label>
-          <input type="text" name="fabric" id="fabric" class="textarea-style" />
-          
-          <label for="Occasion">Occasion:</label>
-          <select name="Occasion" id="Occasion">
-            <option value="Casual">Casual</option>
-            <option value="Semi-Formal">Semi-Formal</option>
-            <option value="Formal">Formal</option>
-          </select>
-          
-          <button type="submit" id="submit">Submit</button>
-
-        </form>
+        
       </div>
       <button class="close" onclick="toggle2()" type="reset">
         <img src="images/close-button.png" alt="" />

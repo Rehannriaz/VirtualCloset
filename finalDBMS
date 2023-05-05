@@ -29,9 +29,9 @@ drop table if exists ClothingItem;
 create table ClothingItem(
 	item_ID serial primary key,
 	userid bigint,
-    ImageUpload bytea,
+    ImageUpload varchar(255),
     colorName varchar(30),
-	colorCode bytea,
+	colorCode varchar(20),
     ClothesSize varchar(5),
     FabricType varchar(25),
     ClothingType varchar(50),
