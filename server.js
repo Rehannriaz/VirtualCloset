@@ -12,12 +12,14 @@ const session = require('express-session'); // import express-session module for
 const pgSession = require('connect-pg-simple')(session); // import connect-pg-simple module to store session data in PostgreSQL database
 const multer = require('multer'); // import multer module to handle file uploads
 const uuid = require('uuid').v4; // import uuid module to generate unique IDs
-
+const bodyParser = require('body-parser');
 
 initializePassport(passport); // initialize Passport with the passport-config.js settings
 
 app.set('view engine', 'ejs'); // set the view engine to ejs
 
+
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false })); // use the urlencoded middleware to parse incoming requests with urlencoded payloads
 app.use(express.static(path.join(__dirname, 'public'))); // serve static files from the public folder
 
@@ -79,13 +81,6 @@ app.post('/loginform', passport.authenticate('local', {
     res.redirect('/login');
   }
 });
-
-
-
-
-
-
-
 
 
 
@@ -174,15 +169,31 @@ app.get('/login', (req, res) => {
   });
 });
 
+
+
 app.get('/outfits', function (req, res) {
   if(!req.session.isAuthenticated){
     return res.status(401).render('/401');
   }
+  
   res.render("outfits.ejs",{
     css: [ '/css/shared.css', '/css/outfits.css','/css/outfits2.css'],
     scripts: ['/app/outfit.js']
   });
 });
+
+app.get('/clothes', isAuthenticated, async (req, res) => {
+  try {
+    const userid = req.session.user.userid;
+    const query = 'SELECT * FROM ClothingItem WHERE userid = $1';
+    const { rows } = await pool.query(query, [userid]);
+    res.send(rows);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
 
 
 app.listen(port,() => console.log(`App listening on port ${port}`));
