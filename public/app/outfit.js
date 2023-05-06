@@ -63,8 +63,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const img1 = document.createElement('img');
         img1.src = '/outfit_images/images/' + clothingItem.imageupload;  // fix images, needs to be in public or not??
         const details = document.createElement('div');
-        details.classList.add('details');
-        const category = document.createElement('p');
+        details.classList.add('card-content');
+        const category = document.createElement('h2');
         category.textContent = clothingItem.colorname+ " " + clothingItem.clothingtype;
         const size = document.createElement('p');
         size.textContent = clothingItem.clothessize;
