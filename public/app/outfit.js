@@ -44,3 +44,57 @@ function openInsideTab(evt, TabName) {
 }
 document.getElementById("InsideOpenAuto").click();
 
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Create new HTML elements based on the data
+  const cardsContainer = document.getElementById('all');
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', '/clothes');
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      const clothes = JSON.parse(xhr.responseText);
+      clothes.forEach(clothingItem => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        card.onclick = toggle;
+
+        const img1 = document.createElement('img');
+        img1.src = '/outfit_images/images/' + clothingItem.imageupload;  // fix images, needs to be in public or not??
+        const details = document.createElement('div');
+        details.classList.add('card-content');
+        const category = document.createElement('h2');
+        category.textContent = clothingItem.colorname+ " " + clothingItem.clothingtype;
+        const size = document.createElement('p');
+        size.textContent = clothingItem.clothessize;
+        const occasion = document.createElement('p');
+        occasion.textContent = clothingItem.occasionname;
+
+        details.appendChild(category);
+        details.appendChild(occasion);
+        details.appendChild(size);
+        card.appendChild(img1);
+        card.appendChild(details);
+        cardsContainer.appendChild(card);
+      });
+    } else {
+      console.error('Request failed. Status:', xhr.status);
+    }
+  };
+  xhr.send();
+});
+
+
+function toggle() {
+  var blur = document.getElementById("blur");
+  blur.classList.toggle("active2");
+  var popup = document.getElementById("modal-wrapper");
+  popup.classList.toggle("active2");
+}
+function toggle2() {
+  var blur = document.getElementById("blur");
+  blur.classList.toggle("active2");
+  var popup = document.getElementById("add-clothes-modal");
+  popup.classList.toggle("active2");
+}
