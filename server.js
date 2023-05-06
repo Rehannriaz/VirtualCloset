@@ -98,8 +98,8 @@ app.post('/uploadclothes',upload.single('image'), async (req, res) => {
   const categoryQuery = `INSERT INTO category (clothingtype,clothingseason) VALUES ($1, $2) RETURNING *`;
   const categoryValues = [category, season];
 
-  const occasionQuery = `INSERT INTO occasion (occasionname,colorName) VALUES ($1, $2) RETURNING *`;
-  const occasionValues = [Occasion, color];
+  const occasionQuery = `INSERT INTO occasion (occasionname,userid,colorName) VALUES ($1, $2,$3) RETURNING *`;
+  const occasionValues = [Occasion,userid,color];
 
   
 
@@ -185,7 +185,7 @@ app.get('/outfits', function (req, res) {
 app.get('/clothes', isAuthenticated, async (req, res) => {
   try {
     const userid = req.session.user.userid;
-    const query = 'SELECT * FROM ClothingItem WHERE userid = $1';
+    const query = 'SELECT * FROM clothingitem, occasion WHERE clothingitem.userid = occasion.userid AND clothingitem.userid = $1';
     const { rows } = await pool.query(query, [userid]);
     res.send(rows);
   } catch (error) {

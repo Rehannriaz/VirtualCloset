@@ -66,13 +66,13 @@ document.addEventListener("DOMContentLoaded", function() {
         details.classList.add('details');
         const category = document.createElement('p');
         category.textContent = clothingItem.colorname+ " " + clothingItem.clothingtype;
-        const color = document.createElement('p');
-        color.textContent = clothingItem.colorname;
         const size = document.createElement('p');
         size.textContent = clothingItem.clothessize;
+        const occasion = document.createElement('p');
+        occasion.textContent = clothingItem.occasionname;
 
         details.appendChild(category);
-        details.appendChild(color);
+        details.appendChild(occasion);
         details.appendChild(size);
         card.appendChild(img1);
         card.appendChild(details);

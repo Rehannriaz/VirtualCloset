@@ -65,11 +65,11 @@ drop table if exists occasion;
 create table occasion(
 	occasion_ID serial primary key,
 	occasionName varchar(15),
-	username varchar(30),
+	userid bigint,
 	colorName varchar(30),
 	description text,
 	
-	constraint username foreign key (username) references users(username)	
+	constraint username foreign key (userid) references users(userid)	
 	
 );
 
