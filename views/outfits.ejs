@@ -165,25 +165,27 @@
       </section>
 
       <section id="looks" class="tab-content">
-        <div id="grid-container2">
-          <button class=grid onclick="popup()">
-            <img src="images/tops.svg" alt="">
-          </button>
-          <button class=grid onclick="popup()">
-            <img src="images/dresses.png" alt="">
-          </button>
-          <button class=grid onclick="popup()">
-            <img src="images/bottoms.svg" alt="">
-          </button>
-          <button class=grid onclick="popup()">
-            <img src="images/shoes.png" alt="">
-          </button>
-          <button class=grid onclick="popup()">
-            <img src="images/bags.png" alt="">
-          </button>
-          <button class=grid onclick="popup()">
-            <img src="images/caps.png" alt="">
-          </button>
+        <h1>Your Outfits</h1>
+        <div class="InsideTabContent-2">
+          <div class="card" onclick="outfitToggle()">
+            <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
+            <div class="card-content">
+              <h2>Formal outfit 1</h2>
+            </div>
+          </div>
+          <div class="card" onclick="outfitToggle()">
+            <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
+            <div class="card-content">
+              <h2>Beach outfit</h2>
+            </div>
+          </div>
+          <div class="card" onclick="createOutfitToggle()">
+            <img src="images/plus-60.png" alt="" />
+            <div class="card-content">
+              <h2>Add new outfit</h2>
+            </div>
+          </div>
+          
         </div>
       </section>
     </main>
@@ -206,6 +208,192 @@
       </div>
     </footer>
   </section>
+  <div id="outfitModalWrapper">
+    <button class="cross-btn" onclick="outfitToggle()">
+      <img src="images/xmark-solid.svg" alt="" />
+    </button>
+    <h2 id="outfitDetails">Outfit Details</h2>
+    <hr />
+    <div class="outfitsGrid">
+      <div class="grid-card">
+        <button onclick="toggle()">
+          <img src="images/formalOutfit/formalShirt1.png" alt="" />
+        </button>
+        <h2>Shirt</h2>
+      </div>
+      <div class="grid-card">
+        <button onclick="toggle()">
+          <img src="images/formalOutfit/formalPant1.png" alt="" />
+        </button>
+        <h2>Bottoms</h2>
+      </div>
+      <div class="grid-card">
+        <button onclick="toggle()">
+          <img src="images/formalOutfit/formalJacket1.jpg" alt="" />
+        </button>
+        <h2>Dress</h2>
+      </div>
+      <div class="grid-card">
+        <button onclick="toggle()">
+          <img src="images/redhat.svg" alt="" />
+        </button>
+        <h2>Hat/Cap</h2>
+      </div>
+      <div class="grid-card">
+        <button onclick="toggle()">
+          <img src="images/bag-shopping-solid.svg" alt="" />
+        </button>
+        <h2>Bag</h2>
+      </div>
+      <div class="grid-card">
+        <button onclick="toggle()">
+          <img src="images/formalOutfit/oxfordShoes black.webp" alt="" />
+        </button>
+        <h2>Shoes</h2>
+      </div>
+    </div>
+    <div class="edit-btn">
+      <button>Edit Outfit</button>
+    </div>
+  </div>
+  <div id="addOutfitModalWrapper">
+    <button class="cross-btn" onclick="createOutfitToggle()">
+      <img src="images/xmark-solid.svg" alt="" />
+    </button>
+    <h2>Create Your Outfit</h2>
+    <div class="outfitsGrid">
+      <div class="slideshow-container">
+        <div class="mySlides1">
+          <img src="images/shirts/BeachShirt.webp" />
+        </div>
+
+        <div class="mySlides1">
+          <img src="images/shirts/blackButtonUp.jpeg" />
+        </div>
+
+        <div class="mySlides1">
+          <img src="images/shirts/hmgoepprod.webp" />
+        </div>
+        <div class="mySlides1">
+          <img src="images/none.png" />
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+        <p>Tops</p>
+      </div>
+      <div class="slideshow-container">
+        <div class="mySlides2">
+          <img src="images/pants/chino.png" />
+        </div>
+
+        <div class="mySlides2">
+          <img src="images/pants/denim1.jpg" />
+        </div>
+
+        <div class="mySlides2">
+          <img src="images/formalOutfit/formalPant1.png" />
+        </div>
+        <div class="mySlides2">
+          <img src="images/none.png" />
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
+        <p>Bottoms</p>
+      </div>
+      <div class="slideshow-container">
+        <div class="mySlides3">
+          <img src="images/dresses/blueSuit.jpg" />
+        </div>
+
+        <div class="mySlides3">
+          <img src="images/dresses/dress1.jpg" />
+        </div>
+
+        <div class="mySlides3">
+          <img src="images/dresses/graySuit.jpg" />
+        </div>
+        <div class="mySlides3">
+          <img src="images/dresses/suit1.jpg" alt="" />
+        </div>
+        <div class="mySlides3">
+          <img src="images/none.png" />
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1, 2)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1, 2)">&#10095;</a>
+        <p>Suits/Dresses</p>
+      </div>
+      <div class="slideshow-container">
+        <div class="mySlides4">
+          <img src="images/shoes/adidas1.jpg" />
+        </div>
+
+        <div class="mySlides4">
+          <img src="images/shoes/boots.jpg" />
+        </div>
+
+        <div class="mySlides4">
+          <img src="images/shoes/nike1.jpg" />
+        </div>
+        <div class="mySlides4">
+          <img src="images/shoes/vans1.jpg" alt="" />
+        </div>
+        <div class="mySlides4">
+          <img src="images/none.png" />
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1, 3)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1, 3)">&#10095;</a>
+        <p>Foot wear</p>
+      </div>
+      <div class="slideshow-container">
+        <div class="mySlides5">
+          <img src="images/bags/bag1.jpg" />
+        </div>
+
+        <div class="mySlides5">
+          <img src="images/bags/bag2.jpg" />
+        </div>
+
+        <div class="mySlides5">
+          <img src="images/bags/bag3.jpg" />
+        </div>
+        <div class="mySlides5">
+          <img src="images/none.png" />
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1, 4)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1, 4)">&#10095;</a>
+        <p>Bags</p>
+      </div>
+      <div class="slideshow-container">
+        <div class="mySlides6">
+          <img src="images/hats/cap1.jpg" />
+        </div>
+
+        <div class="mySlides6">
+          <img src="images/hats/cap2.jpg" />
+        </div>
+
+        <div class="mySlides6">
+          <img src="images/hats/nike.jpg" />
+        </div>
+        <div class="mySlides6">
+          <img src="images/none.png" />
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1, 5)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1, 5)">&#10095;</a>
+        <p>Caps/Hats</p>
+      </div>
+    </div>
+    <div class="done-btn">
+      <button onclick="createOutfitToggle()">Done</button>
+    </div>
+    
+  </div>
   <div id="modal-wrapper">
     <div id="modal-img">
       <h2>Cloth Details</h2>
@@ -284,17 +472,7 @@
         <input type="submit" id="submit" />
       </form>
 
-      <script type="text/javascript">
-        var imgBox = document.getElementById("imgBox");
-        var uploadButton = document.getElementById("upload-button");
-        var LoadFile = function (event) {
-          imgBox.style.backgroundImage = "url(" + URL.createObjectURL(event.target.files[0]) + ")";
-          imgBox.style.border = "1px solid";
-          imgBox.style.backgroundPosition = "center";
-          imgBox.style.objectFit = "contain";
-          uploadButton.style.display = "none";
-        };
-      </script>
+      
 
     </div>
     <button class="close" onclick="toggle2()" type="reset">

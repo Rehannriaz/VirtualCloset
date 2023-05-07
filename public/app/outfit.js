@@ -98,3 +98,62 @@ function toggle2() {
   var popup = document.getElementById("add-clothes-modal");
   popup.classList.toggle("active2");
 }
+
+var imgBox = document.getElementById("imgBox");
+        var uploadButton = document.getElementById("upload-button");
+        var LoadFile = function (event) {
+          imgBox.style.backgroundImage = "url(" + URL.createObjectURL(event.target.files[0]) + ")";
+          imgBox.style.border = "1px solid";
+          imgBox.style.backgroundPosition = "center";
+          imgBox.style.objectFit = "contain";
+          uploadButton.style.display = "none";
+        };
+
+        let slideIndex = [1, 1, 1, 1, 1, 1];
+        let slideId = [
+          "mySlides1",
+          "mySlides2",
+          "mySlides3",
+          "mySlides4",
+          "mySlides5",
+          "mySlides6",
+        ];
+        showSlides(1, 0);
+        showSlides(1, 1);
+        showSlides(1, 2);
+        showSlides(1, 3);
+        showSlides(1, 4);
+        showSlides(1, 5);
+  
+        function plusSlides(n, no) {
+          showSlides((slideIndex[no] += n), no);
+        }
+  
+        function showSlides(n, no) {
+          let i;
+          let x = document.getElementsByClassName(slideId[no]);
+          if (n > x.length) {
+            slideIndex[no] = 1;
+          }
+          if (n < 1) {
+            slideIndex[no] = x.length;
+          }
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+          }
+          x[slideIndex[no] - 1].style.display = "block";
+        }
+
+
+        function outfitToggle() {
+          var blur = document.getElementById("blur");
+          blur.classList.toggle("active3");
+          var popup = document.getElementById("outfitModalWrapper");
+          popup.classList.toggle("active3");
+        }
+        function createOutfitToggle() {
+          var blur = document.getElementById("blur");
+          blur.classList.toggle("active3");
+          var popup = document.getElementById("addOutfitModalWrapper");
+          popup.classList.toggle("active3");
+        }
