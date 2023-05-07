@@ -1,0 +1,98 @@
+main {
+  background-color: rgb(239, 239, 239);
+  height: 620px;
+  padding-top: 68px;
+}
+h1 {
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 48px;
+  color: rgb(32, 32, 32);
+  /* padding-top: 30px; */
+  padding-bottom: 30px;
+}
+.content {
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+}
+.content div{
+  width: 220px;
+}
+.content div img {
+  width: 80px;
+  height: 80px;
+  padding-bottom: 30px;
+}
+.content div h2 {
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+}
+.content div h3 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 0;
+  padding-top: 0;
+}
+.content div p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 0;
+  padding-top: 0;
+  line-height: 1.75;
+  color: rgb(100, 100, 100);
+}
+.content div button{
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  background-color: white;
+  text-transform: uppercase;
+  border: 1px solid rgb(184, 184, 184);
+  padding: 15px;
+  width: 100%;
+ box-shadow: 1px 2px 2px rgba(104, 104, 104, 0);
+ cursor: pointer;
+}
+.content div button:hover{
+  background-color: rgb(204, 204, 204);
+}
+.content div button a{
+  color: black;
+  text-decoration: none;
+}
+#blur.active {
+  filter: blur(18px);
+  pointer-events: none;
+  user-select: none;
+}
+#modal-wrapper {
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 60%;
+  padding: 10px 5px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s;
+  border-radius: 10px;
+  align-items: start;
+  justify-content: space-between;
+}
+#modal-wrapper.active {
+  opacity: 1;
+  /* filter: blur(0);  */
+  visibility: visible;
+  transition: 0.5s;
+}
+
+

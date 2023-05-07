@@ -168,12 +168,22 @@ app.get('/login', (req, res) => {
     css: [ '/css/shared.css', '/css/loginStyles.css']
   });
 });
+app.get('/contactUs', (req, res) => {
+  res.render("contactUs.ejs",{
+    css: [ '/css/shared.css', '/css/contactUs.css']
+  });
+});
+app.get('/401', (req, res) => {
+  res.render("401.ejs",{
+    css: [ '/css/shared.css', '/css/error.css']
+  });
+});
 
 
 
 app.get('/outfits', function (req, res) {
   if(!req.session.isAuthenticated){
-    return res.status(401).render('/401');
+    res.redirect('/401');
   }
   
   res.render("outfits.ejs",{

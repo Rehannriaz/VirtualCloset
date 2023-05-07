@@ -13,6 +13,20 @@
     <link rel="stylesheet" type="text/css" href="css/shared.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <title>CLOSTYLE</title>
+    <div class="loading-area" id="loadingArea">
+        <div class="banner1 banners">
+          <img src="/images/tops.svg" alt="">
+        </div>
+        <div class="banner2 banners">
+          <img src="/images/bottoms.svg" alt="">
+        </div>
+        <div class="banner3 banners">
+          <img src="/images/dresses.png" alt="">
+        </div>
+        <div class="banner4 banners">
+          <img src="/images/shoes.png" alt="">
+        </div>
+      </div>
   </head>
 
   <body>
@@ -22,8 +36,8 @@
         <div id="login_signup">
           <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="">About Us</a></li>
             <li><a href="/outfits">Outfits</a></li>
+            <li><a href="/contactUs">Contact Us</a></li>
             <li><a href="/login">Login</a></li>
             <li><a href="/signup">Sign Up</a></li>
           </ul>
@@ -110,5 +124,12 @@
         </ul></div>
       </div>
     </footer>
+    <script type="text/javascript">
+      
+      var loader=document.getElementById("loadingArea")
+      window.addEventListener("load",function(){
+        loader.style.display="none";
+      })  
+    </script>
   </body>
 </html>

@@ -1,55 +1,161 @@
 html {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  /* background-color: white; */
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+.banner1,
+.banner2,
+.banner3,
+.banner4,
+.banner5,
+.banner6,
+.banner7 {
+  height: 100vh;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  text-align: center;
+}
+.banners img {
+  height: 100px;
+  width: 100px;
+  position: relative;
+  top: 307.5px;
+}
+.banner1 {
+  animation: slide1 2s linear infinite;
+}
+.banner2 {
+  animation: slide2 2s linear infinite;
+}
+.banner3 {
+  animation: slide3 2s linear infinite;
+}
+.banner4 {
+  animation: slide4 2s linear infinite;
+}
+
+@keyframes slide1 {
+  0% {
+    visibility: visible;
   }
-  body {
-    margin: 0;
-    padding: 0;
+  25% {
+    visibility: hidden;
   }
-  header {
-    width: 100%;
-    /* background-color: blue; */
+  50% {
+    visibility: hidden;
   }
-  nav {
-    /* padding-left: 10px; */
-    display: flex;
-    justify-content: space-between;
-    width: 70%;
-    margin: auto;
-    align-items: center;
+  75% {
+    visibility: hidden;
   }
-  
-  nav ul {
-    list-style: none;
-    display: flex;
+  100% {
+    visibility: visible;
   }
-  nav ul li {
-    padding: 10px 1.5rem;
-    /* margin: 1rem; */
-    color: black;
+}
+@keyframes slide2 {
+  0% {
+    visibility: hidden;
   }
-  #logo {
-    font-family: "Oleo Script";
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    padding: 10px 0;
-    font-size: 35px;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 2px black;
+  25% {
+    visibility: hidden;
   }
-  nav ul a {
-    color: rgb(149, 149, 149);
-    text-decoration: none;
-    font-family: sans-serif;
-    font-size: 17px;
-    background-color: rgb(255, 255, 255);
-    border-radius: 7px;
-    text-shadow: 0.1px 0.1px 0.2px rgb(135, 135, 135);
+  50% {
+    visibility: visible;
   }
-  nav ul a:hover {
-    color: black;
+  75% {
+    visibility: hidden;
   }
-  footer {
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes slide3 {
+  0% {
+    visibility: hidden;
+  }
+  25% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  75% {
+    visibility: visible;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes slide4 {
+  0% {
+    visibility: hidden;
+  }
+  25% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  75% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+header {
+  width: 100%;
+  /* background-color: blue; */
+}
+nav {
+  /* padding-left: 10px; */
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin: auto;
+  align-items: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+nav ul li {
+  padding: 10px 1.5rem;
+  /* margin: 1rem; */
+  color: black;
+}
+#logo {
+  font-family: "Oleo Script";
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  padding: 10px 0;
+  font-size: 35px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px black;
+}
+nav ul a {
+  color: rgb(149, 149, 149);
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 17px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 7px;
+  text-shadow: 0.1px 0.1px 0.2px rgb(135, 135, 135);
+}
+nav ul a:hover {
+  color: black;
+}
+footer {
   height: 180px;
   background-color: white;
 }
@@ -88,7 +194,7 @@ html {
   font-family: "Open Sans", sans-serif;
   padding: 10px;
 }
-#media-links ul{
+#media-links ul {
   display: flex;
   list-style: none;
 }
