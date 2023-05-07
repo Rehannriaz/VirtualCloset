@@ -1,15 +1,204 @@
-#grid-container2{
+#looks {
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+  }
+  #looks h1 {
+    /* text-decoration: underline; */
+    font-size: x-large;
+  }
+  
+  .InsideTabContent-2 {
     display: grid;
-    /* grid-row: auto auto; */
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 90%;
+    margin: 50px auto;
+    gap: 50px 25px;
+    text-align: center;
+  }
+  #blur.active3 {
+    filter: blur(18px);
+    pointer-events: none;
+    user-select: none;
+  }
+  #outfitModalWrapper,
+  #addOutfitModalWrapper {
+    position: fixed;
+    /* color: black; */
+    top: 40%;
+    left: 50%;
+    text-align: center;
+    margin-top: 100px;
+    transform: translate(-50%, -50%);
+    /* width: 600px; */
+    /* height: 60%; */
+    padding: 50px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    background-color: rgb(255, 255, 255);
+    opacity: 0;
+    transition: 0.5s;
+    visibility: hidden;
+    font-family: "Open Sans", sans-serif;
+    background-color: rgb(230, 230, 230);
+    border-radius: 30px;
+  }
+  #outfitModalWrapper.active3,
+  #addOutfitModalWrapper.active3 {
+    visibility: visible;
+    opacity: 1;
+    transition: 0.5s;
+  }
+  .cross-btn {
+    width: 35px;
+    height: 35px;
+    right: 20px;
+    top: 20px;
+    position: fixed;
+    background-color: rgb(230, 230, 230);
+    border: none;
+    cursor: pointer;
+  }
+  #outfitDetails {
+    text-align: center;
+    margin-top: 0;
+    padding-top: 0;
+  }
+  
+  .outfitsGrid {
+    display: grid;
     grid-template-columns: auto auto auto;
-    padding: 4rem;
-}
-/* .grid{
-    height: 50px;
-    width: 50px;
-
-} */
-.grid img{
-    width: 200px;
-    height: 200px;
-}
+  }
+  
+  .grid-card img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .grid-card {
+    width: 150px;
+    height: 150px;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .grid-card button {
+    border: 1px solid white;
+    padding: 0.8rem;
+    border-radius: 30px;
+    background-color: rgb(230, 230, 230);
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .grid-card button:hover {
+    border: 1px solid black;
+    background-color: white;
+  }
+  .edit-btn button {
+    padding: 0.5rem;
+    margin-top: 2rem;
+    /* margin-bottom: none; */
+    border-radius: 30px;
+    font-size: larger;
+    background-color: rgb(77, 77, 77);
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+    border: none;
+  }
+  .edit-btn button:hover {
+    color: rgb(77, 77, 77);
+    background-color: white;
+    border: 2px solid rgb(77, 77, 77);
+  }
+  /* .tab-content2 {
+    display: none;
+  } */
+  
+  
+  
+  
+  
+  
+  .mySlides1,
+  .mySlides2,
+  .mySlides3,
+  .mySlides4,
+  .mySlides5,
+  .mySlides6 {
+    display: none;
+  }
+  .slideshow-container img {
+    /* vertical-align: middle; */
+    width: 140px;
+    height: 140px;
+    border-radius: 30px;
+    transition: 0.5s;
+  }
+  .slideshow-container {
+    /* max-width: 1000px; */
+    border: 2px solid white;
+    align-items: center;
+    border-radius: 30px;
+    position: relative;
+    transition: 0.5s;
+    /* margin: auto; */
+    margin: 2rem;
+  }
+  
+  
+  /* Next & previous buttons */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(140, 140, 140, 0.5);
+  }
+  
+  /* Position the "next button" to the right */
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+    margin-left: 20px;
+  }
+  .prev{
+    left: 0;
+  }
+  .next{
+    right: 0;
+  }
+  
+  /* On hover, add a grey background color */
+  .prev:hover, .next:hover {
+    background-color: #f1f1f1;
+    color: black;
+  }
+  
+  .done-btn button {
+    padding: 0.5rem;
+    margin-top: 2rem;
+    /* margin-bottom: none; */
+    border-radius: 30px;
+    font-size: larger;
+    background-color: rgb(77, 77, 77);
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+    border: none;
+  }
+  .done-btn button:hover {
+    color: rgb(77, 77, 77);
+    background-color: white;
+    border: 2px solid rgb(77, 77, 77);
+  }
+  .outfitsGrid .done-btn{
+    text-align: center;
+  }
+  
