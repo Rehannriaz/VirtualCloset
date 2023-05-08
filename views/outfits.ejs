@@ -15,6 +15,20 @@
   <link rel="stylesheet" type="text/css" href="css/outfits.css" />
   <link rel="stylesheet" type="text/css" href="css/outfits2.css" />
   <title>Your Outfits</title>
+  <div class="loading-area" id="loadingArea">
+        <div class="banner1 banners">
+          <img src="/images/tops.svg" alt="">
+        </div>
+        <div class="banner2 banners">
+          <img src="/images/bottoms.svg" alt="">
+        </div>
+        <div class="banner3 banners">
+          <img src="/images/dresses.png" alt="">
+        </div>
+        <div class="banner4 banners">
+          <img src="/images/shoes.png" alt="">
+        </div>
+      </div>
 </head>
 
 <body>
@@ -235,13 +249,13 @@
       </div>
       <div class="grid-card">
         <button onclick="toggle()">
-          <img src="images/redhat.svg" alt="" />
+          <img src="images/tops.svg" alt="" />
         </button>
         <h2>Hat/Cap</h2>
       </div>
       <div class="grid-card">
         <button onclick="toggle()">
-          <img src="images/bag-shopping-solid.svg" alt="" />
+          <img src="images/bags.png" alt="" />
         </button>
         <h2>Bag</h2>
       </div>
@@ -482,6 +496,13 @@
 
 
   </div>
+  <script type="text/javascript">
+      
+      var loader=document.getElementById("loadingArea")
+      window.addEventListener("load",function(){
+        loader.style.display="none";
+      })  
+    </script>
 </body>
 
 <script src="app/outfit.js"></script>
