@@ -42,6 +42,7 @@ function openInsideTab(evt, TabName) {
   evt.currentTarget.className += " active";
 }
 document.getElementById("InsideOpenAuto").click();
+
 document.addEventListener("DOMContentLoaded", function () {
   // Create new HTML elements based on the data
   const cardsContainer = document.getElementById("all");
@@ -54,7 +55,9 @@ document.addEventListener("DOMContentLoaded", function () {
       clothes.forEach((clothingItem) => {
         const card = document.createElement("div");
         card.classList.add("card");
-        card.onclick = toggle;
+        card.onclick = function () {
+          toggle(clothingItem);
+        };
 
         const img1 = document.createElement("img");
         img1.src = "/outfit_images/images/" + clothingItem.imageupload; // fix images, needs to be in public or not??
@@ -82,105 +85,137 @@ document.addEventListener("DOMContentLoaded", function () {
   xhr.send();
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Create modal wrapper element
-  const modalContainer = document.getElementById("modal");
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", "/clothdetail");
-  xhr.onload = function () {
-    if (xhr.status === 200){
-
-    
-
-    const modalWrapper = document.createElement("div");
-    modalWrapper.id = "modal-wrapper";
-
-    // Create modal image element
-    const modalImg = document.createElement("div");
-    modalImg.id = "modal-img";
-
-    const img = document.createElement("img");
-    img.src = "/outfit_images/images/" + clothingItem.imageupload;
-
-    const imgCaption = document.createElement("h2");
-    imgCaption.textContent = "Cloth Details";
-
-    modalImg.appendChild(imgCaption);
-    modalImg.appendChild(img);
-
-    // Create modal content element
-    const modalContent = document.createElement("div");
-    modalContent.id = "modal-content";
-
-    const category1 = document.createElement("p");
-    category1.innerHTML = `category: <span class="cloth-desc">${clothingItem.categoryname}</span>`;
-
-    const type = document.createElement("p");
-    type.innerHTML = `type: <span class="cloth-desc">${clothingItem.clothingtype}</span>`;
-
-    const color = document.createElement("p");
-    color.innerHTML = `color: <span class="cloth-desc">${clothingItem.colorname}</span>`;
-
-    const colorCode = document.createElement("p");
-    colorCode.innerHTML = `color code: <span class="cloth-desc">${clothingItem.colorcode}</span>`;
-
-    const size1 = document.createElement("p");
-    size1.innerHTML = `Size: <span class="cloth-desc">${clothingItem.clothessize}</span>`;
-
-    const season = document.createElement("p");
-    season.innerHTML = `Season: <span class="cloth-desc">${clothingItem.clothingseason}</span>`;
-
-    const fabric = document.createElement("p");
-    fabric.innerHTML = `Fabric: <span class="cloth-desc">${clothingItem.fabrictype}</span>`;
-
-    const occasion1 = document.createElement("p");
-    occasion1.innerHTML = `Occasion: <span class="cloth-desc">${clothingItem.occasionname}</span>`;
-
-    modalContent.appendChild(category1);
-    modalContent.appendChild(type);
-    modalContent.appendChild(color);
-    modalContent.appendChild(colorCode);
-    modalContent.appendChild(size1);
-    modalContent.appendChild(season);
-    modalContent.appendChild(fabric);
-    modalContent.appendChild(occasion1);
-
-    // Create close button element
-    const closeButton = document.createElement("button");
-    closeButton.className = "close";
-    closeButton.onclick = toggle;
-
-    const closeImg = document.createElement("img");
-    closeImg.src = "images/close-button.png";
-    closeImg.alt = "";
-
-    closeButton.appendChild(closeImg);
-
-    // Add elements to modal wrapper
-    modalWrapper.appendChild(modalImg);
-    modalWrapper.appendChild(modalContent);
-    modalWrapper.appendChild(closeButton);
-
-    modalContainer.appendChild(modalWrapper);
-  } 
-  else {
-    console.error("Request failed. Status:", xhr.status);
-  }
-  };
-  xhr.send();
-});
-
-function toggle() {
+// function toggle() {
+//   var blur = document.getElementById("blur");
+//   blur.classList.toggle("active2");
+//   var popup = document.getElementById("modal-wrapper");
+//   popup.classList.toggle("active2");
+// }
+function toggleModal() {
   var blur = document.getElementById("blur");
   blur.classList.toggle("active2");
   var popup = document.getElementById("modal-wrapper");
   popup.classList.toggle("active2");
+  popup.innerHTML="";
 }
+
+
+function toggle(clothingItem) {
+  
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "/clothdetail?item_id="+clothingItem.item_id);
+  
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const clothingItemDetails = JSON.parse(xhr.responseText)[0];
+    
+      console.log(clothingItem.item_id);
+      const modalWrapper = document.getElementById("modal-wrapper");
+      modalWrapper.id = "modal-wrapper";
+
+      // Create modal image element
+      const modalImg = document.createElement("div");
+      modalImg.id = "modal-img";
+
+      const img = document.createElement("img");
+      img.src = "/outfit_images/images/" + clothingItem.imageupload;
+
+      const imgCaption = document.createElement("h2");
+      imgCaption.textContent = "Cloth Details";
+
+      modalImg.appendChild(imgCaption);
+      modalImg.appendChild(img);
+
+      // Create modal content element
+      const modalContent = document.createElement("div");
+      modalContent.id = "modal-content";
+
+      const category1 = document.createElement("p");
+      category1.innerHTML = `category: <span class="cloth-desc">${clothingItem.categoryname}</span>`;
+
+      const type = document.createElement("p");
+      type.innerHTML = `type: <span class="cloth-desc">${clothingItem.clothingtype}</span>`;
+
+      const color = document.createElement("p");
+      color.innerHTML = `color: <span class="cloth-desc">${clothingItem.colorname}</span>`;
+
+      const colorCode = document.createElement("p");
+      colorCode.innerHTML = `color code: <span class="cloth-desc">${clothingItem.colorcode}</span>`;
+
+      const size1 = document.createElement("p");
+      size1.innerHTML = `Size: <span class="cloth-desc">${clothingItem.clothessize}</span>`;
+
+      const season = document.createElement("p");
+      season.innerHTML = `Season: <span class="cloth-desc">${clothingItem.clothingseason}</span>`;
+
+      const fabric = document.createElement("p");
+      fabric.innerHTML = `Fabric: <span class="cloth-desc">${clothingItem.fabrictype}</span>`;
+
+      const occasion1 = document.createElement("p");
+      occasion1.innerHTML = `Occasion: <span class="cloth-desc">${clothingItem.occasionname}</span>`;
+
+      modalContent.appendChild(category1);
+      modalContent.appendChild(type);
+      modalContent.appendChild(color);
+      modalContent.appendChild(colorCode);
+      modalContent.appendChild(size1);
+      modalContent.appendChild(season);
+      modalContent.appendChild(fabric);
+      modalContent.appendChild(occasion1);
+
+      // Create close button element
+      const closeButton = document.createElement("button");
+      closeButton.className = "close";
+      closeButton.id="close2";
+      closeButton.onclick = toggleModal;
+
+      const closeImg = document.createElement("img");
+      closeImg.src = "images/close-button.png";
+      closeImg.alt = "";
+
+      closeButton.appendChild(closeImg);
+
+      // Add elements to modal wrapper
+      modalWrapper.appendChild(modalImg);
+      modalWrapper.appendChild(modalContent);
+      modalWrapper.appendChild(closeButton);
+
+      // modalContainer.appendChild(modalWrapper);
+    } else {
+      console.error("Request failed. 123Status:", xhr.status);
+    }
+  };
+  xhr.send();
+ 
+
+  var blur = document.getElementById("blur");
+  blur.classList.toggle("active2");
+  var popup = document.getElementById('modal-wrapper');
+  console.log(popup);
+  popup.classList.toggle("active2");
+}
+
+
+
+
+
+
+
+
 function toggle2() {
   var blur = document.getElementById("blur");
   blur.classList.toggle("active2");
   var popup = document.getElementById("add-clothes-modal");
   popup.classList.toggle("active2");
+  var imgBox = document.getElementById("imgBox");
+  var uploadButton = document.getElementById("upload-button");
+
+  imgBox.style.backgroundImage ="none";
+  imgBox.style.border = "2px dashed rgb(95, 95, 95)";
+  uploadButton.style.display = "";
+
+
+
 }
 
 var imgBox = document.getElementById("imgBox");

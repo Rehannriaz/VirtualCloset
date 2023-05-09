@@ -49,6 +49,7 @@
   border-bottom-right-radius: 0;
 }
 
+
 .media-scroller {
   display: grid;
   width: 70%;
@@ -168,12 +169,6 @@
   font-size: 16px;
   color: rgb(63, 63, 63);
 }
-#add-clothes {
-  border: 1px dashed black;
-}
-#add-clothes img {
-  margin-top: 52px;
-}
 
 #blur.active2 {
   filter: blur(18px);
@@ -265,6 +260,12 @@
   padding: 0;
   margin: 0;
 }
+#add-clothes {
+  border: 1px dashed black;
+}
+#add-clothes img {
+  margin-top: 52px;
+}
 #add-clothes-modal {
   position: fixed;
   top: 50%;
@@ -279,9 +280,6 @@
   visibility: hidden;
   transition: 0.5s;
   border-radius: 10px;
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
 }
 #add-clothes-modal.active2 {
   opacity: 1;
@@ -289,19 +287,23 @@
   visibility: visible;
   transition: 0.5s;
 }
-
+#modal-info {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+#modal-img-input {
+  width: 50%;
+  height: 472px;
+  border-right: 1px solid rgb(132, 132, 132);
+  text-align: center;
+}
 #modal-img-input h2 {
   font-family: "Open Sans", sans-serif;
   font-size: 30px;
   color: rgb(132, 132, 132);
 }
-#modal-img-input {
-  width: 50%;
-  height: 100%;
-  border-right: 1px solid rgb(132, 132, 132);
-  text-align: center;
-}
-#modal-img-input form {
+#modal-img-input #imgBox{
   margin: auto;
   height: 60%;
   width: 70%;
@@ -392,3 +394,6 @@
 #submit:hover {
   background-color: rgb(236, 173, 184);
 }
+
+
+

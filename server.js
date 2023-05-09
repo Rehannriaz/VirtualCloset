@@ -207,20 +207,19 @@ app.get('/clothes', isAuthenticated, async (req, res) => {
 });
 
 
-app.get('/clothdetail', isAuthenticated, async (req, res) => {
+app.get("/clothdetail", isAuthenticated, async (req, res) => {
   try {
     const userid = req.session.user.userid;
-    const itemId = req.query.itemId; // assuming you're passing the item id as a query parameter
-
-    const query = 'select  * from clothingitem c inner join occasion a on (c.item_id=a.item_id) inner join category d on (d.categoryname=c.categoryname) where c.userid=$1 and c.item_id=$2';
+    const itemId = req.query.item_id;
+    console.log('item id =  = = '+ itemId);
+    const query = "SELECT * FROM clothingitem c INNER JOIN occasion a ON (c.item_id=a.item_id) INNER JOIN category d ON (d.categoryname=c.categoryname) WHERE c.userid=$1 AND c.item_id=$2";
     const { rows } = await pool.query(query, [userid, itemId]);
 
     if (rows.length === 0) {
-      res.status(404).send('Clothing item not found');
+      res.status(404).send("Clothing item not found");
       return;
     }
-
-    const clothingItem = rows[0];
+    
     res.send(rows);
   } catch (error) {
     console.error(error);
