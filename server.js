@@ -36,7 +36,7 @@ app.use(
 );
 
 const storage = multer.diskStorage({
-  destination: 'outfit_images/images', // specify the destination folder for uploaded images
+  destination: 'public/outfit_images/images', // specify the destination folder for uploaded images
   filename: (req, file, cb) => {
     console.log(file); // log the uploaded file details to the console
     cb(null, Date.now() + path.extname(file.originalname)); // specify the filename for the uploaded file
@@ -87,16 +87,16 @@ app.post('/loginform', passport.authenticate('local', {
 app.post('/uploadclothes',upload.single('image'), async (req, res) => {
   
   console.log(req.file);
-  const { color, size, fabric, category, season, Occasion, colorCode } = req.body;
+  const { type,color, size, fabric, category, season, Occasion, colorCode } = req.body;
   const userid = req.session.user.userid; 
 
     const imageName = req.file.filename;
 
-  const itemQuery = `INSERT INTO ClothingItem (userid,imageupload,colorName,colorCode,ClothesSize,FabricType,ClothingType) VALUES ($1, $2,$3,$4,$5,$6,$7) RETURNING *`;
+  const itemQuery = `INSERT INTO ClothingItem (userid,imageupload,colorName,colorCode,ClothesSize,FabricType,categoryName) VALUES ($1, $2,$3,$4,$5,$6,$7) RETURNING *`;
   const itemValues = [userid,imageName,color,colorCode, size, fabric, category];
   
-  const categoryQuery = `INSERT INTO category (clothingtype,clothingseason) VALUES ($1, $2) RETURNING *`;
-  const categoryValues = [category, season];
+  const categoryQuery = `INSERT INTO category (categoryName,clothingtype,clothingseason) VALUES ($1, $2,$3) RETURNING *`;
+  const categoryValues = [category, type,season];
 
   const occasionQuery = `INSERT INTO occasion (occasionname,userid,colorName) VALUES ($1, $2,$3) RETURNING *`;
   const occasionValues = [Occasion,userid,color];
@@ -195,14 +195,39 @@ app.get('/outfits', function (req, res) {
 app.get('/clothes', isAuthenticated, async (req, res) => {
   try {
     const userid = req.session.user.userid;
-    const query = 'SELECT * FROM clothingitem, occasion WHERE clothingitem.userid = occasion.userid AND clothingitem.userid = $1';
+    const query = 'select  * from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d on (d.categoryname=c.categoryname) where c.userid=$1';
     const { rows } = await pool.query(query, [userid]);
+    
+    res.send(rows);
+    // console.log('rows =  = = = ='+ rows + "rows count");
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+
+app.get('/clothdetail', isAuthenticated, async (req, res) => {
+  try {
+    const userid = req.session.user.userid;
+    const itemId = req.query.itemId; // assuming you're passing the item id as a query parameter
+
+    const query = 'select  * from clothingitem c inner join occasion a on (c.item_id=a.item_id) inner join category d on (d.categoryname=c.categoryname) where c.userid=$1 and c.item_id=$2';
+    const { rows } = await pool.query(query, [userid, itemId]);
+
+    if (rows.length === 0) {
+      res.status(404).send('Clothing item not found');
+      return;
+    }
+
+    const clothingItem = rows[0];
     res.send(rows);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
   }
 });
+
 
 
 

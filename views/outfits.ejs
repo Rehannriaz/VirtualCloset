@@ -107,14 +107,14 @@
             <img src="images/plus-60.png" alt="" />
           </div>
 
-          <div class="card" onclick="toggle()">
+          <!-- <div class="card" onclick="toggle()">
             <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
             <div class="card-content">
               <h2>Black Shirt</h2>
               <p>Formal</p>
               <p>M</p>
             </div>
-          </div>
+          </div> -->
           
           
         
@@ -408,7 +408,8 @@
     </div>
     
   </div>
-  <div id="modal-wrapper">
+  <div class="modal-wrapper" id="modal"></div>
+  <!-- <div id="modal-wrapper">
     <div id="modal-img">
       <h2>Cloth Details</h2>
       <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
@@ -426,7 +427,7 @@
     <button class="close" onclick="toggle()">
       <img src="images/close-button.png" alt="" />
     </button>
-  </div>
+  </div> -->
   <div id="add-clothes-modal">
     <div id="modal-img-input">
       <h2>Cloth Details</h2>
@@ -438,7 +439,7 @@
           <input type="file" accept="image/*" capture="environment" name="image" id="file" onchange="LoadFile(event)" />
         </div>
         <div id="modal-data-input">
-          <label for="category">Category:</label>
+          <label for="category">Name:</label>
           <input type="text" name="category" id="category" class="textarea-style" />
 
           <label for="type">Type:</label>
