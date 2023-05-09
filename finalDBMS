@@ -93,6 +93,10 @@ truncate occasion cascade;
 truncate outfit cascade;
 truncate outfit_clothes;
 
+select  * from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d 
+on (d.categoryname=c.categoryname and lower(d.clothingtype)=lower($2))  where c.userid= $1
+
+
 select * from category;
 select * from clothingitem;
 select * from occasion;

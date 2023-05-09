@@ -195,10 +195,24 @@ app.get('/outfits', function (req, res) {
 app.get('/clothes', isAuthenticated, async (req, res) => {
   try {
     const userid = req.session.user.userid;
-    const query = 'select  * from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d on (d.categoryname=c.categoryname) where c.userid=$1';
-    const { rows } = await pool.query(query, [userid]);
+    const clothType=req.query.clothingtype;
+    console.log("clothtype = = =" + clothType);
+    if (clothType=='all')
+    {
+      const query = 'select  * from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d on (d.categoryname=c.categoryname) where c.userid=$1';
+      const { rows } = await pool.query(query, [userid]);
+      console.log("HELLO");
+      res.send(rows);
+    }
+    else
+    {
+      const query = 'select  * from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d on (d.categoryname=c.categoryname and lower(d.clothingtype)=lower($2))  where c.userid= $1'
+      const { rows } = await pool.query(query, [userid,clothType]);
+      console.log("H123ELLO");
+      res.send(rows);
+    }
     
-    res.send(rows);
+    
     // console.log('rows =  = = = ='+ rows + "rows count");
   } catch (error) {
     console.error(error);

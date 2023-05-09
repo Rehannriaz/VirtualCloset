@@ -23,6 +23,7 @@ document.getElementById("OpenAuto").click();
 
 function openInsideTab(evt, TabName) {
   // Declare all variables
+  console.log(TabName);
   var i, tabcontent, tablinks;
 
   // Get all elements with class="tabcontent" and hide them
@@ -40,22 +41,27 @@ function openInsideTab(evt, TabName) {
   // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(TabName).style.display = "grid";
   evt.currentTarget.className += " active";
+
+  displayCards(TabName);
 }
 document.getElementById("InsideOpenAuto").click();
 
-document.addEventListener("DOMContentLoaded", function () {
+
+
+
+ function displayCards (TabName) {
   // Create new HTML elements based on the data
-  const cardsContainer = document.getElementById("all");
+  const cardsContainer = document.getElementById(TabName);
 
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", "/clothes");
-  xhr.onload = function () {
+  xhr.open("GET", "/clothes?clothingtype="+TabName);
+  xhr.onload = function displayCards (TabName) {
     if (xhr.status === 200) {
       const clothes = JSON.parse(xhr.responseText);
       clothes.forEach((clothingItem) => {
         const card = document.createElement("div");
         card.classList.add("card");
-        card.onclick = function () {
+        card.onclick = function displayCards (TabName) {
           toggle(clothingItem);
         };
 
@@ -79,11 +85,11 @@ document.addEventListener("DOMContentLoaded", function () {
         cardsContainer.appendChild(card);
       });
     } else {
-      console.error("Request failed. Status:", xhr.status);
+      console.error("Request failed. 321Status:", xhr.status);
     }
   };
   xhr.send();
-});
+};
 
 // function toggle() {
 //   var blur = document.getElementById("blur");

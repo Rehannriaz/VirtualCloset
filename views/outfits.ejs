@@ -82,37 +82,43 @@
               <p>All</p>
             </button>
             <button
-              onclick="openInsideTab(event, 'tops')"
+              onclick="openInsideTab(event, 'favourites')"
+              class="media-element">
+              <img src="images/favourites.svg" alt="" />
+              <p>Favourites</p>
+            </button>
+            <button
+              onclick="openInsideTab(event, 'top')"
               class="media-element">
               <img src="images/tops.svg" alt="" />
               <p>Tops</p>
             </button>
             <button
-              onclick="openInsideTab(event, 'bottoms')"
+              onclick="openInsideTab(event, 'bottom')"
               class="media-element">
               <img src="images/bottoms.svg" alt="" />
               <p>Bottoms</p>
             </button>
             <button
-              onclick="openInsideTab(event, 'dresses')"
+              onclick="openInsideTab(event, 'dress')"
               class="media-element">
               <img src="images/dresses.png" alt="" />
               <p>Dresses</p>
             </button>
             <button
-              onclick="openInsideTab(event, 'undergarments')"
+              onclick="openInsideTab(event, 'undergarment')"
               class="media-element">
               <img src="images/undergarments.png" alt="" />
               <p>Undergarments</p>
             </button>
             <button
-              onclick="openInsideTab(event, 'bags')"
+              onclick="openInsideTab(event, 'bag')"
               class="media-element">
               <img src="images/bags.png" alt="" />
               <p>Bags</p>
             </button>
             <button
-              onclick="openInsideTab(event, 'caps')"
+              onclick="openInsideTab(event, 'cap')"
               class="media-element">
               <img src="images/caps.png" alt="" />
               <p>Caps</p>
@@ -132,64 +138,15 @@
               <img src="images/plus-60.png" alt="" />
             </div>
 
-          
+          </div>
 
-          <div class="InsideTabContent" id="tops">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              nulla voluptatum facilis quaerat soluta ratione ex ab, ad error
-              facere natus, cumque quibusdam praesentium adipisci sunt
-              necessitatibus? Eius, atque molestias.
-            </p>
-          </div>
-          <div class="InsideTabContent" id="bottoms">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              nulla voluptatum facilis quaerat soluta ratione ex ab, ad error
-              facere natus, cumque quibusdam praesentium adipisci sunt
-              necessitatibus? Eius, atque molestias.
-            </p>
-          </div>
-          <div class="InsideTabContent" id="dresses">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              nulla voluptatum facilis quaerat soluta ratione ex ab, ad error
-              facere natus, cumque quibusdam praesentium adipisci sunt
-              necessitatibus? Eius, atque molestias.
-            </p>
-          </div>
-          <div class="InsideTabContent" id="undergarments">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              nulla voluptatum facilis quaerat soluta ratione ex ab, ad error
-              facere natus, cumque quibusdam praesentium adipisci sunt
-              necessitatibus? Eius, atque molestias.
-            </p>
-          </div>
-          <div class="InsideTabContent" id="bags">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              nulla voluptatum facilis quaerat soluta ratione ex ab, ad error
-              facere natus, cumque quibusdam praesentium adipisci sunt
-              necessitatibus? Eius, atque molestias.
-            </p>
-          </div>
-          <div class="InsideTabContent" id="caps">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              nulla voluptatum facilis quaerat soluta ratione ex ab, ad error
-              facere natus, cumque quibusdam praesentium adipisci sunt
-              necessitatibus? Eius, atque molestias.
-            </p>
-          </div>
-          <div class="InsideTabContent" id="shoes">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              nulla voluptatum facilis quaerat soluta ratione ex ab, ad error
-              facere natus, cumque quibusdam praesentium adipisci sunt
-              necessitatibus? Eius, atque molestias.
-            </p>
-          </div>
+            <div class="InsideTabContent" id="top"></div>
+          <div class="InsideTabContent" id="bottom"> </div>
+          <div class="InsideTabContent" id="dress"></div>
+          <div class="InsideTabContent" id="undergarment"></div>
+          <div class="InsideTabContent" id="bag"></div>
+          <div class="InsideTabContent" id="cap"></div>
+          <div class="InsideTabContent" id="shoes"></div>
         </section>
 
         <section id="looks" class="tab-content">
@@ -235,6 +192,27 @@
         </div>
       </footer>
     </section>
+
+    <div id="modal-wrapper">
+      <div id="modal-img">
+        <h2>Cloth Details</h2>
+        <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
+      </div>
+      <div id="modal-content">
+        <p>category: <span class="cloth-desc">Shirt</span></p>
+        <p>type: <span class="cloth-desc">Top</span></p>
+        <p>color: <span class="cloth-desc">Black</span></p>
+        <p>color code: <span class="cloth-desc">rgb(0,0,0)</span></p>
+        <p>Size: <span class="cloth-desc">Medium</span></p>
+        <p>Season: <span class="cloth-desc">Summer</span></p>
+        <p>Fabric: <span class="cloth-desc">Cotton</span></p>
+        <p>Occasion: <span class="cloth-desc">Semi-Formal</span></p>
+      </div>
+      <button class="close" onclick="toggle()">
+        <img src="images/close-button.png" alt="" />
+      </button>
+    </div>
+
     <div id="outfitModalWrapper">
       <button class="cross-btn" onclick="outfitToggle()">
         <img src="images/xmark-solid.svg" alt="" />
@@ -421,10 +399,7 @@
       </div>
     </div>
     <div id="modal-wrapper">
-      </div>
-      <button class="close" onclick="toggle()">
-        <img src="images/close-button.png" alt="" />
-      </button>
+    
     </div>
     <div id="add-clothes-modal">
       <form action="/uploadclothes" method="POST" enctype="multipart/form-data">
