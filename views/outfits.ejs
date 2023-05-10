@@ -1,282 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Oleo+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap"
-      rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap"
-      rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="css/shared.css" />
-    <link rel="stylesheet" type="text/css" href="css/outfits.css" />
-    <link rel="stylesheet" type="text/css" href="css/outfits2.css" />
-    <script
-      src="https://kit.fontawesome.com/503ade8d65.js"
-      crossorigin="anonymous"></script>
-    <title>Your Outfits</title>
-    <div class="loading-area" id="loadingArea">
-      <div class="banner1 banners">
-        <img src="/images/tops.svg" alt="" />
-      </div>
-      <div class="banner2 banners">
-        <img src="/images/bottoms.svg" alt="" />
-      </div>
-      <div class="banner3 banners">
-        <img src="/images/dresses.png" alt="" />
-      </div>
-      <div class="banner4 banners">
-        <img src="/images/shoes.png" alt="" />
-      </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Oleo+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap"
+    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="css/shared.css" />
+  <link rel="stylesheet" type="text/css" href="css/outfits.css" />
+  <link rel="stylesheet" type="text/css" href="css/outfits2.css" />
+  <script src="https://kit.fontawesome.com/503ade8d65.js" crossorigin="anonymous"></script>
+  <title>Your Outfits</title>
+  <div class="loading-area" id="loadingArea">
+    <div class="banner1 banners">
+      <img src="/images/tops.svg" alt="" />
     </div>
-  </head>
-
-  <body>
-    <section id="blur">
-      <header>
-        <nav>
-          <a href="/" id="logo">CLOSTYLE</a>
-          <div id="login_signup">
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="">About Us</a></li>
-              <li><a href="">Outfits</a></li>
-              <li><a href="/login.html">Login</a></li>
-              <li><a href="/signup.html">Sign Up</a></li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-
-      <main>
-        <div id="nav2">
-          <button
-            onclick="openTab(event, 'closet')"
-            class="head2"
-            id="OpenAuto">
-            <div class="icon">
-              <img src="images/clothes-hanger-svgrepo-com.svg" alt="" />
-            </div>
-            <p>closet</p>
-          </button>
-          <button onclick="openTab(event, 'looks')" class="head2">
-            <div class="icon">
-              <img
-                src="images/noun-clothes-1075584.svg"
-                alt=""
-                id="cloth-svg" />
-            </div>
-            <p>looks</p>
-          </button>
-        </div>
-
-        <section id="closet" class="tab-content">
-          <div class="media-scroller snaps-inline">
-            <button
-              onclick="openInsideTab(event, 'all')"
-              class="media-element"
-              id="InsideOpenAuto">
-              <img src="images/all.svg" alt="" />
-              <p>All</p>
-            </button>
-            <button
-              onclick="openInsideTab(event, 'favourites')"
-              class="media-element">
-              <img src="images/favourites.svg" alt="" />
-              <p>Favourites</p>
-            </button>
-            <button onclick="openInsideTab(event, 'top')" class="media-element">
-              <img src="images/tops.svg" alt="" />
-              <p>Tops</p>
-            </button>
-            <button
-              onclick="openInsideTab(event, 'bottom')"
-              class="media-element">
-              <img src="images/bottoms.svg" alt="" />
-              <p>Bottoms</p>
-            </button>
-            <button
-              onclick="openInsideTab(event, 'dress')"
-              class="media-element">
-              <img src="images/dresses.png" alt="" />
-              <p>Dresses</p>
-            </button>
-            <button
-              onclick="openInsideTab(event, 'undergarment')"
-              class="media-element">
-              <img src="images/undergarments.png" alt="" />
-              <p>Undergarments</p>
-            </button>
-            <button onclick="openInsideTab(event, 'bag')" class="media-element">
-              <img src="images/bags.png" alt="" />
-              <p>Bags</p>
-            </button>
-            <button onclick="openInsideTab(event, 'cap')" class="media-element">
-              <img src="images/caps.png" alt="" />
-              <p>Caps</p>
-            </button>
-            <button
-              onclick="openInsideTab(event, 'shoes')"
-              class="media-element">
-              <img src="images/shoes.png" alt="" />
-              <p>Shoes</p>
-            </button>
-          </div>
-
-          <div class="InsideTabContent" id="all">
-            <!-- add hover effect on card so it increses slightly in size with animation -->
-
-            <div class="card" onclick="toggle2()" id="add-clothes">
-              <img src="images/plus-60.png" alt="" />
-            </div>
-            <div class="card" onclick="toggle()">
-              <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
-              <div class="card-content">
-                <h2>Black Shirt</h2>
-                <p>Formal</p>
-                <p>M</p>
-              </div>
-              <div class="heart-container">
-                <i
-                  class="fa-regular fa-heart fa-3xl heart"
-                  onclick="changeFillColor(event)"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="InsideTabContent" id="top"></div>
-          <div class="InsideTabContent" id="bottom"></div>
-          <div class="InsideTabContent" id="dress"></div>
-          <div class="InsideTabContent" id="undergarment"></div>
-          <div class="InsideTabContent" id="bag"></div>
-          <div class="InsideTabContent" id="cap"></div>
-          <div class="InsideTabContent" id="shoes"></div>
-        </section>
-
-        <section id="looks" class="tab-content">
-          <h1>Your Outfits</h1>
-          <div class="InsideTabContent-2">
-            <div class="card" onclick="outfitToggle()">
-              <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
-              <div class="card-content">
-                <h2>Formal outfit 1</h2>
-              </div>
-            </div>
-            <div class="card" onclick="outfitToggle()">
-              <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
-              <div class="card-content">
-                <h2>Beach outfit</h2>
-              </div>
-            </div>
-            <div class="card" onclick="createOutfitToggle()">
-              <img src="images/plus-60.png" alt="" />
-              <div class="card-content">
-                <h2>Add new outfit</h2>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer>
-        <div id="foot">
-          <div id="docs">
-            <a href="">Service Terms</a>
-            <a href="">Privacy Policy</a>
-          </div>
-          <div id="media-links">
-            <ul>
-              <li><img src="images/instagram.webp" alt="" /></li>
-              <li><img src="images/facebook.webp" alt="" /></li>
-              <li><img src="images/linkedin.webp" alt="" /></li>
-              <li><img src="images/tiktok.webp" alt="" /></li>
-              <li><img src="images/youtube.webp" alt="" /></li>
-            </ul>
-          </div>
-        </div>
-      </footer>
-    </section>
-
-    <div id="modal-wrapper">
-      <div id="modal-img">
-        <h2>Cloth Details</h2>
-        <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
-      </div>
-      <div id="modal-content">
-        <p>category: <span class="cloth-desc">Shirt</span></p>
-        <p>type: <span class="cloth-desc">Top</span></p>
-        <p>color: <span class="cloth-desc">Black</span></p>
-        <p>color code: <span class="cloth-desc">rgb(0,0,0)</span></p>
-        <p>Size: <span class="cloth-desc">Medium</span></p>
-        <p>Season: <span class="cloth-desc">Summer</span></p>
-        <p>Fabric: <span class="cloth-desc">Cotton</span></p>
-        <p>Occasion: <span class="cloth-desc">Semi-Formal</span></p>
-      </div>
-      <button class="close" onclick="toggle()">
-        <img src="images/close-button.png" alt="" />
-      </button>
+    <div class="banner2 banners">
+      <img src="/images/bottoms.svg" alt="" />
     </div>
+    <div class="banner3 banners">
+      <img src="/images/dresses.png" alt="" />
+    </div>
+    <div class="banner4 banners">
+      <img src="/images/shoes.png" alt="" />
+    </div>
+  </div>
+</head>
 
-    <div id="outfitModalWrapper">
-      <button class="cross-btn" onclick="outfitToggle()">
-        <img src="images/xmark-solid.svg" alt="" />
-      </button>
-      <h2 id="outfitDetails">Outfit Details</h2>
-      <hr />
-      <div class="outfitsGrid">
-        <div class="grid-card">
-          <button onclick="toggle()">
-            <img src="images/formalOutfit/formalShirt1.png" alt="" />
-          </button>
-          <h2>Shirt</h2>
+<body>
+  <section id="blur">
+    <header>
+      <nav>
+        <a href="/" id="logo">CLOSTYLE</a>
+        <div id="login_signup">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="">About Us</a></li>
+            <li><a href="">Outfits</a></li>
+            <li><a href="/login.html">Login</a></li>
+            <li><a href="/signup.html">Sign Up</a></li>
+          </ul>
         </div>
-        <div class="grid-card">
-          <button onclick="toggle()">
-            <img src="images/formalOutfit/formalPant1.png" alt="" />
+      </nav>
+    </header>
+
+    <main>
+      <div id="nav2">
+        <button onclick="openTab(event, 'closet')" class="head2" id="OpenAuto">
+          <div class="icon">
+            <img src="images/clothes-hanger-svgrepo-com.svg" alt="" />
+          </div>
+          <p>closet</p>
+        </button>
+        <button onclick="openTab(event, 'looks')" class="head2">
+          <div class="icon">
+            <img src="images/noun-clothes-1075584.svg" alt="" id="cloth-svg" />
+          </div>
+          <p>looks</p>
+        </button>
+      </div>
+
+      <section id="closet" class="tab-content">
+        <div class="media-scroller snaps-inline">
+          <button onclick="openInsideTab(event, 'all')" class="media-element" id="InsideOpenAuto">
+            <img src="images/all.svg" alt="" />
+            <p>All</p>
           </button>
-          <h2>Bottoms</h2>
-        </div>
-        <div class="grid-card">
-          <button onclick="toggle()">
-            <img src="images/formalOutfit/formalJacket1.jpg" alt="" />
+          <button onclick="openInsideTab(event, 'favourites')" class="media-element">
+            <img src="images/favourites.svg" alt="" />
+            <p>Favourites</p>
           </button>
-          <h2>Dress</h2>
-        </div>
-        <div class="grid-card">
-          <button onclick="toggle()">
+          <button onclick="openInsideTab(event, 'top')" class="media-element">
             <img src="images/tops.svg" alt="" />
+            <p>Tops</p>
           </button>
-          <h2>Hat/Cap</h2>
-        </div>
-        <div class="grid-card">
-          <button onclick="toggle()">
+          <button onclick="openInsideTab(event, 'bottom')" class="media-element">
+            <img src="images/bottoms.svg" alt="" />
+            <p>Bottoms</p>
+          </button>
+          <button onclick="openInsideTab(event, 'dress')" class="media-element">
+            <img src="images/dresses.png" alt="" />
+            <p>Dresses</p>
+          </button>
+          <button onclick="openInsideTab(event, 'undergarment')" class="media-element">
+            <img src="images/undergarments.png" alt="" />
+            <p>Undergarments</p>
+          </button>
+          <button onclick="openInsideTab(event, 'bag')" class="media-element">
             <img src="images/bags.png" alt="" />
+            <p>Bags</p>
           </button>
-          <h2>Bag</h2>
+          <button onclick="openInsideTab(event, 'cap')" class="media-element">
+            <img src="images/caps.png" alt="" />
+            <p>Caps</p>
+          </button>
+          <button onclick="openInsideTab(event, 'shoes')" class="media-element">
+            <img src="images/shoes.png" alt="" />
+            <p>Shoes</p>
+          </button>
         </div>
-        <div class="grid-card">
-          <button onclick="toggle()">
-            <img src="images/formalOutfit/oxfordShoes black.webp" alt="" />
-          </button>
-          <h2>Shoes</h2>
+
+        <div class="InsideTabContent" id="all">
+          <!-- add hover effect on card so it increses slightly in size with animation -->
+          <!-- <div class="card" onclick="toggle2()" id="add-clothes">
+              <img src="images/plus-60.png" alt="" />
+            </div> -->
+
+
+
+        </div>
+
+        <div class="InsideTabContent" id="top"></div>
+        <div class="InsideTabContent" id="bottom"></div>
+        <div class="InsideTabContent" id="dress"></div>
+        <div class="InsideTabContent" id="undergarment"></div>
+        <div class="InsideTabContent" id="bag"></div>
+        <div class="InsideTabContent" id="cap"></div>
+        <div class="InsideTabContent" id="shoes"></div>
+      </section>
+
+      <section id="looks" class="tab-content">
+        
+        <h1>Your Outfits</h1>
+        <div class="InsideTabContent-2">
+          <div class="card" onclick="outfitToggle()">
+            <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
+            <div class="card-content">
+              <h2>Formal outfit 1</h2>
+            </div>
+          </div>
+          <div class="card" onclick="outfitToggle()">
+            <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
+            <div class="card-content">
+              <h2>Beach outfit</h2>
+            </div>
+          </div>
+          <div class="card" onclick="createOutfitToggle()">
+            <img src="images/plus-60.png" alt="" />
+            <div class="card-content">
+              <h2>Add new outfit</h2>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div id="foot">
+        <div id="docs">
+          <a href="">Service Terms</a>
+          <a href="">Privacy Policy</a>
+        </div>
+        <div id="media-links">
+          <ul>
+            <li><img src="images/instagram.webp" alt="" /></li>
+            <li><img src="images/facebook.webp" alt="" /></li>
+            <li><img src="images/linkedin.webp" alt="" /></li>
+            <li><img src="images/tiktok.webp" alt="" /></li>
+            <li><img src="images/youtube.webp" alt="" /></li>
+          </ul>
         </div>
       </div>
-      <div class="edit-btn">
-        <button>Edit Outfit</button>
+    </footer>
+  </section>
+
+  <div id="modal-wrapper">
+
+  </div>
+
+  <div id="outfitModalWrapper">
+    <button class="cross-btn" onclick="outfitToggle()">
+      <img src="images/xmark-solid.svg" alt="" />
+    </button>
+    <h2 id="outfitDetails">Outfit Details</h2>
+    <hr />
+    <div class="outfitsGrid">
+      <div class="grid-card">
+        <button onclick="toggle()">
+          <img src="images/formalOutfit/formalShirt1.png" alt="" />
+        </button>
+        <h2>Shirt</h2>
+      </div>
+      <div class="grid-card">
+        <button onclick="toggle()">
+          <img src="images/formalOutfit/formalPant1.png" alt="" />
+        </button>
+        <h2>Bottoms</h2>
+      </div>
+      <div class="grid-card">
+        <button onclick="toggle()">
+          <img src="images/formalOutfit/formalJacket1.jpg" alt="" />
+        </button>
+        <h2>Dress</h2>
+      </div>
+      <div class="grid-card">
+        <button onclick="toggle()">
+          <img src="images/tops.svg" alt="" />
+        </button>
+        <h2>Hat/Cap</h2>
+      </div>
+      <div class="grid-card">
+        <button onclick="toggle()">
+          <img src="images/bags.png" alt="" />
+        </button>
+        <h2>Bag</h2>
+      </div>
+      <div class="grid-card">
+        <button onclick="toggle()">
+          <img src="images/formalOutfit/oxfordShoes black.webp" alt="" />
+        </button>
+        <h2>Shoes</h2>
       </div>
     </div>
+    <div class="edit-btn">
+      <button>Edit Outfit</button>
+    </div>
+  </div>
+  <a id="looksTAB"></a>
+  <form action="/outfitForm" method="POST">
     <div id="addOutfitModalWrapper">
-      <button class="cross-btn" onclick="createOutfitToggle()">
+      <button class="cross-btn" onclick="createOutfitToggle()" type="button">
         <img src="images/xmark-solid.svg" alt="" />
       </button>
       <h2>Create Your Outfit</h2>
+      <input type="text" placeholder="name: "  name="outfitname">
       <div class="outfitsGrid">
-        <div class="slideshow-container">
-          <div class="mySlides1">
+        <div class="slideshow-container" id="slideshow-1" name="slideshow-1">
+          <p>Tops</p>
+          <!-- <div class="mySlides1">
             <img src="images/shirts/BeachShirt.webp" />
           </div>
 
@@ -286,17 +242,19 @@
 
           <div class="mySlides1">
             <img src="images/shirts/hmgoepprod.webp" />
-          </div>
+          </div> -->
           <div class="mySlides1">
             <img src="images/none.png" />
           </div>
 
           <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
           <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
-          <p>Tops</p>
+          
+
         </div>
-        <div class="slideshow-container">
-          <div class="mySlides2">
+        <div class="slideshow-container" id="slideshow-2" name="slideshow-2">
+          <p>Bottoms</p>
+          <!-- <div class="mySlides2">
             <img src="images/pants/chino.png" />
           </div>
 
@@ -306,195 +264,139 @@
 
           <div class="mySlides2">
             <img src="images/formalOutfit/formalPant1.png" />
-          </div>
+          </div> -->
           <div class="mySlides2">
             <img src="images/none.png" />
           </div>
 
           <a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
           <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
-          <p>Bottoms</p>
+          
         </div>
-        <div class="slideshow-container">
-          <div class="mySlides3">
-            <img src="images/dresses/blueSuit.jpg" />
-          </div>
+        <div class="slideshow-container" id="slideshow-3" name="slideshow-3">
+          <p>Suits/Dresses</p>
 
-          <div class="mySlides3">
-            <img src="images/dresses/dress1.jpg" />
-          </div>
-
-          <div class="mySlides3">
-            <img src="images/dresses/graySuit.jpg" />
-          </div>
-          <div class="mySlides3">
-            <img src="images/dresses/suit1.jpg" alt="" />
-          </div>
           <div class="mySlides3">
             <img src="images/none.png" />
           </div>
 
           <a class="prev" onclick="plusSlides(-1, 2)">&#10094;</a>
           <a class="next" onclick="plusSlides(1, 2)">&#10095;</a>
-          <p>Suits/Dresses</p>
         </div>
-        <div class="slideshow-container">
-          <div class="mySlides4">
-            <img src="images/shoes/adidas1.jpg" />
-          </div>
-
-          <div class="mySlides4">
-            <img src="images/shoes/boots.jpg" />
-          </div>
-
-          <div class="mySlides4">
-            <img src="images/shoes/nike1.jpg" />
-          </div>
-          <div class="mySlides4">
-            <img src="images/shoes/vans1.jpg" alt="" />
-          </div>
+        <div class="slideshow-container" id="slideshow-4" name="slideshow-4">
+          <p>Foot wear</p>
           <div class="mySlides4">
             <img src="images/none.png" />
           </div>
 
           <a class="prev" onclick="plusSlides(-1, 3)">&#10094;</a>
           <a class="next" onclick="plusSlides(1, 3)">&#10095;</a>
-          <p>Foot wear</p>
+          
         </div>
-        <div class="slideshow-container">
-          <div class="mySlides5">
-            <img src="images/bags/bag1.jpg" />
-          </div>
+        <div class="slideshow-container" id="slideshow-5" name="slideshow-5">
+          <p>Bags</p>
 
-          <div class="mySlides5">
-            <img src="images/bags/bag2.jpg" />
-          </div>
-
-          <div class="mySlides5">
-            <img src="images/bags/bag3.jpg" />
-          </div>
           <div class="mySlides5">
             <img src="images/none.png" />
           </div>
 
           <a class="prev" onclick="plusSlides(-1, 4)">&#10094;</a>
           <a class="next" onclick="plusSlides(1, 4)">&#10095;</a>
-          <p>Bags</p>
+         
         </div>
-        <div class="slideshow-container">
-          <div class="mySlides6">
-            <img src="images/hats/cap1.jpg" />
-          </div>
-
-          <div class="mySlides6">
-            <img src="images/hats/cap2.jpg" />
-          </div>
-
-          <div class="mySlides6">
-            <img src="images/hats/nike.jpg" />
-          </div>
+        <div class="slideshow-container" id="slideshow-6" name="slideshow-6"> 
+          <p>Caps/Hats</p>
           <div class="mySlides6">
             <img src="images/none.png" />
           </div>
 
           <a class="prev" onclick="plusSlides(-1, 5)">&#10094;</a>
           <a class="next" onclick="plusSlides(1, 5)">&#10095;</a>
-          <p>Caps/Hats</p>
+      
         </div>
       </div>
       <div class="done-btn">
-        <button onclick="createOutfitToggle()">Done</button>
+        <button onclick="createOutfitToggle()"type="submit">Done</button>
       </div>
     </div>
-    <div id="modal-wrapper"></div>
-    <div id="add-clothes-modal">
-      <form action="/uploadclothes" method="POST" enctype="multipart/form-data">
-        <div id="modal-info">
-          <div id="modal-img-input">
-            <h2>Cloth Details</h2>
-            <div id="imgBox">
-              <label for="file">
-                <img src="images/upload.png" alt="" id="upload-button" />
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                capture="environment"
-                name="image"
-                id="file"
-                onchange="LoadFile(event)" />
-            </div>
+  </form>
+  <div id="modal-wrapper"></div>
+  <div id="add-clothes-modal">
+    <form action="/uploadclothes" method="POST" enctype="multipart/form-data">
+      <div id="modal-info">
+        <div id="modal-img-input">
+          <h2>Cloth Details</h2>
+          <div id="imgBox">
+            <label for="file">
+              <img src="images/upload.png" alt="" id="upload-button" />
+            </label>
+            <input type="file" accept="image/*" capture="environment" name="image" id="file"
+              onchange="LoadFile(event)" />
           </div>
-          <div id="modal-data-input">
-            <label for="category">Category:</label>
-            <input
-              type="text"
-              name="category"
-              id="category"
-              class="textarea-style" />
-
-            <label for="type">Type:</label>
-            <select name="type" id="type">
-              <option value="Top" name="top">Top</option>
-              <option value="Bottom" name="bottom">Bottom</option>
-              <option value="Dress" name="dress">Dress</option>
-              <option value="Undergrarment" name="undergarment">
-                Undergrarment
-              </option>
-              <option value="Bag" name="bag">Bag</option>
-              <option value="Cap" name="cap">Cap</option>
-              <option value="Shoes" name="shoes">Shoes</option>
-            </select>
-
-            <label for="color">Color:</label>
-            <input type="text" name="color" id="color" class="textarea-style" />
-            <label for="color-code">Color Code:</label>
-            <input type="color" name="colorCode" id="color-code" />
-
-            <label for="size">Size:</label>
-            <select name="size" id="size">
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L">L</option>
-              <option value="XL">XL</option>
-            </select>
-
-            <label for="season">Season:</label>
-            <select name="season" id="season">
-              <option value="Summer">Summer</option>
-              <option value="Winter">Winter</option>
-              <option value="Autumn">Autumn</option>
-              <option value="Spring">Spring</option>
-            </select>
-
-            <label for="fabric">Fabric:</label>
-            <input
-              type="text"
-              name="fabric"
-              id="fabric"
-              class="textarea-style" />
-
-            <label for="Occasion">Occasion:</label>
-            <select name="Occasion" id="Occasion">
-              <option value="Casual">Casual</option>
-              <option value="Semi-Formal">Semi-Formal</option>
-              <option value="Formal">Formal</option>
-            </select>
-          </div>
-          <button class="close" onclick="toggle2()" type="reset">
-            <img src="images/close-button.png" alt="" />
-          </button>
         </div>
-        <input type="submit" id="submit" />
-      </form>
-    </div>
-    <script type="text/javascript">
-      var loader = document.getElementById("loadingArea");
-      window.addEventListener("load", function () {
-        loader.style.display = "none";
-      });
-    </script>
-  </body>
+        <div id="modal-data-input">
+          <label for="category">Name:</label>
+          <input type="text" name="category" id="category" class="textarea-style" />
 
-  <script src="app/outfit.js"></script>
+          <label for="type">Type:</label>
+          <select name="type" id="type">
+            <option value="Top" name="top">Top</option>
+            <option value="Bottom" name="bottom">Bottom</option>
+            <option value="Dress" name="dress">Dress</option>
+            <option value="Undergrarment" name="undergarment">
+              Undergrarment
+            </option>
+            <option value="Bag" name="bag">Bag</option>
+            <option value="Cap" name="cap">Cap</option>
+            <option value="Shoes" name="shoes">Shoes</option>
+          </select>
+
+          <label for="color">Color:</label>
+          <input type="text" name="color" id="color" class="textarea-style" />
+          <label for="color-code">Color Code:</label>
+          <input type="color" name="colorCode" id="color-code" />
+
+          <label for="size">Size:</label>
+          <select name="size" id="size">
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+          </select>
+
+          <label for="season">Season:</label>
+          <select name="season" id="season">
+            <option value="Summer">Summer</option>
+            <option value="Winter">Winter</option>
+            <option value="Autumn">Autumn</option>
+            <option value="Spring">Spring</option>
+          </select>
+
+          <label for="fabric">Fabric:</label>
+          <input type="text" name="fabric" id="fabric" class="textarea-style" />
+
+          <label for="Occasion">Occasion:</label>
+          <select name="Occasion" id="Occasion">
+            <option value="Casual">Casual</option>
+            <option value="Semi-Formal">Semi-Formal</option>
+            <option value="Formal">Formal</option>
+          </select>
+        </div>
+        <button class="close" onclick="toggle2()" type="reset">
+          <img src="images/close-button.png" alt="" />
+        </button>
+      </div>
+      <input type="submit" id="submit" />
+    </form>
+  </div>
+  <script type="text/javascript">
+    var loader = document.getElementById("loadingArea");
+    window.addEventListener("load", function () {
+      loader.style.display = "none";
+    });
+  </script>
+</body>
+
+<script src="app/outfit.js"></script>
+
 </html>

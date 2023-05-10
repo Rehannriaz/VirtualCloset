@@ -22,8 +22,11 @@ function openTab(evt, TabName) {
 document.getElementById("OpenAuto").click();
 
 function openInsideTab(evt, TabName) {
-  // Declare all variables
-  console.log(TabName);
+  // Check if the tab is already active
+  if (evt.currentTarget.classList.contains("active")) {
+    return;
+  }
+
   var i, tabcontent, tablinks;
 
   // Get all elements with class="tabcontent" and hide them
@@ -40,7 +43,11 @@ function openInsideTab(evt, TabName) {
 
   // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(TabName).style.display = "grid";
+  // clothesAdd=document.querySelector(".InsideTabContent #add-clothes");
   evt.currentTarget.className += " active";
+  for (i = 0; i < tabcontent.length; i++) {
+    if (tabcontent[i].className != "active") tabcontent[i].innerHTML = "";
+  }
 
   displayCards(TabName);
 }
@@ -49,7 +56,11 @@ document.getElementById("InsideOpenAuto").click();
 function displayCards(TabName) {
   // Create new HTML elements based on the data
   const cardsContainer = document.getElementById(TabName);
-
+  if (TabName == "all") {
+    console.log("TAB NAME : " + TabName);
+    cardsContainer.innerHTML =
+      '<div class="card" onclick="toggle2()" id="add-clothes"><img src="images/plus-60.png" alt="" /></div>';
+  }
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "/clothes?clothingtype=" + TabName);
   xhr.onload = function displayCards(TabName) {
@@ -274,3 +285,73 @@ function createOutfitToggle() {
   var popup = document.getElementById("addOutfitModalWrapper");
   popup.classList.toggle("active3");
 }
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const clothingTypeToClass = {
+    "Tops": "top",
+    "Bottoms": "bottom",
+    "Suits/Dresses": "dress",
+    "Foot wear": "shoes",
+    "Bags": "bag",
+    "Caps/Hats": "cap"
+  };
+
+  const slideContainers = [
+    {
+      slideContainer: document.getElementById("slideshow-1"),
+      className: "mySlides1"
+    },
+    {
+      slideContainer: document.getElementById("slideshow-2"),
+      className: "mySlides2"
+    },
+    {
+      slideContainer: document.getElementById("slideshow-3"),
+      className: "mySlides3"
+    },
+    {
+      slideContainer: document.getElementById("slideshow-4"),
+      className: "mySlides4"
+    },
+    {
+      slideContainer: document.getElementById("slideshow-5"),
+      className: "mySlides5"
+    },
+    {
+      slideContainer: document.getElementById("slideshow-6"),
+      className: "mySlides6"
+    }
+  ];
+
+  slideContainers.forEach(function (slideObj) {
+    const slideContainer = slideObj.slideContainer;
+    const className = slideObj.className;
+
+    const clothingType = document.querySelector(`#${slideContainer.id} p`).textContent;
+    const clothingClass = clothingTypeToClass[clothingType];
+    console.log("clothing type ::: " + clothingClass);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/outfitSlides?clothingtype=" + clothingClass);
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        const clothes = JSON.parse(xhr.responseText);
+        clothes.forEach(function (clothingItem) {
+          const slide = document.createElement("div");
+          slide.className = className;
+
+          const img = document.createElement("img");
+          img.src = "/outfit_images/images/" + clothingItem.imageupload;
+          slide.appendChild(img);
+
+          slideContainer.append(slide);
+        });
+      } else {
+        // console.error(`Request failed outfitslides for ${clothingClass}. Status: ${xhr.status}`);
+      }
+    };
+    xhr.send();
+  });
+});

@@ -132,7 +132,7 @@ app.post('/register', async (req, res) => {
 
     }
 
-    const id= Date.now().toString();
+    const id= Date.now().toString();                            // TRY UUID
     const query = `INSERT INTO users (userid,username, email, password) VALUES ($1, $2, $3,$4) RETURNING *`;
     const values = [id,req.body.usernameInput, req.body.emailInput, hashedPassword];
     const { rows } = await pool.query(query, values);
@@ -142,6 +142,25 @@ app.post('/register', async (req, res) => {
     console.error('Error creating user:', error);
     res.redirect('/register');
   }
+});
+
+app.post('/outfitForm', async(req,res) => {
+  try{
+    const id= Date.now().toString();
+    const userid = req.session.user.userid;
+    // console.log("OUTFITNAME  = " + req.body.outfitname);
+    const query = `INSERT INTO outfit (userid,outfitname) VALUES ($1, $2) RETURNING *`;
+    const values = [userid,req.body.outfitname];
+    const { rows } = await pool.query(query, values);
+
+     res.redirect('/outfits#looksTAB');                                // redirect TO LOOKS PAGE fix lookstab
+  } catch (error) {
+    console.error('Error creating outfit:', error);
+    res.redirect('/401');
+  }
+  
+
+
 });
 
 app.get('/', function(req, res) {
@@ -196,19 +215,19 @@ app.get('/clothes', isAuthenticated, async (req, res) => {
   try {
     const userid = req.session.user.userid;
     const clothType=req.query.clothingtype;
-    console.log("clothtype = = =" + clothType);
+    // console.log("clothtype = = =" + clothType);
     if (clothType=='all')
     {
       const query = 'select  * from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d on (d.categoryname=c.categoryname) where c.userid=$1';
       const { rows } = await pool.query(query, [userid]);
-      console.log("HELLO");
+      // console.log("HELLO");
       res.send(rows);
     }
     else
     {
       const query = 'select  * from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d on (d.categoryname=c.categoryname and lower(d.clothingtype)=lower($2))  where c.userid= $1'
       const { rows } = await pool.query(query, [userid,clothType]);
-      console.log("H123ELLO");
+      // console.log("H123ELLO");
       res.send(rows);
     }
     
@@ -225,7 +244,7 @@ app.get("/clothdetail", isAuthenticated, async (req, res) => {
   try {
     const userid = req.session.user.userid;
     const itemId = req.query.item_id;
-    console.log('item id =  = = '+ itemId);
+    // console.log('item id =  = = '+ itemId);
     const query = "SELECT * FROM clothingitem c INNER JOIN occasion a ON (c.item_id=a.item_id) INNER JOIN category d ON (d.categoryname=c.categoryname) WHERE c.userid=$1 AND c.item_id=$2";
     const { rows } = await pool.query(query, [userid, itemId]);
 
@@ -241,6 +260,27 @@ app.get("/clothdetail", isAuthenticated, async (req, res) => {
   }
 });
 
+app.get("/outfitSlides", isAuthenticated, async (req,res) =>{
+  try {
+    const userid = req.session.user.userid;
+    const clothingType= req.query.clothingtype;
+    // console.log("CLOTHING TYPE::::" + clothingType);
+    // const clothCheckquery='SELECT count(*) '
+    const query = 'SELECT * FROM clothingitem c INNER JOIN category d ON (d.categoryname=c.categoryname and  lower(d.clothingtype)= lower($2)) WHERE c.userid=$1';
+    const { rows } = await pool.query(query, [userid,clothingType]);
+    // console.log("CLOTHING type  = == = " + clothingType + "rowss == " + rows.length);
+    if (rows.length == 0) {
+      res.status(404).send("Clothing item not found");
+      return;
+    }
+    
+    res.send(rows);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+
+});
 
 
 
