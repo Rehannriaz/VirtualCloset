@@ -15,6 +15,9 @@
     <link rel="stylesheet" type="text/css" href="css/shared.css" />
     <link rel="stylesheet" type="text/css" href="css/outfits.css" />
     <link rel="stylesheet" type="text/css" href="css/outfits2.css" />
+    <script
+      src="https://kit.fontawesome.com/503ade8d65.js"
+      crossorigin="anonymous"></script>
     <title>Your Outfits</title>
     <div class="loading-area" id="loadingArea">
       <div class="banner1 banners">
@@ -72,7 +75,6 @@
         </div>
 
         <section id="closet" class="tab-content">
-          
           <div class="media-scroller snaps-inline">
             <button
               onclick="openInsideTab(event, 'all')"
@@ -87,9 +89,7 @@
               <img src="images/favourites.svg" alt="" />
               <p>Favourites</p>
             </button>
-            <button
-              onclick="openInsideTab(event, 'top')"
-              class="media-element">
+            <button onclick="openInsideTab(event, 'top')" class="media-element">
               <img src="images/tops.svg" alt="" />
               <p>Tops</p>
             </button>
@@ -111,15 +111,11 @@
               <img src="images/undergarments.png" alt="" />
               <p>Undergarments</p>
             </button>
-            <button
-              onclick="openInsideTab(event, 'bag')"
-              class="media-element">
+            <button onclick="openInsideTab(event, 'bag')" class="media-element">
               <img src="images/bags.png" alt="" />
               <p>Bags</p>
             </button>
-            <button
-              onclick="openInsideTab(event, 'cap')"
-              class="media-element">
+            <button onclick="openInsideTab(event, 'cap')" class="media-element">
               <img src="images/caps.png" alt="" />
               <p>Caps</p>
             </button>
@@ -137,11 +133,23 @@
             <div class="card" onclick="toggle2()" id="add-clothes">
               <img src="images/plus-60.png" alt="" />
             </div>
-
+            <div class="card" onclick="toggle()">
+              <img src="images/pexels-tembela-bohle-1884584.jpg" alt="" />
+              <div class="card-content">
+                <h2>Black Shirt</h2>
+                <p>Formal</p>
+                <p>M</p>
+              </div>
+              <div class="heart-container">
+                <i
+                  class="fa-regular fa-heart fa-3xl heart"
+                  onclick="changeFillColor(event)"></i>
+              </div>
+            </div>
           </div>
 
-            <div class="InsideTabContent" id="top"></div>
-          <div class="InsideTabContent" id="bottom"> </div>
+          <div class="InsideTabContent" id="top"></div>
+          <div class="InsideTabContent" id="bottom"></div>
           <div class="InsideTabContent" id="dress"></div>
           <div class="InsideTabContent" id="undergarment"></div>
           <div class="InsideTabContent" id="bag"></div>
@@ -398,9 +406,7 @@
         <button onclick="createOutfitToggle()">Done</button>
       </div>
     </div>
-    <div id="modal-wrapper">
-    
-    </div>
+    <div id="modal-wrapper"></div>
     <div id="add-clothes-modal">
       <form action="/uploadclothes" method="POST" enctype="multipart/form-data">
         <div id="modal-info">
@@ -426,7 +432,7 @@
               name="category"
               id="category"
               class="textarea-style" />
-  
+
             <label for="type">Type:</label>
             <select name="type" id="type">
               <option value="Top" name="top">Top</option>
@@ -439,12 +445,12 @@
               <option value="Cap" name="cap">Cap</option>
               <option value="Shoes" name="shoes">Shoes</option>
             </select>
-  
+
             <label for="color">Color:</label>
             <input type="text" name="color" id="color" class="textarea-style" />
             <label for="color-code">Color Code:</label>
             <input type="color" name="colorCode" id="color-code" />
-  
+
             <label for="size">Size:</label>
             <select name="size" id="size">
               <option value="S">S</option>
@@ -452,7 +458,7 @@
               <option value="L">L</option>
               <option value="XL">XL</option>
             </select>
-  
+
             <label for="season">Season:</label>
             <select name="season" id="season">
               <option value="Summer">Summer</option>
@@ -460,10 +466,14 @@
               <option value="Autumn">Autumn</option>
               <option value="Spring">Spring</option>
             </select>
-  
+
             <label for="fabric">Fabric:</label>
-            <input type="text" name="fabric" id="fabric" class="textarea-style" />
-  
+            <input
+              type="text"
+              name="fabric"
+              id="fabric"
+              class="textarea-style" />
+
             <label for="Occasion">Occasion:</label>
             <select name="Occasion" id="Occasion">
               <option value="Casual">Casual</option>
