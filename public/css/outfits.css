@@ -169,6 +169,34 @@
   font-size: 16px;
   color: rgb(63, 63, 63);
 }
+.heart-container{
+  display: inline;
+  z-index: 1000;
+  background-color: white;
+  padding: 9px;
+  border-radius: 100%;
+  position: relative;
+  top: -280px;
+  right: -98px;
+  cursor: pointer;
+  
+}
+.heart-container:hover{
+  background-color: rgb(209, 209, 209);
+}
+.heart{
+  /* padding-top: 15px; */
+   position: relative;
+   top: 2.75px;
+   color: black;
+}
+.heart.selected2{
+  color: red;
+}
+.fa-3xl{
+  font-size: 1.5em;
+}
+
 
 #blur.active2 {
   filter: blur(18px);

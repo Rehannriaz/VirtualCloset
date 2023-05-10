@@ -46,22 +46,19 @@ function openInsideTab(evt, TabName) {
 }
 document.getElementById("InsideOpenAuto").click();
 
-
-
-
- function displayCards (TabName) {
+function displayCards(TabName) {
   // Create new HTML elements based on the data
   const cardsContainer = document.getElementById(TabName);
 
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", "/clothes?clothingtype="+TabName);
-  xhr.onload = function displayCards (TabName) {
+  xhr.open("GET", "/clothes?clothingtype=" + TabName);
+  xhr.onload = function displayCards(TabName) {
     if (xhr.status === 200) {
       const clothes = JSON.parse(xhr.responseText);
       clothes.forEach((clothingItem) => {
         const card = document.createElement("div");
         card.classList.add("card");
-        card.onclick = function displayCards (TabName) {
+        card.onclick = function displayCards(TabName) {
           toggle(clothingItem);
         };
 
@@ -76,12 +73,18 @@ document.getElementById("InsideOpenAuto").click();
         size.textContent = clothingItem.clothessize;
         const occasion = document.createElement("p");
         occasion.textContent = clothingItem.occasionname;
+        const heartContainer = document.createElement("div");
+        heartContainer.className = "heart-container";
+        heartContainer.innerHTML =
+          '<i class="fa-regular fa-heart fa-3xl heart" onclick="changeFillColor(event)"></i>';
 
         details.appendChild(category);
         details.appendChild(occasion);
         details.appendChild(size);
         card.appendChild(img1);
         card.appendChild(details);
+        card.appendChild(heartContainer);
+
         cardsContainer.appendChild(card);
       });
     } else {
@@ -89,32 +92,32 @@ document.getElementById("InsideOpenAuto").click();
     }
   };
   xhr.send();
-};
+}
 
-// function toggle() {
-//   var blur = document.getElementById("blur");
-//   blur.classList.toggle("active2");
-//   var popup = document.getElementById("modal-wrapper");
-//   popup.classList.toggle("active2");
-// }
+function changeFillColor(event) {
+  event.stopPropagation();
+  var icon = event.target;
+  icon.classList.toggle("fa-regular");
+  icon.classList.toggle("fa-solid");
+  icon.classList.toggle("selected2");
+}
+
 function toggleModal() {
   var blur = document.getElementById("blur");
   blur.classList.toggle("active2");
   var popup = document.getElementById("modal-wrapper");
   popup.classList.toggle("active2");
-  popup.innerHTML="";
+  popup.innerHTML = "";
 }
 
-
 function toggle(clothingItem) {
-  
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", "/clothdetail?item_id="+clothingItem.item_id);
-  
+  xhr.open("GET", "/clothdetail?item_id=" + clothingItem.item_id);
+
   xhr.onload = function () {
     if (xhr.status === 200) {
       const clothingItemDetails = JSON.parse(xhr.responseText)[0];
-    
+
       console.log(clothingItem.item_id);
       const modalWrapper = document.getElementById("modal-wrapper");
       modalWrapper.id = "modal-wrapper";
@@ -172,7 +175,7 @@ function toggle(clothingItem) {
       // Create close button element
       const closeButton = document.createElement("button");
       closeButton.className = "close";
-      closeButton.id="close2";
+      closeButton.id = "close2";
       closeButton.onclick = toggleModal;
 
       const closeImg = document.createElement("img");
@@ -192,21 +195,13 @@ function toggle(clothingItem) {
     }
   };
   xhr.send();
- 
 
   var blur = document.getElementById("blur");
   blur.classList.toggle("active2");
-  var popup = document.getElementById('modal-wrapper');
+  var popup = document.getElementById("modal-wrapper");
   console.log(popup);
   popup.classList.toggle("active2");
 }
-
-
-
-
-
-
-
 
 function toggle2() {
   var blur = document.getElementById("blur");
@@ -216,12 +211,9 @@ function toggle2() {
   var imgBox = document.getElementById("imgBox");
   var uploadButton = document.getElementById("upload-button");
 
-  imgBox.style.backgroundImage ="none";
+  imgBox.style.backgroundImage = "none";
   imgBox.style.border = "2px dashed rgb(95, 95, 95)";
   uploadButton.style.display = "";
-
-
-
 }
 
 var imgBox = document.getElementById("imgBox");
