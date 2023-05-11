@@ -1,7 +1,7 @@
 const express = require('express'); // import express module
 const app = express(); // create an instance of express
 const bcrypt = require('bcrypt'); // import bcrypt module for password hashing
-const port = 3025; // set the port number for the server
+const port = 3033; // set the port number for the server
 const pool = require('./db'); // import the pool object from db.js file which contains database connection settings
 const path = require('path'); // import path module to work with file and directory paths
 const mime = require('mime'); // import mime module to get MIME type of a file
@@ -40,7 +40,7 @@ app.post("/logout", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.redirect("/login");
+      res.redirect("/");
     }
   });
 });
