@@ -71,7 +71,7 @@ const isAuthenticated = (req, res, next) => {
 };
 
 
-app.post('/loginform', passport.authenticate('local', {
+app.post('/loginform',passport.authenticate('local', {
   failureRedirect: '/login',
   failureFlash: true
 }), async (req, res) => {
@@ -79,18 +79,18 @@ app.post('/loginform', passport.authenticate('local', {
     const query = `SELECT userid, email FROM users WHERE email = $1`;
     const values = [req.body.email];
     const { rows } = await pool.query(query, values);
-    
+
     req.session.isAuthenticated = true;
     req.session.user = { userid: rows[0].userid, email: rows[0].email };
     req.session.save(function(){
-      
-      res.redirect('/outfits');
+      res.redirect('/');
     });
   } catch (error) {
     console.error('Error finding user:', error);
     res.redirect('/login');
   }
 });
+
 
 
 
@@ -291,6 +291,16 @@ app.get("/outfitSlides", isAuthenticated, async (req,res) =>{
   }
 
 });
+
+app.get('/loginlogout', (req, res) => {
+  const loggedinBool = req.session.isAuthenticated;
+  if(loggedinBool)
+    res.json(loggedinBool);
+  else
+    res.json(false);
+  // console.log("LOGGED IN BOOL =  " + loggedinBool);
+});
+
 
 
 

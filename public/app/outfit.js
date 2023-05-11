@@ -286,50 +286,50 @@ function createOutfitToggle() {
   popup.classList.toggle("active3");
 }
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
   const clothingTypeToClass = {
-    "Tops": "top",
-    "Bottoms": "bottom",
+    Tops: "top",
+    Bottoms: "bottom",
     "Suits/Dresses": "dress",
     "Foot wear": "shoes",
-    "Bags": "bag",
-    "Caps/Hats": "cap"
+    Bags: "bag",
+    "Caps/Hats": "cap",
   };
 
   const slideContainers = [
     {
       slideContainer: document.getElementById("slideshow-1"),
-      className: "mySlides1"
+      className: "mySlides1",
     },
     {
       slideContainer: document.getElementById("slideshow-2"),
-      className: "mySlides2"
+      className: "mySlides2",
     },
     {
       slideContainer: document.getElementById("slideshow-3"),
-      className: "mySlides3"
+      className: "mySlides3",
     },
     {
       slideContainer: document.getElementById("slideshow-4"),
-      className: "mySlides4"
+      className: "mySlides4",
     },
     {
       slideContainer: document.getElementById("slideshow-5"),
-      className: "mySlides5"
+      className: "mySlides5",
     },
     {
       slideContainer: document.getElementById("slideshow-6"),
-      className: "mySlides6"
-    }
+      className: "mySlides6",
+    },
   ];
 
   slideContainers.forEach(function (slideObj) {
     const slideContainer = slideObj.slideContainer;
     const className = slideObj.className;
 
-    const clothingType = document.querySelector(`#${slideContainer.id} p`).textContent;
+    const clothingType = document.querySelector(
+      `#${slideContainer.id} p`
+    ).textContent;
     const clothingClass = clothingTypeToClass[clothingType];
     console.log("clothing type ::: " + clothingClass);
 
@@ -355,3 +355,4 @@ document.addEventListener("DOMContentLoaded", function () {
     xhr.send();
   });
 });
+
