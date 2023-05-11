@@ -170,7 +170,7 @@ nav ul img:hover{
 }
 
 #after-login{
-  display: none;
+  display: flex;
   align-items: center;
   padding: 5px;
   /* justify-content: center; */
