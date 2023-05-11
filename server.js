@@ -35,6 +35,16 @@ app.use(
   })
 );
 
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/login");
+    }
+  });
+});
+
 const storage = multer.diskStorage({
   destination: 'public/outfit_images/images', // specify the destination folder for uploaded images
   filename: (req, file, cb) => {
