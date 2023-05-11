@@ -6,16 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Oleo+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap"
-      rel="stylesheet" />
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap"
-      rel="stylesheet" />
+      rel="stylesheet"
+    />
     <link
       href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900"
-      rel="stylesheet" />
-    <link rel="stylesheet" type="text/css"  href="css/shared.css" />
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="css/shared.css" />
     <link rel="stylesheet" type="text/css" href="css/contactUs.css" />
     <title>Contact Us</title>
     <div class="loading-area" id="loadingArea">
@@ -32,6 +35,10 @@
         <img src="images/shoes.png" alt="" />
       </div>
     </div>
+    <script
+      src="https://kit.fontawesome.com/0dc94dd95c.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <section id="blur">
@@ -112,20 +119,77 @@
         </div>
       </footer>
     </section>
-    <div id="modal-wrapper"></div>
+    <div id="modal-wrapper">
+      <button class="cross-btn" onclick="toggle()">
+        <img src="images/xmark-solid.svg" alt="" />
+      </button>
+      <div class="heading">
+        <h1>Your Feedback</h1>
+      </div>
+      <form action="">
+        <div class="rating">
+          <p>What is your opinion of this website?</p>
+          <div class="reactions">
+            <i class="fa-regular fa-face-angry fa-5xl"></i>
+            <i class="fa-regular fa-face-frown fa-5xl"></i>
+            <i class="fa-regular fa-face-meh fa-5xl"></i>
+            <i class="fa-regular fa-face-smile fa-5xl"></i>
+            <i class="fa-regular fa-face-grin fa-5xl"></i>
+          </div>
+          <div class="category">
+            <p>please select your feedback category</p>
+            <div class="flex-container">
+              <div class="textbox">
+                <p>Suggestion</p>
+              </div>
+              <div class="textbox">
+                <p>
+                  I'm Satisfied
+                </p>
+              </div>
+              <div class="textbox">
+                <p>Compliment</p>
+              </div>
+            </div>
+          </div>
+          <div class = "feedback">
+            <p>Please leave your feedback below:</p>
+            <!-- <input type="text" placeholder="You  r thoughts..."> -->
+            <textarea id="textarea" cols="75" rows="5" wrap="soft" placeholder="your thoughts..."></textarea>
+          </div>
+          <button class = "sendbtn" type="submit">Send</button>
+        </div>
+      </form>
+        <script type="text/javascript">
+          const iconElements = document.querySelectorAll(".fa-regular");
 
+          iconElements.forEach((iconElement) => {
+            iconElement.addEventListener("click", () => {
+              iconElements.forEach((icon) => {
+                icon.classList.remove("selected");
+              });
+              iconElement.classList.add("selected");
+            });
+          });
+
+          const categories = document.querySelectorAll(".textbox");
+
+          categories.forEach((category) => {
+            category.addEventListener("click", () => {
+              categories.forEach((cat) => {
+                cat.classList.remove("selected2");
+              });
+              category.classList.add("selected2");
+            });
+          });
+        </script>
+      </div>
+    </div>
     <script type="text/javascript">
       var loader = document.getElementById("loadingArea");
       window.addEventListener("load", function () {
         loader.style.display = "none";
       });
-    </script>
-    <script type="text/javascript">
-      
-      var loader=document.getElementById("loadingArea")
-      window.addEventListener("load",function(){
-        loader.style.display="none";
-      })  
     </script>
   </body>
 </html>

@@ -71,13 +71,13 @@ h1 {
   user-select: none;
 }
 #modal-wrapper {
-  display: flex;
+  /* display: flex; */
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50%;
-  height: 60%;
+  height: 85%;
   padding: 10px 5px;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
   background-color: white;
@@ -95,4 +95,121 @@ h1 {
   transition: 0.5s;
 }
 
+.cross-btn {
+  width: 30px;
+  height: 30px;
+  right: 10px;
+  top: 10px;
+  position: fixed;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  cursor: pointer;
+}
+.heading{
+  /* height: 100vh; */
+  margin-inline: auto;
+  /* text-align: center; */
+  width: 80%;
+  border-bottom: 1px solid rgb(167, 167, 167);
+  padding: 0;
 
+ 
+}
+.heading h1{
+  color: rgb(53, 53, 53);
+  padding: 0;
+  font-size: 30px;
+}
+.reactions{
+  border-bottom: 1px solid rgb(167, 167, 167);
+  padding-bottom: 2.5rem;
+  width: 80%;
+  margin: auto;
+}
+
+.rating{
+  text-align: center;
+}
+.rating p{
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+.reactions i{
+  padding-inline: 25px;
+  padding-top: 20px;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  
+}
+
+.reactions i.selected {
+  color: rgb(242, 139, 29);
+}
+.fa-5xl{
+  font-size:2.5em;
+}
+
+
+.category{
+  border-bottom: 1px solid rgb(167, 167, 167);
+  width: 80%;
+  padding-bottom: 20px;
+  margin: auto;
+}
+.flex-container{
+  display: flex;
+   height: 70px;
+  /* align-content: center;
+  align-items: center;
+  justify-content: space-between; */
+  justify-content: space-around;
+}
+.textbox p{
+  padding: 0;
+  margin: 0;
+  padding-top: 8px;
+}
+
+/* .textbox p:last-child{
+  padding-top:10px;
+} */
+.textbox{
+  color: black;
+  font-size: 15px;
+  
+  background-color: rgb(238, 238, 238);
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 0.8rem;
+}
+
+
+.textbox:hover{
+  background-color: rgb(200, 200, 200);
+  cursor: pointer;
+}
+
+
+.textbox.selected2{
+  border:1px solid rgb(242, 139, 29);
+}
+.textarea{
+  border-radius: 20px;
+  
+}
+.sendbtn{
+  padding: 10px;
+  margin: 15px;
+  width: 120px;
+  margin-bottom: 10px;
+  background-color: rgb(238, 238, 238);
+  border: 1px solid gray;
+  
+  border-radius: 25px;
+  font-size: 20px;
+}
+.sendbtn:hover{
+  background-color: rgb(200, 200, 200);
+  cursor: pointer;
+}

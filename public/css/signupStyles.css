@@ -1,8 +1,17 @@
+*{
+  font-family: "Montserrat", sans-serif;
+}
 body{
   background-image: url("/images/loginvector.svg");
-    background-size: cover;
+  background-size: cover;
 }
+::-webkit-scrollbar {
+  display: none;
+}
+
 .container {
+    margin-top: 80px;
+    margin-bottom: 100px;
     display: flex;
     justify-content:center;
     align-items: center;
@@ -53,7 +62,9 @@ body{
   }
 
   input[type="date"]{
-    /* width: 50%; */
+    width: 30%;
+    height: 36px;
+    text-align: center;
     border-radius: 5px;
     font-size: large;
   }
@@ -63,7 +74,7 @@ body{
     display: block;
     margin: 0 auto;
     padding: 10px 20px;
-    background-color: #3366cc;
+    background-color: rgb(243, 99, 32);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -73,11 +84,11 @@ body{
   }
   
   button[type="submit"]:hover {
-    background-color: #204e8a;
+    background-color: rgb(173, 72, 25);
   }
   form a{
     text-decoration: none;
-    color: orange;
+    color: rgb(0, 102, 255);
   }
   form a:hover{
     color: white;

@@ -1,3 +1,6 @@
+*{
+  font-family: "Montserrat", sans-serif;
+}
 body {
     /* margin: 0;
     padding: 0;
@@ -78,24 +81,42 @@ body {
     /* margin-top:1rem; */
   }
   form button:hover{
-      background-color: #1d222b;
-      color: white;
+      background-color: rgb(173, 72, 25);
       
       border: 1 px solid white;
   
       cursor: pointer;
   }
   
-  form a:hover{
+  /* form a:hover{
       color: #ccc;
-  }
+  } */
   .googleSignin{
       display: flex;
-      justify-content: center;   
+      justify-content: center;  
+      align-items: center;
+      /* margin-left: 50%; */
+      background-color:rgb(234, 234, 234);
+
+      width: 50%;
+      margin:15px auto;
+      padding: 8px 12px;
+      border-radius: 22px;
+      /* width: 50%;
+      margin: 0;
+      padding: 0; */
+      /* background-color: #ccc;  */
+  }
+  .googleSignin:hover{
+    background-color:rgb(200, 200, 200);
+    cursor: pointer;
+
   }
   .googleSignin a{
       text-decoration: none;
-      color: white;
+      color: rgb(59, 59, 59);
+      padding: 3px;
+      font-size: 14.5px;
   }
   .googleSignin img{
       padding: 6px 3px;
