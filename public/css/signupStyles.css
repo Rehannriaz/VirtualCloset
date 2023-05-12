@@ -93,3 +93,10 @@ body{
   form a:hover{
     color: white;
   }
+
+  #errorMSG{
+    color: rgb(159, 2, 2);
+    font-size: 13px;
+    margin: 0;
+    padding-top: 5px;
+  }

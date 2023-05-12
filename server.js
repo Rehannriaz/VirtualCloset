@@ -1,7 +1,7 @@
 const express = require("express"); // import express module
 const app = express(); // create an instance of express
 const bcrypt = require("bcrypt"); // import bcrypt module for password hashing
-const port = 3033; // set the port number for the server
+const port = 3032; // set the port number for the server
 const pool = require("./db"); // import the pool object from db.js file which contains database connection settings
 const path = require("path"); // import path module to work with file and directory paths
 const mime = require("mime"); // import mime module to get MIME type of a file
@@ -260,6 +260,7 @@ app.use(express.json());
 app.get("/signup", (req, res) => {
   res.render("signup.ejs", {
     css: ["/css/style.css", "/css/signupStyles.css"],
+    scripts: ["/app/signup.js"],
   });
 });
 
@@ -310,6 +311,7 @@ app.get("/outfitdetail", isAuthenticated,async(req,res)=>{
     const outfitid=req.query.outfitid;
     const query = 'select c.*,clothingtype from clothingitem c inner join outfit_clothes o ON(o.item_id=c.item_id) inner join category d ON (d.categoryname =c.categoryname) where o.outfit_id= $1';
     const {rows} = await pool.query(query,[outfitid]); 
+    console.log(rows)
 
     res.send(rows);
   }catch (error) {

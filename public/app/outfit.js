@@ -375,7 +375,7 @@ function outfitToggleModal(outfit) {
       const outfitWrap= document.getElementById("outfitModalWrapper");
       outfitWrap.innerHTML='<button class="cross-btn" onclick="outfitToggle()"><img src="images/xmark-solid.svg" alt="" /></button> <h2 id="outfitDetails">Outfit Details</h2><hr /><div class="outfitsGrid" id="OUTFITGRIDID"></div> <div class="edit-btn"><button>Edit Outfit</button></div>'
       const outfitGRID= document.getElementById("OUTFITGRIDID");
-      var i=0;
+      console.log(outfitGRID)
       clothingItemDetails.forEach((outfitTYPE) => {
           const gridCard=document.createElement("div");
           gridCard.className="grid-card";
@@ -385,7 +385,13 @@ function outfitToggleModal(outfit) {
           }
           const img1=document.createElement("img");
           img1.src="/outfit_images/images/"+outfitTYPE.imageupload;
-          buttonTog.append(img1);looks
+          buttonTog.append(img1);
+          const h2txt=document.createElement("h2");
+          h2txt.textContent=outfitTYPE.clothingtype;
+          gridCard.append(buttonTog);
+          gridCard.append(h2txt);
+          outfitGRID.append(gridCard);
+          
 
       });
 
