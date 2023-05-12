@@ -232,7 +232,7 @@ app.post("/outfitForm", async (req, res) => {
       }
 
     }
-    res.redirect("/outfits");                                 // redirect TO LOOKS PAGE fix lookstab
+    res.redirect("/outfits#looks");                                 // redirect TO LOOKS PAGE fix lookstab
   } catch (error) {
     console.error("Error creating outfit:", error);
     res.redirect("/401");
@@ -326,18 +326,23 @@ app.get("/clothes", isAuthenticated, async (req, res) => {
   try {
     const userid = req.session.user.userid;
     const clothType = req.query.clothingtype;
-    // console.log("clothtype = = =" + clothType);
+    console.log("clothtype = = =" + clothType);
     if (clothType == "all") {
       const query =
-        "select  * from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d on (d.categoryname=c.categoryname) where c.userid=$1";
+        "select  c.*,a.occasion_id,a.occasionname, d.clothingtype,d.clothingseason,i.favourites from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d on (d.categoryname=c.categoryname) left join itemfavourite i on (i.item_id=c.item_id) where c.userid=$1order by favourites asc;";
       const { rows } = await pool.query(query, [userid]);
       // console.log("HELLO");
       res.send(rows);
-    } else {
-      const query =
-        "select  * from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d on (d.categoryname=c.categoryname and lower(d.clothingtype)=lower($2))  where c.userid= $1";
+    } 
+    else if(clothType === "favourites")
+    {
+      const query = "select  c.*,a.occasion_id,a.occasionname, d.clothingtype,d.clothingseason,i.favourites from clothingitem c inner join occasion a  on (c.item_id=a.item_id) inner join category d on (d.categoryname=c.categoryname) inner join itemfavourite i on (i.item_id=c.item_id) where c.userid=$1 order by favourites asc;"
+      const { rows } = await pool.query(query, [userid]);
+      res.send(rows);
+    }
+    else {
+      const query = "select  c.*,a.occasion_id,a.occasionname, d.clothingtype,d.clothingseason,i.favourites from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d on (d.categoryname=c.categoryname and lower(d.clothingtype)=lower($2)) left join itemfavourite i on (i.item_id=c.item_id)  where c.userid= $1;"
       const { rows } = await pool.query(query, [userid, clothType]);
-      // console.log("H123ELLO");
       res.send(rows);
     }
 

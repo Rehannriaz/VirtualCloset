@@ -129,14 +129,23 @@ function displayCards(TabName) {
         occasion.textContent = clothingItem.occasionname;
         const heartContainer = document.createElement("div");
         heartContainer.className = "heart-container";
-        const heart=document.createElement('i');
-        heart.className="fa-regular fa-heart fa-3xl heart";
-        heart.onclick=function displayCards(TabName){
-          changeFillColor(event,clothingItem.item_id);
+        if(clothingItem.favourites)
+        {
+          const heart=document.createElement('i');
+          heart.className="fa-heart fa-3xl heart fa-solid selected2";
+          heart.onclick=function displayCards(TabName){
+            changeFillColor(event,clothingItem.item_id);
+          }
+          heartContainer.appendChild(heart);
         }
-        // heartContainer.innerHTML =
-        //   '<i class="fa-regular fa-heart fa-3xl heart" onclick="changeFillColor(event)"></i>';
-        heartContainer.appendChild(heart);
+        else{
+          const heart=document.createElement('i');
+          heart.className="fa-regular fa-heart fa-3xl heart";
+          heart.onclick=function displayCards(TabName){
+            changeFillColor(event,clothingItem.item_id);
+          }
+          heartContainer.appendChild(heart);
+        }
         details.appendChild(category);
         details.appendChild(occasion);
         details.appendChild(size);
@@ -376,13 +385,7 @@ function outfitToggleModal(outfit) {
           }
           const img1=document.createElement("img");
           img1.src="/outfit_images/images/"+outfitTYPE.imageupload;
-          buttonTog.append(img1);
-          const h2txt=document.createElement("h2");
-          h2txt.textContent=outfitTYPE.clothingtype;
-          gridCard.append(buttonTog);
-          gridCard.append(h2txt);
-          outfitGRID.append(gridCard);
-          i++;
+          buttonTog.append(img1);looks
 
       });
 
@@ -408,6 +411,7 @@ function createOutfitToggle() {
   blur.classList.toggle("active3");
   var popup = document.getElementById("addOutfitModalWrapper");
   popup.classList.toggle("active3");
+  // document.getElementById('looks').click();
 }
 
 function getImage(no) {
