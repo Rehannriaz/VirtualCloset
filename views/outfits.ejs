@@ -14,6 +14,7 @@
   <link rel="stylesheet" type="text/css" href="css/shared.css" />
   <link rel="stylesheet" type="text/css" href="css/outfits.css" />
   <link rel="stylesheet" type="text/css" href="css/outfits2.css" />
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <script src="https://kit.fontawesome.com/503ade8d65.js" crossorigin="anonymous"></script>
   <title>Your Outfits</title>
   <div class="loading-area" id="loadingArea">
@@ -115,10 +116,7 @@
         </div>
 
         <div class="InsideTabContent" id="all">
-          <!-- add hover effect on card so it increses slightly in size with animation -->
-          <!-- <div class="card" onclick="toggle2()" id="add-clothes">
-              <img src="images/plus-60.png" alt="" />
-            </div> -->
+
 
 
 
@@ -231,31 +229,21 @@
     </div>
   </div>
   <a id="looksTAB"></a>
-  <form action="/outfitForm" method="POST">
+  <form method="POST" action="/outfitForm">
     <div id="addOutfitModalWrapper">
       <button class="cross-btn" onclick="createOutfitToggle()" type="button">
-        <img src="images/xmark-solid.svg" alt="" />
+        <img src="images/xmark-solid.svg" alt=""/>
       </button>
       <h2>Create Your Outfit</h2>
-      <input type="text" placeholder="name: "  name="outfitname">
+      <input type="text" placeholder="name: "  id="outfitNAME" name="outfitname">
       <div class="outfitsGrid">
         <div class="slideshow-container" id="slideshow-1" name="slideshow-1">
           <p>Tops</p>
-          <!-- <div class="mySlides1">
-            <img src="images/shirts/BeachShirt.webp" />
-          </div>
-
-          <div class="mySlides1">
-            <img src="images/shirts/blackButtonUp.jpeg" />
-          </div>
-
-          <div class="mySlides1">
-            <img src="images/shirts/hmgoepprod.webp" />
-          </div> -->
+          
+          
           <div class="mySlides1">
             <img src="images/none.png" />
           </div>
-
           <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
           <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
           
@@ -263,17 +251,7 @@
         </div>
         <div class="slideshow-container" id="slideshow-2" name="slideshow-2">
           <p>Bottoms</p>
-          <!-- <div class="mySlides2">
-            <img src="images/pants/chino.png" />
-          </div>
-
-          <div class="mySlides2">
-            <img src="images/pants/denim1.jpg" />
-          </div>
-
-          <div class="mySlides2">
-            <img src="images/formalOutfit/formalPant1.png" />
-          </div> -->
+      
           <div class="mySlides2">
             <img src="images/none.png" />
           </div>
@@ -325,7 +303,7 @@
         </div>
       </div>
       <div class="done-btn">
-        <button onclick="createOutfitToggle()"type="submit">Done</button>
+        <button id="outfit-submit-button" onclick="createOutfitToggle()" type="submit">Done</button>
       </div>
     </div>
   </form>

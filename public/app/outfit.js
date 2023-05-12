@@ -75,6 +75,7 @@ function displayCards(TabName) {
 
         const img1 = document.createElement("img");
         img1.src = "/outfit_images/images/" + clothingItem.imageupload; // fix images, needs to be in public or not??
+
         const details = document.createElement("div");
         details.classList.add("card-content");
         const category = document.createElement("h2");
@@ -267,10 +268,31 @@ function showSlides(n, no) {
   if (n < 1) {
     slideIndex[no] = x.length;
   }
+
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";
+    x[i].id = no + "NONEID" + i;
   }
-  x[slideIndex[no] - 1].style.display = "block";
+
+  SID = x[slideIndex[no] - 1];
+  SID.style.display = "block";
+  SID.id = "hoverIMG" + no;
+  const slide = document.getElementById("hoverIMG" + no);
+  const parag = document.createElement("input");
+  parag.style.display = "none";
+  parag.type = "hidden";
+  parag.name = "hoverIMG" + no;
+  imgSrc = getImage(no);
+  parag.value = imgSrc;
+  slide.appendChild(parag);
+
+  for (i = 0; i < x.length; i++) {
+    if (x[i].id == no + "NONEID" + i) {
+      const temp = document.getElementById(no + "NONEID" + i);
+      const input = temp.querySelector("input");
+      if (input) input.remove();
+    }
+  }
 }
 
 function outfitToggle() {
@@ -284,6 +306,18 @@ function createOutfitToggle() {
   blur.classList.toggle("active3");
   var popup = document.getElementById("addOutfitModalWrapper");
   popup.classList.toggle("active3");
+}
+
+function getImage(no) {
+  {
+    let imgname = document.getElementById("hoverIMG" + no);
+    let imgElement = imgname.querySelector("img");
+    // imgElement.name=
+    // imgElement.setAttribute("name","hoverIMG"+no);
+    let imgSrc = imgElement.getAttribute("src");
+    imgSrc = imgSrc.substring(imgSrc.lastIndexOf("/") + 1);
+    return imgSrc;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -331,7 +365,7 @@ document.addEventListener("DOMContentLoaded", function () {
       `#${slideContainer.id} p`
     ).textContent;
     const clothingClass = clothingTypeToClass[clothingType];
-    console.log("clothing type ::: " + clothingClass);
+    // console.log("clothing type ::: " + clothingClass);
 
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "/outfitSlides?clothingtype=" + clothingClass);
@@ -341,11 +375,11 @@ document.addEventListener("DOMContentLoaded", function () {
         clothes.forEach(function (clothingItem) {
           const slide = document.createElement("div");
           slide.className = className;
-
           const img = document.createElement("img");
           img.src = "/outfit_images/images/" + clothingItem.imageupload;
           slide.appendChild(img);
 
+          console.log("clothing type ::: " + clothingClass);
           slideContainer.append(slide);
         });
       } else {
@@ -355,4 +389,3 @@ document.addEventListener("DOMContentLoaded", function () {
     xhr.send();
   });
 });
-
