@@ -129,9 +129,14 @@ function displayCards(TabName) {
         occasion.textContent = clothingItem.occasionname;
         const heartContainer = document.createElement("div");
         heartContainer.className = "heart-container";
-        heartContainer.innerHTML =
-          '<i class="fa-regular fa-heart fa-3xl heart" onclick="changeFillColor(event)"></i>';
-
+        const heart=document.createElement('i');
+        heart.className="fa-regular fa-heart fa-3xl heart";
+        heart.onclick=function displayCards(TabName){
+          changeFillColor(event,clothingItem.item_id);
+        }
+        // heartContainer.innerHTML =
+        //   '<i class="fa-regular fa-heart fa-3xl heart" onclick="changeFillColor(event)"></i>';
+        heartContainer.appendChild(heart);
         details.appendChild(category);
         details.appendChild(occasion);
         details.appendChild(size);
@@ -148,13 +153,27 @@ function displayCards(TabName) {
   xhr.send();
 }
 
-function changeFillColor(event) {
+function changeFillColor(event,item_id) {
   event.stopPropagation();
   var icon = event.target;
   icon.classList.toggle("fa-regular");
   icon.classList.toggle("fa-solid");
   icon.classList.toggle("selected2");
+  // console.log("ITEM ID "+ item_id);
+  const isSelected = icon.classList.contains("selected2");
+    const requestData = {
+    cardId: item_id,
+    isSelected: isSelected,
+  };
+  console.log("IS SELECTED"+isSelected);
+   const xhr = new XMLHttpRequest();
+  xhr.open("POST", "/cardFav");
+  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhr.send(JSON.stringify(requestData));
 }
+
+
+
 
 function toggleModal() {
   var blur = document.getElementById("blur");

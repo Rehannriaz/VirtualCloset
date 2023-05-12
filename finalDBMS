@@ -41,13 +41,18 @@ create table ClothingItem(
     constraint categoryName foreign key (categoryName) references category(categoryName)
 );
 
+create table itemFavourite(
+	item_id int,
+	favourites bool,
+	constraint item_id foreign key (item_id) references clothingitem(item_id)
+)
 
 drop table if exists outfit cascade;
 create table outfit(
-	outfitID serial primary key,
+	outfit_ID serial primary key,
 	userid bigint,
 	outfitName varchar(15),
-	notes text,
+	overalltype varchar(20),
 	
 	constraint username foreign key (userid) references users(userid)
 );

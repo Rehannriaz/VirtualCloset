@@ -158,6 +158,32 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.post("/cardFav",async (req, res) => {
+  try {
+    const cardId = req.body.cardId;
+    const isSelected = req.body.isSelected;
+    // console.log("Card id = "+cardId);
+    // console.log("isSelected = "+isSelected);
+    if (isSelected) {
+      // Add card details to the database
+      const query = "insert into itemfavourite values ($1,$2)";
+      const {rows}= await pool.query(query,[cardId,isSelected]);
+    } else {
+
+      const query = "delete from itemfavourite where item_id=$1";
+      const {rows}= await pool.query(query,[cardId]);
+
+      
+    }
+    res.sendStatus(200);
+
+  }catch (error) {
+    console.error("Error creating outfit:", error);
+    res.redirect("/401");
+  }
+
+});
+
 app.post("/outfitForm", async (req, res) => {
   try {
     const userid = req.session.user.userid;
