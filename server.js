@@ -162,13 +162,13 @@ app.post("/outfitForm", async (req, res) => {
   try {
     const userid = req.session.user.userid;
 
-    const { outfitname,hoverIMG0,hoverIMG1, hoverIMG2, hoverIMG3, hoverIMG4, hoverIMG5 } = req.body;
+    const { Occasion,outfitname,hoverIMG0,hoverIMG1, hoverIMG2, hoverIMG3, hoverIMG4, hoverIMG5 } = req.body;
 
-    
-    const query = `INSERT INTO outfit (userid,outfitname) VALUES ($1, $2) RETURNING *`;
-    const values = [userid, outfitname];
-    const { rows } = await pool.query(query, values);
-
+    {
+      const query = `INSERT INTO outfit (userid,outfitname,overalltype) VALUES ($1, $2,$3) RETURNING *`;
+      const values = [userid, outfitname,Occasion];
+      const { rows } = await pool.query(query, values);
+    }
 
     const arrayIMG = [
       hoverIMG0,
@@ -178,10 +178,6 @@ app.post("/outfitForm", async (req, res) => {
       hoverIMG4,
       hoverIMG5
     ];
-
-
-
-
     let i;
     for(i=0;i<=5;i++)
     {
@@ -197,9 +193,9 @@ app.post("/outfitForm", async (req, res) => {
          itemID = rows[0].item_id;
         }
         {
-          const query = 'SELECT outfitid from outfit where outfitname like $1';
+          const query = 'SELECT outfit_id from outfit where outfitname = $1';
           const {rows}=await pool.query(query,[outfitname]);
-           outfitID = rows[0].outfitid;
+           outfitID = rows[0].outfit_id;
         }
         console.log("ITEM ID = "+itemID);
         console.log("OUTFITID =  = "+ outfitID);
@@ -267,6 +263,38 @@ app.get("/outfits", function (req, res) {
     scripts: ["/app/outfit.js"],
   });
 });
+
+app.get("/outfitCards", isAuthenticated,async(req,res)=>{
+  try{
+    const userid = req.session.user.userid;
+    const query = 'SELECT * FROM outfit WHERE userid = $1';
+    const {rows} = await pool.query(query,[userid]); 
+
+    res.send(rows);
+  }catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+
+});
+
+app.get("/outfitdetail", isAuthenticated,async(req,res)=>{
+  try{
+ 
+    const outfitid=req.query.outfitid;
+    const query = 'select c.*,clothingtype from clothingitem c inner join outfit_clothes o ON(o.item_id=c.item_id) inner join category d ON (d.categoryname =c.categoryname) where o.outfit_id= $1';
+    const {rows} = await pool.query(query,[outfitid]); 
+
+    res.send(rows);
+  }catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+
+});
+
+
+
 
 app.get("/clothes", isAuthenticated, async (req, res) => {
   try {

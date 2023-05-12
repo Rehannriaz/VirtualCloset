@@ -17,9 +17,51 @@ function openTab(evt, TabName) {
   // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(TabName).style.display = "block";
   evt.currentTarget.className += " active";
+  if (TabName == "looks") {
+    displayOutfitCards();
+  }
 }
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("OpenAuto").click();
+
+function displayOutfitCards() {
+  const cardsContainer = document.getElementById("InsideTab");
+
+  // InsideTabContent.classList.add("InsideTabContent-2");
+  // InsideTabContent.className="InsideTabContent-2";
+  cardsContainer.innerHTML =
+    '<div class="card" onclick="createOutfitToggle()"><img src="images/plus-60.png" alt="" /><div class="card-content"><h2>Add new outfit</h2></div></div>';
+  // cardsContainer.append(InsideTabContent);
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "/outfitCards");
+  xhr.onload = function displayOutfitCards() {
+
+    if (xhr.status === 200) {
+      const outfits = JSON.parse(xhr.responseText);
+      outfits.forEach((outfit) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.onclick = function displayOutfitCards() {
+          outfitToggleModal(outfit);
+        };
+        const img1 = document.createElement("img");
+        img1.src = "images/pexels-tembela-bohle-1884584.jpg";
+        card.append(img1);
+        const cardcontent = document.createElement("div");
+        cardcontent.className = "card-content";
+        const parag = document.createElement("p");
+        parag.textContent = outfit.overalltype;
+        const h2txt = document.createElement("h2");
+        h2txt.textContent = outfit.outfitname;
+        cardcontent.append(h2txt);
+        cardcontent.append(parag);
+        card.append(cardcontent);
+        cardsContainer.append(card);
+      });
+    }
+  };
+  xhr.send();
+}
 
 function openInsideTab(evt, TabName) {
   // Check if the tab is already active
@@ -295,7 +337,48 @@ function showSlides(n, no) {
   }
 }
 
-function outfitToggle() {
+
+function outfitToggleModal(outfit) {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "outfitdetail?outfitid=" + outfit.outfit_id);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const clothingItemDetails = JSON.parse(xhr.responseText);
+      const outfitWrap= document.getElementById("outfitModalWrapper");
+      outfitWrap.innerHTML='<button class="cross-btn" onclick="outfitToggle()"><img src="images/xmark-solid.svg" alt="" /></button> <h2 id="outfitDetails">Outfit Details</h2><hr /><div class="outfitsGrid" id="OUTFITGRIDID"></div> <div class="edit-btn"><button>Edit Outfit</button></div>'
+      const outfitGRID= document.getElementById("OUTFITGRIDID");
+      var i=0;
+      clothingItemDetails.forEach((outfitTYPE) => {
+          const gridCard=document.createElement("div");
+          gridCard.className="grid-card";
+          const buttonTog=document.createElement("button");
+          buttonTog.onclick=function outfitToggleModal(outfit){
+            toggle(outfitTYPE);
+          }
+          const img1=document.createElement("img");
+          img1.src="/outfit_images/images/"+outfitTYPE.imageupload;
+          buttonTog.append(img1);
+          const h2txt=document.createElement("h2");
+          h2txt.textContent=outfitTYPE.clothingtype;
+          gridCard.append(buttonTog);
+          gridCard.append(h2txt);
+          outfitGRID.append(gridCard);
+          i++;
+
+      });
+
+
+    } else {
+      console.error("Request failed. outfittoggle fail:", xhr.status);
+    }
+  };
+
+  xhr.send();
+  outfitToggle();
+}
+function outfitToggle()
+
+{
   var blur = document.getElementById("blur");
   blur.classList.toggle("active3");
   var popup = document.getElementById("outfitModalWrapper");
