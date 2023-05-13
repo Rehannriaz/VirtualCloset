@@ -331,7 +331,7 @@ app.get("/clothes", isAuthenticated, async (req, res) => {
     console.log("clothtype = = =" + clothType);
     if (clothType == "all") {
       const query =
-        "select  c.*,a.occasion_id,a.occasionname, d.clothingtype,d.clothingseason,i.favourites from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d on (d.categoryname=c.categoryname) left join itemfavourite i on (i.item_id=c.item_id) where c.userid=$1order by favourites asc;";
+        "select  c.*,a.occasion_id,a.occasionname, d.clothingtype,d.clothingseason,i.favourites from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d on (d.categoryname=c.categoryname) left join itemfavourite i on (i.item_id=c.item_id) where c.userid=$1 order by favourites asc;";
       const { rows } = await pool.query(query, [userid]);
       // console.log("HELLO");
       res.send(rows);

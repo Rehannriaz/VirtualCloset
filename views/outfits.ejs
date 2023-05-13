@@ -172,13 +172,17 @@
         <img src="images/xmark-solid.svg" alt=""/>
       </button>
       <h2>Create Your Outfit</h2>
-      <input type="text" placeholder="name: "  id="outfitNAME" name="outfitname">
-      <label for="Occasion">Occasion:</label>
-      <select name="Occasion" id="Occasion">
-        <option value="Casual">Casual</option>
-        <option value="Semi-Formal">Semi-Formal</option>
-        <option value="Formal">Formal</option>
-      </select>
+      <div class="name-and-occasion">
+        <input type="text" placeholder=" name your outfit "  id="outfitNAME" name="outfitname">
+        <div class="selectOccasion">
+          <label for="Occasion">Select Occasion</label>
+          <select name="Occasion" id="Occasion">
+            <option value="Casual">Casual</option>
+            <option value="Semi-Formal">Semi-Formal</option>
+            <option value="Formal">Formal</option>
+          </select>
+        </div>
+      </div>
       
       <div class="outfitsGrid">
         <div class="slideshow-container" id="slideshow-1" name="slideshow-1">

@@ -422,5 +422,14 @@
   background-color: rgb(236, 173, 184);
 }
 
+.name-and-occasion{
+  display: block;
+  text-align: center;
+}
 
+#outfitNAME{
+  border-radius: 15px;
+  height: 20px;
+  margin: 5px;
+}
 
