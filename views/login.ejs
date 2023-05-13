@@ -14,6 +14,7 @@
       rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="css/shared.css" />
     <link rel="stylesheet" type="text/css" href="css/login2.css" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <title>Document</title>
     <div class="loading-area" id="loadingArea">
         <div class="banner1 banners">
@@ -35,12 +36,12 @@
       <nav>
         <a href="/" id="logo">CLOSTYLE</a>
         <div id="login_signup">
-          <ul>
+          <ul id="ul_login_signup">
             <li><a href="/">Home</a></li>
             <li><a href="/outfits">Outfits</a></li>
             <li><a href="/contactUs">Contact Us</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/signup">Sign Up</a></li>
+            <li id="loginLI"><a href="/login">Login</a></li>
+            <li id="signupLI"><a href="/signup">Sign Up</a></li>
             <li id="after-login">
               <img id="head" src="images/human.svg" alt="">
               <div class="dropdown">
@@ -80,5 +81,6 @@
         loader.style.display="none";
       })  
     </script>
+     <script src="app/loginlogoutfeature.js"></script>
   </body>
 </html>

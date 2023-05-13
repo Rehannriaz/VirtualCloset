@@ -17,9 +17,51 @@ function openTab(evt, TabName) {
   // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(TabName).style.display = "block";
   evt.currentTarget.className += " active";
+  if (TabName == "looks") {
+    displayOutfitCards();
+  }
 }
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("OpenAuto").click();
+
+function displayOutfitCards() {
+  const cardsContainer = document.getElementById("InsideTab");
+
+  // InsideTabContent.classList.add("InsideTabContent-2");
+  // InsideTabContent.className="InsideTabContent-2";
+  cardsContainer.innerHTML =
+    '<div class="card" onclick="createOutfitToggle()"><img src="images/plus-60.png" alt="" /><div class="card-content"><h2>Add new outfit</h2></div></div>';
+  // cardsContainer.append(InsideTabContent);
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "/outfitCards");
+  xhr.onload = function displayOutfitCards() {
+
+    if (xhr.status === 200) {
+      const outfits = JSON.parse(xhr.responseText);
+      outfits.forEach((outfit) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.onclick = function displayOutfitCards() {
+          outfitToggleModal(outfit);
+        };
+        const img1 = document.createElement("img");
+        img1.src = "images/pexels-tembela-bohle-1884584.jpg";
+        card.append(img1);
+        const cardcontent = document.createElement("div");
+        cardcontent.className = "card-content";
+        const parag = document.createElement("p");
+        parag.textContent = outfit.overalltype;
+        const h2txt = document.createElement("h2");
+        h2txt.textContent = outfit.outfitname;
+        cardcontent.append(h2txt);
+        cardcontent.append(parag);
+        card.append(cardcontent);
+        cardsContainer.append(card);
+      });
+    }
+  };
+  xhr.send();
+}
 
 function openInsideTab(evt, TabName) {
   // Check if the tab is already active
@@ -75,6 +117,7 @@ function displayCards(TabName) {
 
         const img1 = document.createElement("img");
         img1.src = "/outfit_images/images/" + clothingItem.imageupload; // fix images, needs to be in public or not??
+
         const details = document.createElement("div");
         details.classList.add("card-content");
         const category = document.createElement("h2");
@@ -86,9 +129,23 @@ function displayCards(TabName) {
         occasion.textContent = clothingItem.occasionname;
         const heartContainer = document.createElement("div");
         heartContainer.className = "heart-container";
-        heartContainer.innerHTML =
-          '<i class="fa-regular fa-heart fa-3xl heart" onclick="changeFillColor(event)"></i>';
-
+        if(clothingItem.favourites)
+        {
+          const heart=document.createElement('i');
+          heart.className="fa-heart fa-3xl heart fa-solid selected2";
+          heart.onclick=function displayCards(TabName){
+            changeFillColor(event,clothingItem.item_id);
+          }
+          heartContainer.appendChild(heart);
+        }
+        else{
+          const heart=document.createElement('i');
+          heart.className="fa-regular fa-heart fa-3xl heart";
+          heart.onclick=function displayCards(TabName){
+            changeFillColor(event,clothingItem.item_id);
+          }
+          heartContainer.appendChild(heart);
+        }
         details.appendChild(category);
         details.appendChild(occasion);
         details.appendChild(size);
@@ -105,13 +162,27 @@ function displayCards(TabName) {
   xhr.send();
 }
 
-function changeFillColor(event) {
+function changeFillColor(event,item_id) {
   event.stopPropagation();
   var icon = event.target;
   icon.classList.toggle("fa-regular");
   icon.classList.toggle("fa-solid");
   icon.classList.toggle("selected2");
+  // console.log("ITEM ID "+ item_id);
+  const isSelected = icon.classList.contains("selected2");
+    const requestData = {
+    cardId: item_id,
+    isSelected: isSelected,
+  };
+  console.log("IS SELECTED"+isSelected);
+   const xhr = new XMLHttpRequest();
+  xhr.open("POST", "/cardFav");
+  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhr.send(JSON.stringify(requestData));
 }
+
+
+
 
 function toggleModal() {
   var blur = document.getElementById("blur");
@@ -267,13 +338,75 @@ function showSlides(n, no) {
   if (n < 1) {
     slideIndex[no] = x.length;
   }
+
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";
+    x[i].id = no + "NONEID" + i;
   }
-  x[slideIndex[no] - 1].style.display = "block";
+
+  SID = x[slideIndex[no] - 1];
+  SID.style.display = "block";
+  SID.id = "hoverIMG" + no;
+  const slide = document.getElementById("hoverIMG" + no);
+  const parag = document.createElement("input");
+  parag.style.display = "none";
+  parag.type = "hidden";
+  parag.name = "hoverIMG" + no;
+  imgSrc = getImage(no);
+  parag.value = imgSrc;
+  slide.appendChild(parag);
+
+  for (i = 0; i < x.length; i++) {
+    if (x[i].id == no + "NONEID" + i) {
+      const temp = document.getElementById(no + "NONEID" + i);
+      const input = temp.querySelector("input");
+      if (input) input.remove();
+    }
+  }
 }
 
-function outfitToggle() {
+
+function outfitToggleModal(outfit) {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "outfitdetail?outfitid=" + outfit.outfit_id);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const clothingItemDetails = JSON.parse(xhr.responseText);
+      const outfitWrap= document.getElementById("outfitModalWrapper");
+      outfitWrap.innerHTML='<button class="cross-btn" onclick="outfitToggle()"><img src="images/xmark-solid.svg" alt="" /></button> <h2 id="outfitDetails">Outfit Details</h2><hr /><div class="outfitsGrid" id="OUTFITGRIDID"></div> <div class="edit-btn"><button>Edit Outfit</button></div>'
+      const outfitGRID= document.getElementById("OUTFITGRIDID");
+      console.log(outfitGRID)
+      clothingItemDetails.forEach((outfitTYPE) => {
+          const gridCard=document.createElement("div");
+          gridCard.className="grid-card";
+          const buttonTog=document.createElement("button");
+          buttonTog.onclick=function outfitToggleModal(outfit){
+            toggle(outfitTYPE);
+          }
+          const img1=document.createElement("img");
+          img1.src="/outfit_images/images/"+outfitTYPE.imageupload;
+          buttonTog.append(img1);
+          const h2txt=document.createElement("h2");
+          h2txt.textContent=outfitTYPE.clothingtype;
+          gridCard.append(buttonTog);
+          gridCard.append(h2txt);
+          outfitGRID.append(gridCard);
+          
+
+      });
+
+
+    } else {
+      console.error("Request failed. outfittoggle fail:", xhr.status);
+    }
+  };
+
+  xhr.send();
+  outfitToggle();
+}
+function outfitToggle()
+
+{
   var blur = document.getElementById("blur");
   blur.classList.toggle("active3");
   var popup = document.getElementById("outfitModalWrapper");
@@ -284,54 +417,67 @@ function createOutfitToggle() {
   blur.classList.toggle("active3");
   var popup = document.getElementById("addOutfitModalWrapper");
   popup.classList.toggle("active3");
+  // document.getElementById('looks').click();
 }
 
-
+function getImage(no) {
+  {
+    let imgname = document.getElementById("hoverIMG" + no);
+    let imgElement = imgname.querySelector("img");
+    // imgElement.name=
+    // imgElement.setAttribute("name","hoverIMG"+no);
+    let imgSrc = imgElement.getAttribute("src");
+    imgSrc = imgSrc.substring(imgSrc.lastIndexOf("/") + 1);
+    return imgSrc;
+  }
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   const clothingTypeToClass = {
-    "Tops": "top",
-    "Bottoms": "bottom",
+    Tops: "top",
+    Bottoms: "bottom",
     "Suits/Dresses": "dress",
     "Foot wear": "shoes",
-    "Bags": "bag",
-    "Caps/Hats": "cap"
+    Bags: "bag",
+    "Caps/Hats": "cap",
   };
 
   const slideContainers = [
     {
       slideContainer: document.getElementById("slideshow-1"),
-      className: "mySlides1"
+      className: "mySlides1",
     },
     {
       slideContainer: document.getElementById("slideshow-2"),
-      className: "mySlides2"
+      className: "mySlides2",
     },
     {
       slideContainer: document.getElementById("slideshow-3"),
-      className: "mySlides3"
+      className: "mySlides3",
     },
     {
       slideContainer: document.getElementById("slideshow-4"),
-      className: "mySlides4"
+      className: "mySlides4",
     },
     {
       slideContainer: document.getElementById("slideshow-5"),
-      className: "mySlides5"
+      className: "mySlides5",
     },
     {
       slideContainer: document.getElementById("slideshow-6"),
-      className: "mySlides6"
-    }
+      className: "mySlides6",
+    },
   ];
 
   slideContainers.forEach(function (slideObj) {
     const slideContainer = slideObj.slideContainer;
     const className = slideObj.className;
 
-    const clothingType = document.querySelector(`#${slideContainer.id} p`).textContent;
+    const clothingType = document.querySelector(
+      `#${slideContainer.id} p`
+    ).textContent;
     const clothingClass = clothingTypeToClass[clothingType];
-    console.log("clothing type ::: " + clothingClass);
+    // console.log("clothing type ::: " + clothingClass);
 
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "/outfitSlides?clothingtype=" + clothingClass);
@@ -341,11 +487,11 @@ document.addEventListener("DOMContentLoaded", function () {
         clothes.forEach(function (clothingItem) {
           const slide = document.createElement("div");
           slide.className = className;
-
           const img = document.createElement("img");
           img.src = "/outfit_images/images/" + clothingItem.imageupload;
           slide.appendChild(img);
 
+          console.log("clothing type ::: " + clothingClass);
           slideContainer.append(slide);
         });
       } else {
