@@ -334,9 +334,11 @@ function showSlides(n, no) {
   let x = document.getElementsByClassName(slideId[no]);
   if (n > x.length) {
     slideIndex[no] = 1;
+
   }
   if (n < 1) {
     slideIndex[no] = x.length;
+
   }
 
   for (i = 0; i < x.length; i++) {
@@ -347,14 +349,21 @@ function showSlides(n, no) {
   SID = x[slideIndex[no] - 1];
   SID.style.display = "block";
   SID.id = "hoverIMG" + no;
-  const slide = document.getElementById("hoverIMG" + no);
-  const parag = document.createElement("input");
-  parag.style.display = "none";
-  parag.type = "hidden";
-  parag.name = "hoverIMG" + no;
-  imgSrc = getImage(no);
-  parag.value = imgSrc;
-  slide.appendChild(parag);
+
+  const currentSlide = x[slideIndex[no] - 1];
+  currentSlide.style.display = "block";
+  currentSlide.id = "hoverIMG" + no;
+
+  const input = currentSlide.querySelector("input[name='hoverIMG" + no + "']");
+  if (!input) {
+    const newInput = document.createElement("input");
+    newInput.type = "hidden";
+    newInput.name = "hoverIMG" + no;
+    const imgSrc = getImage(no);
+    newInput.value = imgSrc;
+    currentSlide.appendChild(newInput);
+  }
+
 
   for (i = 0; i < x.length; i++) {
     if (x[i].id == no + "NONEID" + i) {
