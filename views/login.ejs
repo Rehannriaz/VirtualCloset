@@ -55,6 +55,37 @@
         </div>
       </nav>
     </header>
+    <% if (success_msg) { %>
+      <p class="success" id="successMessage" style="text-align: center;"><%= success_msg %></p>
+    <% } else if (error_msg) { %>
+      <p class="error" id="errorMessage" style="text-align: center;"><%= error_msg %></p>
+    <% } %>
+    
+
+    
+    
+    <script>
+      // Function to remove the success message after 3 seconds
+      function removeSuccessMessage() {
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        if (successMessage) {
+          setTimeout(function () {
+            successMessage.remove();
+          }, 3000); // 3 seconds in milliseconds
+        }
+        if (errorMessage) {
+          setTimeout(function () {
+            errorMessage.remove();
+          }, 3000); // 3 seconds in milliseconds
+        }
+
+      }
+      // Call the function when the page loads
+      window.addEventListener('load', removeSuccessMessage);
+    </script>
+    
     <div class="container">
       <form action="/loginform" method="POST">
         <h2>LOGIN</h2>
