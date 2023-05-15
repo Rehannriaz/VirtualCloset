@@ -6,12 +6,12 @@
   top: -30px;
   background-image: url("/images/wardrobe3.jpg");
   background-position: center;
-  background-size: 100% 600px;
-  background-repeat: no-repeat;
+  background-size: cover; /* Updated value */
+    background-repeat: no-repeat;
   /* border-radius: 50% 50%; */
 }
 #intro-text {
-  width: 70%;
+  width: 90%; /* New addition */
   margin: auto;
 }
 #intro h1 {
@@ -31,9 +31,8 @@
 }
 
 #smart {
-  width: 70%;
+  width: 90%; /* New addition */
   margin: auto;
-  /* text-align: center; */
 }
 
 #smart h1 {
@@ -120,4 +119,16 @@
   font-family: sans-serif;
   color: rgb(169, 169, 169);
   line-height: 1.5;
+}
+@media screen and (min-width: 768px) {
+  #intro-text, #smart {
+    width: 80%;
+  }
+}
+
+/* Responsive design for desktops */
+@media screen and (min-width: 1024px) {
+  #intro-text, #smart {
+    width: 70%;
+  }
 }

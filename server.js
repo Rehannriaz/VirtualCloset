@@ -1,36 +1,35 @@
-const express = require("express"); // import express module
-const app = express(); // create an instance of express
-const bcrypt = require("bcrypt"); // import bcrypt module for password hashing
-const port = 3035; // set the port number for the server
-const pool = require("./db"); // import the pool object from db.js file which contains database connection settings
-const path = require("path"); // import path module to work with file and directory paths
-const mime = require("mime"); // import mime module to get MIME type of a file
-const flash = require("connect-flash"); // import connect-flash module for flash messages
-const passport = require("passport"); // import passport module for authentication
-const initializePassport = require("./passport-config"); // import initializePassport function from passport-config.js
-const session = require("express-session"); // import express-session module for session management
-const pgSession = require("connect-pg-simple")(session); // import connect-pg-simple module to store session data in PostgreSQL database
-const multer = require("multer"); // import multer module to handle file uploads
-const uuid = require("uuid").v4; // import uuid module to generate unique IDs
+const express = require("express");
+const app = express();
+const bcrypt = require("bcrypt");
+const port = 3035;
+const pool = require("./db");
+const path = require("path");
+const mime = require("mime");
+const flash = require("connect-flash");
+const passport = require("passport");
+const initializePassport = require("./passport-config");
+const session = require("express-session");
+const pgSession = require("connect-pg-simple")(session);
+const multer = require("multer");
+const uuid = require("uuid").v4;
 const bodyParser = require("body-parser");
-const cheerio =require('cheerio');
+const cheerio = require("cheerio");
 
-initializePassport(passport); // initialize Passport with the passport-config.js settings
+initializePassport(passport);
 
-app.set("view engine", "ejs"); // set the view engine to ejs
+app.set("view engine", "ejs");
 
 app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: false })); // use the urlencoded middleware to parse incoming requests with urlencoded payloads
-app.use(express.static(path.join(__dirname, "public"))); // serve static files from the public folder
-
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
-    secret: "uNb2G9tkhb", // set the secret used to sign the session ID cookie
-    resave: false, // do not save the session if it is not modified
-    saveUninitialized: false, // do not create a session until something is stored
+    secret: "uNb2G9tkhb",
+    resave: false,
+    saveUninitialized: false,
     store: new pgSession({
-      pool: pool, // specify the database connection pool to use for storing sessions
-      tableName: "sessions", // specify the name of the table to store session data
+      pool: pool,
+      tableName: "sessions",
     }),
   })
 );
@@ -40,30 +39,36 @@ app.post("/logout", (req, res) => {
     if (err) {
       console.log(err);
     } else {
+      req.flash("success_msg", "You have successfully logged out.");
       res.redirect("/");
     }
   });
 });
 
 const storage = multer.diskStorage({
-  destination: "public/outfit_images/images", // specify the destination folder for uploaded images
+  destination: "public/outfit_images/images",
   filename: (req, file, cb) => {
-    console.log(file); // log the uploaded file details to the console
-    cb(null, Date.now() + path.extname(file.originalname)); // specify the filename for the uploaded file
+    console.log(file);
+    cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
-const upload = multer({ storage: storage }); // create a multer object to handle file uploads
+const upload = multer({ storage: storage });
 
-// Passport initialization
-app.use(flash()); // use the connect-flash middleware for flash messages
-app.use(passport.initialize()); // use the passport middleware for authentication
-app.use(passport.session()); // use the passport middleware for session management
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  next();
+});
+app.use(passport.initialize());
+app.use(passport.session());
 
 const isAuthenticated = (req, res, next) => {
   if (req.session.isAuthenticated) {
     return next();
   } else {
+    req.flash("error_msg", "Please log in to access this page.");
     res.redirect("/login");
   }
 };
@@ -83,10 +88,12 @@ app.post(
       req.session.isAuthenticated = true;
       req.session.user = { userid: rows[0].userid, email: rows[0].email };
       req.session.save(function () {
+        req.flash("success_msg", "You have successfully logged in.");
         res.redirect("/");
       });
     } catch (error) {
       console.error("Error finding user:", error);
+      req.flash("error_msg", "An error occurred. Please try again.");
       res.redirect("/login");
     }
   }
@@ -96,7 +103,13 @@ app.post("/uploadclothes", upload.single("image"), async (req, res) => {
   console.log(req.file);
   const { type, color, size, fabric, category, season, Occasion, colorCode } =
     req.body;
+    try {
   const userid = req.session.user.userid;
+  if (!req.file) {
+    req.flash("error_msg", "No file received. Please upload an image.");
+    return res.redirect("/outfits");  // Redirect to the same page or error page
+    
+  }
 
   const imageName = req.file.filename;
 
@@ -123,26 +136,27 @@ app.post("/uploadclothes", upload.single("image"), async (req, res) => {
     pool.query(occasionQuery, occasionValues),
   ];
 
-  try {
-    const results = await Promise.all(queries); // all queries run in parallel
-
+  
+    const results = await Promise.all(queries);
+    req.flash("success_msg", "Clothing item uploaded successfully.");
     res.redirect("/outfits");
   } catch (error) {
     console.error(error);
-    res.sendStatus(500);
+    req.flash("error_msg", "An error occurred. Please try again.");
+    return res.redirect("/outfits");
   }
 });
 
 app.post("/register", async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.passwordInput, 10);
-    if (req.body.passwordInput != req.body.confirmPasswordInput) {
-      console.log("Passwords do not match.");
+    if (req.body.passwordInput !== req.body.confirmPasswordInput) {
+      req.flash("error_msg", "Passwords do not match.");
       return res.redirect("/signup");
     }
 
-    const id = Date.now().toString(); // TRY UUID
-    const query = `INSERT INTO users (userid,username, email, password) VALUES ($1, $2, $3,$4) RETURNING *`;
+    const id = Date.now().toString();
+    const query = `INSERT INTO users (userid, username, email, password) VALUES ($1, $2, $3, $4) RETURNING *`;
     const values = [
       id,
       req.body.usernameInput,
@@ -150,96 +164,108 @@ app.post("/register", async (req, res) => {
       hashedPassword,
     ];
     const { rows } = await pool.query(query, values);
-    console.log("User created:", rows[0]);
+
+    if (rows.length === 0) {
+      req.flash("error_msg", "An error occurred. Please try again.");
+      return res.redirect("/register");
+    }
+
+    req.flash(
+      "success_msg",
+      "You have successfully registered. Please log in."
+    );
     res.redirect("/login");
   } catch (error) {
     console.error("Error creating user:", error);
+    req.flash("error_msg", "An error occurred. Please try again.");
     res.redirect("/register");
   }
 });
 
-app.post("/cardFav",async (req, res) => {
+app.post("/cardFav", async (req, res) => {
   try {
     const cardId = req.body.cardId;
     const isSelected = req.body.isSelected;
-    // console.log("Card id = "+cardId);
-    // console.log("isSelected = "+isSelected);
+
     if (isSelected) {
       // Add card details to the database
       const query = "insert into itemfavourite values ($1,$2)";
-      const {rows}= await pool.query(query,[cardId,isSelected]);
+      const { rows } = await pool.query(query, [cardId, isSelected]);
     } else {
-
       const query = "delete from itemfavourite where item_id=$1";
-      const {rows}= await pool.query(query,[cardId]);
-
-      
+      const { rows } = await pool.query(query, [cardId]);
     }
     res.sendStatus(200);
-
-  }catch (error) {
+  } catch (error) {
     console.error("Error creating outfit:", error);
     res.redirect("/401");
   }
-
 });
 
 app.post("/outfitForm", async (req, res) => {
   try {
     const userid = req.session.user.userid;
-
-    const { Occasion,outfitname,hoverIMG0,hoverIMG1, hoverIMG2, hoverIMG3, hoverIMG4, hoverIMG5 } = req.body;
-
-    {
-      const query = `INSERT INTO outfit (userid,outfitname,overalltype) VALUES ($1, $2,$3) RETURNING *`;
-      const values = [userid, outfitname,Occasion];
-      const { rows } = await pool.query(query, values);
-    }
-
+    const {
+      Occasion,
+      outfitname,
+      hoverIMG0,
+      hoverIMG1,
+      hoverIMG2,
+      hoverIMG3,
+      hoverIMG4,
+      hoverIMG5,
+    } = req.body;
     const arrayIMG = [
       hoverIMG0,
       hoverIMG1,
       hoverIMG2,
       hoverIMG3,
       hoverIMG4,
-      hoverIMG5
+      hoverIMG5,
     ];
-    let i;
-    for(i=0;i<=5;i++)
-    {
-      if(arrayIMG[i]!="none.png")
-      {
-        let itemID;
-        let outfitID;
 
-        console.log("IMAGE NAME = "+ arrayIMG[i]);
-       {
-         const queryImg = 'SELECT item_id from clothingitem where imageupload like $1' ;
-         const {rows} = await pool.query(queryImg,[arrayIMG[i]]);
-         itemID = rows[0].item_id;
+    const outfitQuery = `INSERT INTO outfit (userid, outfitname, overalltype) VALUES ($1, $2, $3) RETURNING *`;
+    const outfitValues = [userid, outfitname, Occasion];
+    const { rows: outfitRows } = await pool.query(outfitQuery, outfitValues);
+    const outfitId = outfitRows[0].outfit_id;
+
+    let successCount = 0;
+    const insertQueries = [];
+
+    for (let i = 0; i <= 5; i++) {
+      if (arrayIMG[i] !== "none.png") {
+        const itemQuery = `SELECT item_id FROM clothingitem WHERE imageupload = $1`;
+        const itemValues = [arrayIMG[i]];
+        const { rows: itemRows } = await pool.query(itemQuery, itemValues);
+
+        if (itemRows.length > 0) {
+          const itemId = itemRows[0].item_id;
+          insertQueries.push(
+            pool.query(
+              "INSERT INTO outfit_clothes (outfit_id, item_id) VALUES ($1, $2) RETURNING *",
+              [outfitId, itemId]
+            )
+          );
+          successCount++;
         }
-        {
-          const query = 'SELECT outfit_id from outfit where outfitname = $1';
-          const {rows}=await pool.query(query,[outfitname]);
-           outfitID = rows[0].outfit_id;
-        }
-        console.log("ITEM ID = "+itemID);
-        console.log("OUTFITID =  = "+ outfitID);
-
-        const insertQuery = "INSERT into outfit_clothes values ($1,$2) RETURNING *";
-        const {rows} = await pool.query(insertQuery,[outfitID,itemID]);
-
       }
-
     }
-    res.redirect("/outfits#looks");                                 // redirect TO LOOKS PAGE fix lookstab
+
+    await Promise.all(insertQueries);
+
+    if (successCount > 0) {
+      req.flash("success_msg", "Outfit created successfully.");
+      res.redirect("/outfits#looks");
+    } else {
+      req.flash("error_msg", "Failed to create outfit. Please try again.");
+      res.redirect("/401");
+    }
   } catch (error) {
     console.error("Error creating outfit:", error);
+    req.flash("error_msg", "An error occurred. Please try again.");
     res.redirect("/401");
   }
 });
-
-
 
 app.get("/", function (req, res) {
   res.render("index", {
@@ -291,38 +317,46 @@ app.get("/outfits", function (req, res) {
   });
 });
 
-app.get("/outfitCards", isAuthenticated,async(req,res)=>{
-  try{
+app.get("/outfitCards", isAuthenticated, async (req, res) => {
+  try {
     const userid = req.session.user.userid;
-    const query = 'SELECT * FROM outfit WHERE userid = $1';
-    const {rows} = await pool.query(query,[userid]); 
+    const query = "SELECT * FROM outfit WHERE userid = $1";
+    const { rows } = await pool.query(query, [userid]);
+
+    if (rows.length > 0) {
+      req.flash("success_msg", "Outfit cards retrieved successfully.");
+    } else {
+      req.flash("error_msg", "No outfit cards found.");
+    }
 
     res.send(rows);
-  }catch (error) {
+  } catch (error) {
     console.error(error);
+    req.flash("error_msg", "An error occurred. Please try again.");
     res.sendStatus(500);
   }
-
 });
 
-app.get("/outfitdetail", isAuthenticated,async(req,res)=>{
-  try{
- 
-    const outfitid=req.query.outfitid;
-    const query = 'select c.*,clothingtype from clothingitem c inner join outfit_clothes o ON(o.item_id=c.item_id) inner join category d ON (d.categoryname =c.categoryname) where o.outfit_id= $1';
-    const {rows} = await pool.query(query,[outfitid]); 
-    console.log(rows)
+app.get("/outfitdetail", isAuthenticated, async (req, res) => {
+  try {
+    const outfitid = req.query.outfitid;
+    const query =
+      "SELECT c.*, clothingtype FROM clothingitem c INNER JOIN outfit_clothes o ON (o.item_id = c.item_id) INNER JOIN category d ON (d.categoryname = c.categoryname) WHERE o.outfit_id = $1";
+    const { rows } = await pool.query(query, [outfitid]);
+
+    if (rows.length > 0) {
+      req.flash("success_msg", "Outfit details retrieved successfully.");
+    } else {
+      req.flash("error_msg", "Outfit details not found.");
+    }
 
     res.send(rows);
-  }catch (error) {
+  } catch (error) {
     console.error(error);
+    req.flash("error_msg", "An error occurred. Please try again.");
     res.sendStatus(500);
   }
-
 });
-
-
-
 
 app.get("/clothes", isAuthenticated, async (req, res) => {
   try {
@@ -331,26 +365,47 @@ app.get("/clothes", isAuthenticated, async (req, res) => {
     console.log("clothtype = = =" + clothType);
     if (clothType == "all") {
       const query =
-        "select  c.*,a.occasion_id,a.occasionname, d.clothingtype,d.clothingseason,i.favourites from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d on (d.categoryname=c.categoryname) left join itemfavourite i on (i.item_id=c.item_id) where c.userid=$1 order by favourites asc;";
+        "SELECT c.*, a.occasion_id, a.occasionname, d.clothingtype, d.clothingseason, i.favourites FROM clothingitem c INNER JOIN occasion a ON (c.item_id = a.item_id) INNER JOIN category d ON (d.categoryname = c.categoryname) LEFT JOIN itemfavourite i ON (i.item_id = c.item_id) WHERE c.userid = $1 ORDER BY i.favourites ASC";
       const { rows } = await pool.query(query, [userid]);
-      // console.log("HELLO");
+      if (rows.length > 0) {
+        req.flash("success_msg", "All clothing items retrieved successfully.");
+      } else {
+        req.flash("error_msg", "No clothing items found.");
+      }
       res.send(rows);
-    } 
-    else if(clothType === "favourites")
-    {
-      const query = "select  c.*,a.occasion_id,a.occasionname, d.clothingtype,d.clothingseason,i.favourites from clothingitem c inner join occasion a  on (c.item_id=a.item_id) inner join category d on (d.categoryname=c.categoryname) inner join itemfavourite i on (i.item_id=c.item_id) where c.userid=$1 order by favourites asc;"
+    } else if (clothType === "favourites") {
+      const query =
+        "SELECT c.*, a.occasion_id, a.occasionname, d.clothingtype, d.clothingseason, i.favourites FROM clothingitem c INNER JOIN occasion a ON (c.item_id = a.item_id) INNER JOIN category d ON (d.categoryname = c.categoryname) INNER JOIN itemfavourite i ON (i.item_id = c.item_id) WHERE c.userid = $1 ORDER BY i.favourites ASC";
       const { rows } = await pool.query(query, [userid]);
+      if (rows.length > 0) {
+        req.flash(
+          "success_msg",
+          "Favorite clothing items retrieved successfully."
+        );
+      } else {
+        req.flash("error_msg", "No favorite clothing items found.");
+      }
       res.send(rows);
-    }
-    else {
-      const query = "select  c.*,a.occasion_id,a.occasionname, d.clothingtype,d.clothingseason,i.favourites from clothingitem c inner join occasion a  on (c.item_id=a.item_id)  inner join category d on (d.categoryname=c.categoryname and lower(d.clothingtype)=lower($2)) left join itemfavourite i on (i.item_id=c.item_id)  where c.userid= $1;"
+    } else {
+      const query =
+        "SELECT c.*, a.occasion_id, a.occasionname, d.clothingtype, d.clothingseason, i.favourites FROM clothingitem c INNER JOIN occasion a ON (c.item_id = a.item_id) INNER JOIN category d ON (d.categoryname = c.categoryname AND LOWER(d.clothingtype) = LOWER($2)) LEFT JOIN itemfavourite i ON (i.item_id = c.item_id) WHERE c.userid = $1";
       const { rows } = await pool.query(query, [userid, clothType]);
+      if (rows.length > 0) {
+        req.flash(
+          "success_msg",
+          `Clothing items of type "${clothType}" retrieved successfully.`
+        );
+      } else {
+        req.flash(
+          "error_msg",
+          `No clothing items found for type "${clothType}".`
+        );
+      }
       res.send(rows);
     }
-
-    // console.log('rows =  = = = ='+ rows + "rows count");
   } catch (error) {
     console.error(error);
+    req.flash("error_msg", "An error occurred. Please try again.");
     res.sendStatus(500);
   }
 });
@@ -359,19 +414,21 @@ app.get("/clothdetail", isAuthenticated, async (req, res) => {
   try {
     const userid = req.session.user.userid;
     const itemId = req.query.item_id;
-    // console.log('item id =  = = '+ itemId);
     const query =
-      "SELECT * FROM clothingitem c INNER JOIN occasion a ON (c.item_id=a.item_id) INNER JOIN category d ON (d.categoryname=c.categoryname) WHERE c.userid=$1 AND c.item_id=$2";
+      "SELECT * FROM clothingitem c INNER JOIN occasion a ON (c.item_id = a.item_id) INNER JOIN category d ON (d.categoryname = c.categoryname) WHERE c.userid = $1 AND c.item_id = $2";
     const { rows } = await pool.query(query, [userid, itemId]);
 
     if (rows.length === 0) {
+      req.flash("error_msg", "Clothing item not found.");
       res.status(404).send("Clothing item not found");
       return;
     }
 
+    req.flash("success_msg", "Clothing item details retrieved successfully.");
     res.send(rows);
   } catch (error) {
     console.error(error);
+    req.flash("error_msg", "An error occurred. Please try again.");
     res.sendStatus(500);
   }
 });
@@ -382,16 +439,20 @@ app.get("/outfitSlides", isAuthenticated, async (req, res) => {
     const clothingType = req.query.clothingtype;
 
     const query =
-      "SELECT * FROM clothingitem c INNER JOIN category d ON (d.categoryname=c.categoryname and  lower(d.clothingtype)= lower($2)) WHERE c.userid=$1";
+      "SELECT * FROM clothingitem c INNER JOIN category d ON (d.categoryname = c.categoryname AND LOWER(d.clothingtype) = LOWER($2)) WHERE c.userid = $1";
     const { rows } = await pool.query(query, [userid, clothingType]);
-    if (rows.length == 0) {
-      res.status(404).send("Clothing item not found");
+
+    if (rows.length === 0) {
+      req.flash("error_msg", "No clothing items found for the specified type.");
+      res.status(404).send("Clothing items not found");
       return;
     }
 
+    req.flash("success_msg", "Clothing items retrieved successfully.");
     res.send(rows);
   } catch (error) {
     console.error(error);
+    req.flash("error_msg", "An error occurred. Please try again.");
     res.sendStatus(500);
   }
 });
@@ -400,9 +461,6 @@ app.get("/loginlogout", (req, res) => {
   const loggedinBool = req.session.isAuthenticated;
   if (loggedinBool) res.json(loggedinBool);
   else res.json(false);
-  // console.log("LOGGED IN BOOL =  " + loggedinBool);
 });
-
-
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
